@@ -34,7 +34,7 @@ export default function VendorOtp() {
       otp
     }).then(() =>{
       toast.success('Signup successful')
-      navigate("/vendor/Login")
+      navigate("/vendor/completeSignup")
     })
   }
 
