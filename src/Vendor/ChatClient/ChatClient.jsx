@@ -562,393 +562,322 @@ function ChatClient() {
                             </div>
                         </div>
                     </nav>
-                    <div className="flex my-2">
-                        <div className="w-full max-w-full px-3 md:w-1/2 md:flex-none lg:w-1/3 lg:flex-none">
-                            <div className="border-black/12.5 shadow-soft-2xl relative flex h-5/6 min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
-                                <div className="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid bg-white p-6 pb-0">
-                                    <h6 className="font-semibold text-lg">Messages</h6>
+                    <div class="flex h-screen antialiased text-gray-800 ">
+                        <div class="flex flex-row h-full w-full overflow-x-hidden">
+                            <div class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0">
+                                <div
+                                    class="flex flex-col items-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg"
+                                >
+                                    <div class="h-20 w-20 rounded-full border overflow-hidden">
+                                        <img
+                                            src="https://avatars3.githubusercontent.com/u/2763884?s=128"
+                                            alt="Avatar"
+                                            class="h-full w-full"
+                                        />
+                                    </div>
+                                    <div class="text-sm text-white font-semibold mt-2">Aminos Co.</div>
+
                                 </div>
-                                <div className="p-4">
-                                    <div className="flex items-end mt-6">  
-                                        <img
-                                            src={team2}
-                                            alt="My profile"
-                                            className="w-10 h-10 rounded-lg order-1"
-                                        />
-                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                            <div>
-                                                <span className="mx-2 rounded-lg inline-block text-gray-600 font-semibold text-base mb-2">
-                                                    Client 1 
-                                                </span>
-                                            </div>
-                                        </div>
+                                <div class="flex flex-col mt-8">
+                                    <div class="flex flex-row items-center justify-between text-xs">
+                                        <span class="font-bold text-base">Messages</span>
+                                        <span
+                                            class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full"
+                                        >4</span
+                                        >
                                     </div>
-                                </div>
-                                <div className="p-4">
-                                    <div className="flex items-end">  
-                                        <img
-                                            src={team2}
-                                            alt="My profile"
-                                            className="w-10 h-10 rounded-lg order-1"
-                                        />
-                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                            <div>
-                                                <span className="mx-2 rounded-lg inline-block text-gray-600 font-semibold text-base mb-2">
-                                                    Client 1 
-                                                </span>
+                                    <div class="flex flex-col space-y-1 mt-5 -mx-2 h-96 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                                        <button
+                                            class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
+                                        >
+                                            <div
+                                                class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full"
+                                            >
+                                                H
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="p-4">
-                                    <div className="flex items-end">  
-                                        <img
-                                            src={team2}
-                                            alt="My profile"
-                                            className="w-10 h-10 rounded-lg order-1"
-                                        />
-                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                            <div>
-                                                <span className="mx-2 rounded-lg inline-block text-gray-600 font-semibold text-base mb-2">
-                                                    Client 1 
-                                                </span>
+                                            <div class="ml-2 text-sm font-semibold">Henry Boyd</div>
+                                        </button>
+                                        <button
+                                            class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
+                                        >
+                                            <div
+                                                class="flex items-center justify-center h-8 w-8 bg-gray-200 rounded-full"
+                                            >
+                                                M
                                             </div>
-                                        </div>
-                                    </div>
-                                </div><div className="p-4">
-                                    <div className="flex items-end">  
-                                        <img
-                                            src={team2}
-                                            alt="My profile"
-                                            className="w-10 h-10 rounded-lg order-1"
-                                        />
-                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                            <div>
-                                                <span className="mx-2 rounded-lg inline-block text-gray-600 font-semibold text-base mb-2">
-                                                    Client 1 
-                                                </span>
+                                            <div class="ml-2 text-sm font-semibold">Marta Curtis</div>
+                                            <div
+                                                class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none"
+                                            >
+                                                2
                                             </div>
-                                        </div>
-                                    </div>
-                                </div><div className="p-4">
-                                    <div className="flex items-end">  
-                                        <img
-                                            src={team2}
-                                            alt="My profile"
-                                            className="w-10 h-10 rounded-lg order-1"
-                                        />
-                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                            <div>
-                                                <span className="mx-2 rounded-lg inline-block text-gray-600 font-semibold text-base mb-2">
-                                                    Client 1 
-                                                </span>
+                                        </button>
+                                        <button
+                                            class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
+                                        >
+                                            <div
+                                                class="flex items-center justify-center h-8 w-8 bg-orange-200 rounded-full"
+                                            >
+                                                P
                                             </div>
-                                        </div>
-                                    </div>
-                                </div><div className="p-4">
-                                    <div className="flex items-end">  
-                                        <img
-                                            src={team2}
-                                            alt="My profile"
-                                            className="w-10 h-10 rounded-lg order-1"
-                                        />
-                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                            <div>
-                                                <span className="mx-2 rounded-lg inline-block text-gray-600 font-semibold text-base mb-2">
-                                                    Client 1 
-                                                </span>
+                                            <div class="ml-2 text-sm font-semibold">Philip Tucker</div>
+                                        </button>
+                                        <button
+                                            class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
+                                        >
+                                            <div
+                                                class="flex items-center justify-center h-8 w-8 bg-pink-200 rounded-full"
+                                            >
+                                                C
                                             </div>
-                                        </div>
-                                    </div>
-                                </div><div className="p-4">
-                                    <div className="flex items-end">  
-                                        <img
-                                            src={team2}
-                                            alt="My profile"
-                                            className="w-10 h-10 rounded-lg order-1"
-                                        />
-                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                            <div>
-                                                <span className="mx-2 rounded-lg inline-block text-gray-600 font-semibold text-base mb-2">
-                                                    Client 1 
-                                                </span>
+                                            <div class="ml-2 text-sm font-semibold">Christine Reid</div>
+                                        </button>
+                                        <button
+                                            class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
+                                        >
+                                            <div
+                                                class="flex items-center justify-center h-8 w-8 bg-purple-200 rounded-full"
+                                            >
+                                                J
                                             </div>
-                                        </div>
-                                    </div>
-                                </div><div className="p-4">
-                                    <div className="flex items-end">  
-                                        <img
-                                            src={team2}
-                                            alt="My profile"
-                                            className="w-10 h-10 rounded-lg order-1"
-                                        />
-                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                            <div>
-                                                <span className="mx-2 rounded-lg inline-block text-gray-600 font-semibold text-base mb-2">
-                                                    Client 1 
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><div className="p-4">
-                                    <div className="flex items-end">  
-                                        <img
-                                            src={team2}
-                                            alt="My profile"
-                                            className="w-10 h-10 rounded-lg order-1"
-                                        />
-                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                            <div>
-                                                <span className="mx-2 rounded-lg inline-block text-gray-600 font-semibold text-base mb-2">
-                                                    Client 1 
-                                                </span>
-                                            </div>
-                                        </div>
+                                            <div class="ml-2 text-sm font-semibold">Jerry Guzman</div>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 shadow-soft-2xl rounded-2xl bg-clip-border overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch" style={{ width: "46rem", height:"38rem" }}>
-                            <div className="flex-1 p:2 sm:p-6 justify-between flex flex-col">
-                                <div className="flex sm:items-center justify-between py-3 border-gray-200">
-                                    <div className="fixed flex items-center space-x-4 mt-6 bg-white w-full h-24">
-                                        <div className="relative">
-                                            {/* <span className="absolute text-green-500 -right-2 -top-1">
-                                            <svg width="18" height="18">
-                                                <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
-                                            </svg>
-                                        </span> */}
-                                            <img
-                                                src={team2}
-                                                alt=""
-                                                className="w-10 sm:w-16 h-10 sm:h-16 rounded-xl"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col leading-tight">
-                                            <div className="text-base mt-1 flex items-center">
-                                                <span className="text-gray-700 mr-3">Anderson Vanhron</span>
-                                            </div>
-                                            <span className="text-sm text-gray-600">Junior Developer</span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="flex flex-col flex-auto h-full p-6">
                                 <div
-                                    id="messages"
-                                    className="flex flex-col space-y-4 mt-16 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+                                    class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
                                 >
-                                    <div className="chat-message">
-                                        <div className="flex items-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                                                        Can be verified on any platform using docker
-                                                    </span>
+                                    <div class="flex flex-col h-full overflow-x-auto mb-4 scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                                        <div class="flex flex-col h-full">
+                                            <div class="grid grid-cols-12 gap-y-2">
+                                                <div class="col-start-1 col-end-8 p-3 rounded-lg">
+                                                    <div class="flex flex-row items-center">
+                                                        <div
+                                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                        >
+                                                            A
+                                                        </div>
+                                                        <div
+                                                            class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                                                        >
+                                                            <div>Hey How are you today?</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-start-1 col-end-8 p-3 rounded-lg">
+                                                    <div class="flex flex-row items-center">
+                                                        <div
+                                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                        >
+                                                            A
+                                                        </div>
+                                                        <div
+                                                            class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                                                        >
+                                                            <div>
+                                                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                                elit. Vel ipsa commodi illum saepe numquam maxime
+                                                                asperiores voluptate sit, minima perspiciatis.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-start-6 col-end-13 p-3 rounded-lg">
+                                                    <div class="flex items-center justify-start flex-row-reverse">
+                                                        <div
+                                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                        >
+                                                            A
+                                                        </div>
+                                                        <div
+                                                            class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
+                                                        >
+                                                            <div>I'm ok what about you?</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-start-6 col-end-13 p-3 rounded-lg">
+                                                    <div class="flex items-center justify-start flex-row-reverse">
+                                                        <div
+                                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                        >
+                                                            A
+                                                        </div>
+                                                        <div
+                                                            class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
+                                                        >
+                                                            <div>
+                                                                Lorem ipsum dolor sit, amet consectetur adipisicing. ?
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-start-1 col-end-8 p-3 rounded-lg">
+                                                    <div class="flex flex-row items-center">
+                                                        <div
+                                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                        >
+                                                            A
+                                                        </div>
+                                                        <div
+                                                            class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                                                        >
+                                                            <div>Lorem ipsum dolor sit amet !</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-start-6 col-end-13 p-3 rounded-lg">
+                                                    <div class="flex items-center justify-start flex-row-reverse">
+                                                        <div
+                                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                        >
+                                                            A
+                                                        </div>
+                                                        <div
+                                                            class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
+                                                        >
+                                                            <div>
+                                                                Lorem ipsum dolor sit, amet consectetur adipisicing. ?
+                                                            </div>
+                                                            <div
+                                                                class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-500"
+                                                            >
+                                                                Seen
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-start-1 col-end-8 p-3 rounded-lg">
+                                                    <div class="flex flex-row items-center">
+                                                        <div
+                                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                        >
+                                                            A
+                                                        </div>
+                                                        <div
+                                                            class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                                                        >
+                                                            <div>
+                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                                Perspiciatis, in.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-start-1 col-end-8 p-3 rounded-lg">
+                                                    <div class="flex flex-row items-center">
+                                                        <div
+                                                            class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                        >
+                                                            A
+                                                        </div>
+                                                        <div
+                                                            class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                                                        >
+                                                            <div class="flex flex-row items-center">
+                                                                <button
+                                                                    class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-800 rounded-full h-8 w-10"
+                                                                >
+                                                                    <svg
+                                                                        class="w-6 h-6 text-white"
+                                                                        fill="none"
+                                                                        stroke="currentColor"
+                                                                        viewBox="0 0 24 24"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                    >
+                                                                        <path
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            stroke-width="1.5"
+                                                                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                                                                        ></path>
+                                                                        <path
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            stroke-width="1.5"
+                                                                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                                        ></path>
+                                                                    </svg>
+                                                                </button>
+                                                                <div class="flex flex-row items-center space-x-px ml-4">
+                                                                    <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-4 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-12 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-6 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-5 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-4 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-3 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-10 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-1 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-1 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-8 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-2 w-1 bg-gray-500 rounded-lg"></div>
+                                                                    <div class="h-4 w-1 bg-gray-500 rounded-lg"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <img
-                                                src={team2}
-                                                alt="My profile"
-                                                className="w-6 h-6 rounded-lg order-1"
-                                            />
                                         </div>
                                     </div>
-                                    <div className="chat-message">
-                                        <div className="flex items-end justify-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-                                                        Your error message says permission denied, npm global
-                                                        installs must be given root privileges.
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <img
-                                                src={team1}
-                                                alt="My profile"
-                                                className="w-6 h-6 rounded-lg order-2"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="chat-message">
-                                        <div className="flex items-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                                                        Command was run with root privileges. I'm sure about
-                                                        that.
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                                                        I've update the description so it's more obviously now
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                                                        FYI https://askubuntu.com/a/700266/510172
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                                                        Check the line above (it ends with a # so, I'm running
-                                                        it as root )<pre># npm install -g @vue/devtools</pre>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <img
-                                                src={team2}
-                                                alt="My profile"
-                                                className="w-6 h-6 rounded-lg order-1"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="chat-message">
-                                        <div className="flex items-end justify-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-                                                        Any updates on this issue? I'm getting the same error
-                                                        when trying to install devtools. Thanks
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <img
-                                                src={team1}
-                                                alt="My profile"
-                                                className="w-6 h-6 rounded-lg order-2"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="chat-message">
-                                        <div className="flex items-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                                                        Thanks for your message David. I thought I'm alone with
-                                                        this issue. Please, ? the issue to support it{" "}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <img
-                                                src={team1}
-                                                alt="My profile"
-                                                className="w-6 h-6 rounded-lg order-1"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="chat-message">
-                                        <div className="flex items-end justify-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block bg-blue-600 text-white ">
-                                                        Are you using sudo?
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-                                                        Run this command sudo chown -R `whoami` /Users/
+                                    <div
+                                        class="flex flex-row items-center h-6 rounded-xl  w-full px-4"
+                                    >
 
-                                                        package globally without using sudo
-                                                    </span>
-                                                </div>
+                                        <div class="flex-grow ml-4">
+                                            <div class="relative w-full">
+                                                <input
+                                                    type="text"
+                                                    name="company-website"
+                                                    id="company-website"
+                                                    className="block w-full border-0 flex-1 rounded-lg sm:text-sm"
+
+
+                                                />
                                             </div>
-                                            <img
-                                                src={team2}
-                                                alt="My profile"
-                                                className="w-6 h-6 rounded-lg order-2"
-                                            />
                                         </div>
-                                    </div>
-                                    <div className="chat-message">
-                                        <div className="flex items-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                                                        It seems like you are from Mac OS world. There is no
-                                                        /Users/ folder on linux ?
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                                                        I have no issue with any other packages installed with
-                                                        root permission globally.
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <img
-                                                src={team2}
-                                                alt="My profile"
-                                                className="w-6 h-6 rounded-lg order-1"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="chat-message">
-                                        <div className="flex items-end justify-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-                                                        yes, I have a mac. I never had issues with root
-                                                        permission as well, but this helped me to solve the
-                                                        problem
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <img
-                                                src={team2}
-                                                alt="My profile"
-                                                className="w-6 h-6 rounded-lg order-2"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="chat-message">
-                                        <div className="flex items-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                                                        I get the same error on Arch Linux (also with sudo)
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block bg-gray-300 text-gray-600">
-                                                        I also have this issue, Here is what I was doing until
-                                                        now: #1076
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
-                                                        even i am facing
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <img
-                                                src={team2}
-                                                alt="My profile"
-                                                className="w-6 h-6 rounded-lg order-1"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="px-4 pt-4 mb-2 sm:mb-0">
-                                    <div className="relative flex">
-                                        <input
-                                            type="text"
-                                            placeholder="Write your message!"
-                                            className=" w-full focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-lg py-3"
-                                        />
-                                        <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
+                                        <div class="ml-4">
                                             <button
-                                                type="button"
-                                                className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
+                                                class="flex items-center justify-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 rounded-xl text-white px-4 py-1 flex-shrink-0"
                                             >
-                                                <span className="font-bold">Send</span>
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                    className="h-6 w-6 ml-2 transform rotate-90"
-                                                >
-                                                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                                                </svg>
+                                                <span>Send</span>
+                                                <span class="ml-2">
+                                                    <svg
+                                                        class="w-4 h-4 transform rotate-45 -mt-px"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                                                        ></path>
+                                                    </svg>
+                                                </span>
                                             </button>
                                         </div>
                                     </div>

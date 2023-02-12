@@ -9,6 +9,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/img/Logo1.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../api";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -27,11 +28,10 @@ export default function VendorLogin() {
 
   const eventHandler = (e) => {
     e.preventDefault()
-
-    axios.post("http://localhost:3500/vendor/login",{
-        email,
-        password
-    }).then(() => {
+    const data = {
+      email, password
+    }
+    login(data).then(() => {
       navigate('/vendor/Dashboard')
     })
   }

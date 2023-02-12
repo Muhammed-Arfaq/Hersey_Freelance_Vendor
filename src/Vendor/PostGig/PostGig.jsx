@@ -5,10 +5,15 @@ import img1 from "../../assets/img/home-decor-1.jpg";
 import img2 from "../../assets/img/home-decor-2.jpg";
 import img3 from "../../assets/img/home-decor-3.jpg";
 import AddIcon from '@mui/icons-material/Add';
+import { useDispatch } from "react-redux";
+import { setCreateSwitchOn } from "../../Redux/Reducer/gigModal";
+import GigModal from "../GigModal/GigModal";
 
 function PostGig() {
+  const dispatch = useDispatch()
   return (
     <div>
+      <GigModal/>
       <div className="grid grid-cols-12">
       <div className="z-10 my-4 mx-3 col-span-3">
         <div className="w-full max-w-full px-3 lg:w-80 lg:flex-none fixed">
@@ -740,7 +745,7 @@ function PostGig() {
                       <div className="w-full mt-5 max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
                         <div className="relative flex flex-col h-full min-w-0 break-words bg-transparent border border-solid shadow-none rounded-2xl border-slate-100 bg-clip-border">
                           <div className="flex flex-col justify-center flex-auto p-6 text-center">
-                            <a href="javascript:;" className="text-slate-400">
+                            <a href="javascript:;" className="text-slate-400"  onClick={() => dispatch(setCreateSwitchOn())}>
                               <AddIcon/>
                               <h5 className="text-slate-400">New Gig</h5>
                             </a>
