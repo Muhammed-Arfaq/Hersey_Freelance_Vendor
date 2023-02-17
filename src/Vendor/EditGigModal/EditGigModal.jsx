@@ -1,20 +1,19 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCreateSwitchOff } from "../../Redux/Reducer/gigModal";
+import { setCreateModalOff } from "../../Redux/Reducer/editGigModal";
 import { useNavigate } from "react-router-dom";
 import { gigData, gigsCategory } from "../../API";
 import { useFormik } from "formik";
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function GigModal() {
+export default function EditGigModal() {
     const cancelButtonRef = useRef(null);
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const show = useSelector((state) => state.showGigDetails.show)
+    const show = useSelector((state) => state.editGigDetails.show)
     const [gigImage, setGigImage] = useState("");
     const [gigCategory, setGigCategory] = useState([])
-    const token = localStorage.getItem("jwt");
 
     const formik = useFormik({
         initialValues: {
@@ -30,7 +29,7 @@ export default function GigModal() {
                 ...values, gigImage
             }
             console.log(data);
-            gigData(values, token).then((response) => {
+            gigData(values).then((response) => {
                 console.log(response);
                 navigate('/vendor/postGig')
             })
@@ -59,7 +58,7 @@ export default function GigModal() {
     };
 
     const gigCat = async () => {
-        await gigsCategory(token).then((result) => {
+        await gigsCategory().then((result) => {
             setGigCategory(result.data.data.categories)
         })
     }
@@ -75,7 +74,7 @@ export default function GigModal() {
                 as="div"
                 className="relative z-10"
                 initialFocus={cancelButtonRef}
-                onClose={() => dispatch(setCreateSwitchOff())}
+                onClose={() => dispatch(setCreateModalOff())}
             >
                 <Transition.Child
                     as={Fragment}
@@ -101,13 +100,13 @@ export default function GigModal() {
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
                             <Dialog.Panel className="relative transform overflow-hidden rounded-2xl bg-gray-100 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-2xl">
-                                <div className="text-end mr-2 mt-2 text-gray-600 cursor-pointer" onClick={() => dispatch(setCreateSwitchOff())}
+                                <div className="text-end mr-2 mt-2 text-gray-600 cursor-pointer" onClick={() => dispatch(setCreateModalOff())}
                                     ref={cancelButtonRef}>
                                     <CloseIcon />
                                 </div>
                                 <div className="bg-gray-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     <div className="hidden sm:block" aria-hidden="true">
-                                        
+
                                     </div>
 
                                     <div className="bg-gray-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -203,23 +202,23 @@ export default function GigModal() {
                                                     </div>
 
                                                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                                <label class="block mt-3 text-sm font-medium text-gray-700" for="grid-state">
-                                                                    Categories
-                                                                </label>
-                                                                <div class="relative">
-                                                                    <select
-                                                                        id="category"
-                                                                        name="categoryId"
-                                                                        {...formik.getFieldProps("category")}
-                                                                        class="mt-5 block w-40  rounded-lg text-gray-500 border-gray-300 shadow-md border-0 sm:text-sm">
-                                                                        <option className="text-xs">Select from the categories</option>
-                                                                        {gigCategory.map((cat) => (
+                                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                            <label class="block mt-3 text-sm font-medium text-gray-700" for="grid-state">
+                                                                Categories
+                                                            </label>
+                                                            <div class="relative">
+                                                                <select
+                                                                    id="category"
+                                                                    name="categoryId"
+                                                                    {...formik.getFieldProps("category")}
+                                                                    class="mt-5 block w-40  rounded-lg text-gray-500 border-gray-300 shadow-md border-0 sm:text-sm">
+                                                                    <option className="text-xs">Select from the categories</option>
+                                                                    {gigCategory.map((cat) => (
                                                                         <option className="text-xs" value={cat._id}>{cat.name}</option>
-                                                                        ))}
-                                                                    </select>
-                                                                </div>
+                                                                    ))}
+                                                                </select>
                                                             </div>
+                                                        </div>
                                                     </div>
 
                                                     <div className="col-span-6 sm:col-span-6">

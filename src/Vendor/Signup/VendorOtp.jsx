@@ -1,7 +1,7 @@
 import React from "react";
 import github from '../../assets/img/github.svg'
 import google from '../../assets/img/google.svg'
-import bg2 from '../../assets/img/wlppr12.jpg'
+import bg2 from '../../assets/img/wlppr1.jpg'
 
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'

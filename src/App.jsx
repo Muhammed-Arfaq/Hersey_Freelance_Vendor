@@ -1,5 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ProtectedRoutes from './protectedRoutes';
+import ReRoute from './reRoute';
 import ChatClient from './Vendor/ChatClient/ChatClient';
 import CompleteSignup from './Vendor/CompleteSignup/CompleteSignup';
 import VendorDashboard from './Vendor/Dashboard/VendorDashboard';
@@ -7,7 +9,6 @@ import VendorLogin from './Vendor/Login/Login';
 import ManageOrder from './Vendor/ManageOrder/ManageOrder';
 import MyProfile from './Vendor/MyProfile/MyProfile';
 import PostGig from './Vendor/PostGig/PostGig';
-// import PostManagement from './Vendor/PostManagement/PostManagement';
 import VendorSignup from './Vendor/Signup/Signup';
 import VendorOtp from './Vendor/Signup/VendorOtp';
 
@@ -17,16 +18,15 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path='/vendor/login' element={<VendorLogin />}/>
-          <Route path='/vendor/signup' element={<VendorSignup />}/>
-          <Route path='/vendor/dashboard' element={<VendorDashboard />}/>
-          <Route path='/vendor/postGig' element={<PostGig />}/>
-          <Route path='/vendor/chat' element={<ChatClient />}/>
-          <Route path='/vendor/manageOrder' element={<ManageOrder />}/>
-          {/* <Route path='/vendor/managePost' element={<PostManagement />}/> */}
-          <Route path='/vendor/profile' element={<MyProfile />}/>
-          <Route path='/vendor/verifyOTP' element={<VendorOtp />}/>
-          <Route path='/vendor/completeSignup' element={<CompleteSignup />}/>
+          <Route path='/vendor/login' element={<ReRoute><VendorLogin /></ReRoute>}/>
+          <Route path='/vendor/signup' element={<ReRoute><VendorSignup /></ReRoute>}/>
+          <Route path='/vendor/dashboard' element={<ProtectedRoutes><VendorDashboard /></ProtectedRoutes>}/>
+          <Route path='/vendor/postGig' element={<ProtectedRoutes><PostGig /></ProtectedRoutes>}/>
+          <Route path='/vendor/chat' element={<ProtectedRoutes><ChatClient /></ProtectedRoutes>}/>
+          <Route path='/vendor/manageOrder' element={<ProtectedRoutes><ManageOrder /></ProtectedRoutes>}/>
+          <Route path='/vendor/profile' element={<ProtectedRoutes><MyProfile /></ProtectedRoutes>}/>
+          <Route path='/vendor/verifyOTP' element={<ProtectedRoutes><VendorOtp /></ProtectedRoutes>}/>
+          <Route path='/vendor/completeSignup' element={<ProtectedRoutes><CompleteSignup /></ProtectedRoutes>}/>
         </Routes>
       </Router>
       <Toaster/>

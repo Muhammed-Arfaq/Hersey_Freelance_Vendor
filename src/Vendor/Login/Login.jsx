@@ -1,15 +1,14 @@
 import React from "react";
 import github from "../../assets/img/github.svg";
 import google from "../../assets/img/google.svg";
-import bg2 from "../../assets/img/wlppr12.jpg";
+import bg2 from "../../assets/img/wlppr1.jpg";
 
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/img/Logo1.png";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api";
+import { login } from "../../API";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -31,7 +30,11 @@ export default function VendorLogin() {
     const data = {
       email, password
     }
-    login(data).then(() => {
+    login(data).then((result) => {
+      localStorage.setItem("jwt", result.data.token)
+      localStorage.setItem( "vendorId", result.data.data.user._id )
+      localStorage.setItem( "userName", result.data.data.user.userName )
+      localStorage.setItem( "email", result.data.data.user.email )
       navigate('/vendor/Dashboard')
     })
   }

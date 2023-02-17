@@ -3,11 +3,21 @@ import "./MyProfile.css";
 import logo from "../../assets/img/Logo1.png";
 import bg from '../../assets/img/curved0.jpg'
 import team1 from '../../assets/img/team-2.jpg'
-
+import { Rating } from "@mui/material";
+import { useDispatch } from "react-redux";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import { switchOn } from "../../Redux/Reducer/EditProfileModal";
+import { Link } from "react-router-dom";
 
 function MyProfile() {
+    const [value, setValue] = React.useState(2);
+    const dispatch = useDispatch()
+    const logout = () => {
+        localStorage.clear();
+      }
     return (
         <div>
+            <EditProfileModal />
             <div className="grid grid-cols-12">
                 <div className="z-10 my-4 mx-3 col-span-3">
                     <div className="w-full max-w-full px-3 lg:w-80 lg:flex-none fixed">
@@ -19,9 +29,9 @@ function MyProfile() {
                                 <div className="">
                                     <ul className="flex flex-col pl-0 mb-0">
                                         <li className="mt-14 w-full">
-                                            <a
+                                            <Link
                                                 className="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors hover:rounded-xl hover:bg-zinc-300"
-                                                href="../pages/sign-in.html"
+                                                to="/vendor/dashboard"
                                             >
                                                 <div className="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
                                                     <svg
@@ -63,12 +73,12 @@ function MyProfile() {
                                                 <span className="ml-3 text-base font-semibold duration-300 opacity-100 pointer-events-none ease-soft">
                                                     Vendor Dashboard
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className="mt-2 w-full">
-                                            <a
+                                            <Link
                                                 className="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors hover:rounded-xl hover:bg-zinc-300"
-                                                href="../pages/sign-in.html"
+                                                to="/vendor/postGig"
                                             >
                                                 <div className="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
                                                     <svg
@@ -110,12 +120,12 @@ function MyProfile() {
                                                 <span className="ml-3 text-base font-semibold duration-300 opacity-100 pointer-events-none ease-soft">
                                                     Post Gigs
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className="mt-2 w-full">
-                                            <a
+                                            <Link
                                                 className="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors hover:rounded-xl hover:bg-zinc-300"
-                                                href="../pages/sign-in.html"
+                                                to="/vendor/chat"
                                             >
                                                 <div className="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
                                                     <svg
@@ -157,12 +167,12 @@ function MyProfile() {
                                                 <span className="ml-3 text-base font-semibold duration-300 opacity-100 pointer-events-none ease-soft">
                                                     Message Clients
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className="mt-2 w-full">
-                                            <a
+                                            <Link
                                                 className="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors hover:rounded-xl hover:bg-zinc-300"
-                                                href="../pages/sign-in.html"
+                                                to="/vendor/manageOrder"
                                             >
                                                 <div className="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
                                                     <svg
@@ -204,59 +214,12 @@ function MyProfile() {
                                                 <span className="ml-3 text-base font-semibold duration-300 opacity-100 pointer-events-none ease-soft">
                                                     Manage Orders
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </li>
-                                        {/* <li className="mt-2 w-full">
-                                            <a
-                                                className="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors hover:rounded-xl hover:bg-zinc-300"
-                                                href="../pages/sign-in.html"
-                                            >
-                                                <div className="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
-                                                    <svg
-                                                        width="12px"
-                                                        height="12px"
-                                                        viewBox="0 0 40 44"
-                                                        version="1.1"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                    >
-                                                        <title>document</title>
-                                                        <g
-                                                            stroke="none"
-                                                            stroke-width="1"
-                                                            fill="none"
-                                                            fill-rule="evenodd"
-                                                        >
-                                                            <g
-                                                                transform="translate(-1870.000000, -591.000000)"
-                                                                fill="#FFFFFF"
-                                                                fill-rule="nonzero"
-                                                            >
-                                                                <g transform="translate(1716.000000, 291.000000)">
-                                                                    <g transform="translate(154.000000, 300.000000)">
-                                                                        <path
-                                                                            className="fill-slate-800 opacity-60"
-                                                                            d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z"
-                                                                        ></path>
-                                                                        <path
-                                                                            className="fill-slate-800"
-                                                                            d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z"
-                                                                        ></path>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                                <span className="ml-3 text-base font-semibold duration-300 opacity-100 pointer-events-none ease-soft">
-                                                    Post Management
-                                                </span>
-                                            </a>
-                                        </li> */}
                                         <li className="mt-2 w-full">
-                                            <a
+                                            <Link
                                                 className="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors hover:rounded-xl hover:bg-zinc-300"
-                                                href="../pages/sign-in.html"
+                                                to="/vendor/profile"
                                             >
                                                 <div className="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
                                                     <svg
@@ -298,12 +261,13 @@ function MyProfile() {
                                                 <span className="ml-3 text-base font-semibold duration-300 opacity-100 pointer-events-none ease-soft">
                                                     My Profile
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className="mt-2 w-full">
-                                            <a
+                                            <Link
                                                 className="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors hover:rounded-xl hover:bg-zinc-300"
-                                                href="../pages/sign-in.html"
+                                                to='/vendor/login'
+                                                onClick={() => logout()}
                                             >
                                                 <div className="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
                                                     <svg
@@ -345,7 +309,7 @@ function MyProfile() {
                                                 <span className="ml-3 text-base font-semibold duration-300 opacity-100 pointer-events-none ease-soft">
                                                     Logout
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li className="mt-24"></li>
                                     </ul>
@@ -356,13 +320,12 @@ function MyProfile() {
                 </div>
                 <div className="col-span-9 ">
                     <nav
-                        className="relative mt-4 flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start"
+                        className="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start"
                         navbar-main
                         navbar-scroll="true"
                     >
                         <div className="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
                             <nav>
-                                {/* <!-- breadcrumb --> */}
                                 <ol className="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
                                     <li className="leading-normal text-sm">
                                         <a
@@ -376,191 +339,11 @@ function MyProfile() {
                                         className="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left before:pr-2 before:text-gray-600 before:content-['/']"
                                         aria-current="page"
                                     >
-                                        Order Management
+                                        My Profile
                                     </li>
                                 </ol>
-                                <h6 className="mb-0 font-bold capitalize">Order Management</h6>
+                                <h6 className="mb-0 font-bold capitalize">My Profile</h6>
                             </nav>
-
-                            <div className="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-                                <div className="flex items-center md:ml-auto md:pr-4">
-                                    <div className="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
-                                        <span className="text-sm ease-soft leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
-                                            <i className="fas fa-search"></i>
-                                        </span>
-                                        <input
-                                            type="text"
-                                            className="pl-8.75 text-sm focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"
-                                            placeholder="Type here..."
-                                        />
-                                    </div>
-                                </div>
-                                <ul className="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-                                    <li className="flex items-center">
-                                        <a
-                                            href="../pages/sign-in.html"
-                                            className="block px-0 py-2 font-semibold transition-all ease-nav-brand text-sm text-slate-500"
-                                        >
-                                            <i className="fa fa-user sm:mr-1"></i>
-                                            <span className="hidden sm:inline">Sign In</span>
-                                        </a>
-                                    </li>
-                                    <li className="flex items-center pl-4 xl:hidden">
-                                        <a
-                                            href="javascript:;"
-                                            className="block p-0 transition-all ease-nav-brand text-sm text-slate-500"
-                                            sidenav-trigger
-                                        >
-                                            <div className="w-4.5 overflow-hidden">
-                                                <i className="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                                                <i className="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                                                <i className="ease-soft relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li className="flex items-center px-4">
-                                        <a
-                                            href="javascript:;"
-                                            className="p-0 transition-all text-sm ease-nav-brand text-slate-500"
-                                        >
-                                            <i
-                                                fixed-plugin-button-nav
-                                                className="cursor-pointer fa fa-cog"
-                                            ></i>
-                                            {/* <!-- fixed-plugin-button-nav  --> */}
-                                        </a>
-                                    </li>
-
-                                    {/* <!-- notifications --> */}
-
-                                    <li className="relative flex items-center pr-2">
-                                        <p className="hidden transform-dropdown-show"></p>
-                                        <a
-                                            href="javascript:;"
-                                            className="block p-0 transition-all text-sm ease-nav-brand text-slate-500"
-                                            dropdown-trigger
-                                            aria-expanded="false"
-                                        >
-                                            <i className="cursor-pointer fa fa-bell"></i>
-                                        </a>
-
-                                        <ul
-                                            dropdown-menu
-                                            className="text-sm transform-dropdown before:font-awesome before:leading-default before:duration-350 before:ease-soft lg:shadow-soft-3xl duration-250 min-w-44 before:sm:right-7.5 before:text-5.5 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg border-0 border-solid border-transparent bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-50 before:inline-block before:font-normal before:text-white before:antialiased before:transition-all before:content-['\f0d8'] sm:-mr-6 lg:absolute lg:right-0 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer"
-                                        >
-                                            {/* <!-- add show className on dropdown open js --> */}
-                                            <li className="relative mb-2">
-                                                <a
-                                                    className="ease-soft py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors"
-                                                    href="javascript:;"
-                                                >
-                                                    <div className="flex py-1">
-                                                        <div className="my-auto">
-                                                            <img
-                                                                src="../assets/img/team-2.jpg"
-                                                                className="inline-flex items-center justify-center mr-4 text-white text-sm h-9 w-9 max-w-none rounded-xl"
-                                                            />
-                                                        </div>
-                                                        <div className="flex flex-col justify-center">
-                                                            <h6 className="mb-1 font-normal leading-normal text-sm">
-                                                                <span className="font-semibold">
-                                                                    New message
-                                                                </span>{" "}
-                                                                from Laur
-                                                            </h6>
-                                                            <p className="mb-0 leading-tight text-xs text-slate-400">
-                                                                <i className="mr-1 fa fa-clock"></i>
-                                                                13 minutes ago
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-
-                                            <li className="relative mb-2">
-                                                <a
-                                                    className="ease-soft py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700"
-                                                    href="javascript:;"
-                                                >
-                                                    <div className="flex py-1">
-                                                        <div className="my-auto">
-                                                            <img
-                                                                src="../assets/img/small-logos/logo-spotify.svg"
-                                                                className="inline-flex items-center justify-center mr-4 text-white text-sm bg-gradient-to-tl from-gray-900 to-slate-800 h-9 w-9 max-w-none rounded-xl"
-                                                            />
-                                                        </div>
-                                                        <div className="flex flex-col justify-center">
-                                                            <h6 className="mb-1 font-normal leading-normal text-sm">
-                                                                <span className="font-semibold">New album</span>{" "}
-                                                                by Travis Scott
-                                                            </h6>
-                                                            <p className="mb-0 leading-tight text-xs text-slate-400">
-                                                                <i className="mr-1 fa fa-clock"></i>1 day
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-
-                                            <li className="relative">
-                                                <a
-                                                    className="ease-soft py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700"
-                                                    href="javascript:;"
-                                                >
-                                                    <div className="flex py-1">
-                                                        <div className="inline-flex items-center justify-center my-auto mr-4 text-white transition-all duration-200 ease-nav-brand text-sm bg-gradient-to-tl from-slate-600 to-slate-300 h-9 w-9 rounded-xl">
-                                                            <svg
-                                                                width="12px"
-                                                                height="12px"
-                                                                viewBox="0 0 43 36"
-                                                                version="1.1"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                            >
-                                                                <title>credit-card</title>
-                                                                <g
-                                                                    stroke="none"
-                                                                    stroke-width="1"
-                                                                    fill="none"
-                                                                    fill-rule="evenodd"
-                                                                >
-                                                                    <g
-                                                                        transform="translate(-2169.000000, -745.000000)"
-                                                                        fill="#FFFFFF"
-                                                                        fill-rule="nonzero"
-                                                                    >
-                                                                        <g transform="translate(1716.000000, 291.000000)">
-                                                                            <g transform="translate(453.000000, 454.000000)">
-                                                                                <path
-                                                                                    className="color-background"
-                                                                                    d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                                                                    opacity="0.593633743"
-                                                                                ></path>
-                                                                                <path
-                                                                                    className="color-background"
-                                                                                    d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"
-                                                                                ></path>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                </g>
-                                                            </svg>
-                                                        </div>
-                                                        <div className="flex flex-col justify-center">
-                                                            <h6 className="mb-1 font-normal leading-normal text-sm">
-                                                                Payment successfully completed
-                                                            </h6>
-                                                            <p className="mb-0 leading-tight text-xs text-slate-400">
-                                                                <i className="mr-1 fa fa-clock"></i>2 days
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </nav>
                     <div className="w-full px-6 mx-auto">
@@ -578,10 +361,297 @@ function MyProfile() {
                                 <div className="flex-none w-auto max-w-full px-3 my-auto">
                                     <div className="h-full">
                                         <h5 className="mb-1">Alec Thompson</h5>
-                                        <p className="mb-0 font-semibold leading-normal text-sm">CEO / Co-Founder</p>
+                                        <p className="mb-0 font-semibold leading-normal text-sm">#274687364961</p>
+                                    </div>
+                                </div>
+                                <div class="w-full max-w-full px-3 mx-auto mt-4 sm:my-auto sm:mr-0 md:w-1/2 md:flex-none lg:w-4/12">
+                                    <div class="relative right-0">
+                                        <ul class="relative flex flex-wrap p-1 list-none bg-transparent rounded-xl" nav-pills role="tablist">
+                                            <li class="z-30 flex-auto text-center">
+
+                                            </li>
+                                            <li class="z-30 flex-auto text-center">
+
+                                            </li>
+                                            <li class="z-30 lg:-mx-28 xl:-mx-36 sm:-mx-56 md:-mx-28 flex-auto text-center">
+                                                <button class="flex items-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white px-4 py-2 rounded-lg text-sm space-x-2 transition duration-100" onClick={() => dispatch(switchOn())}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
+                                                    </svg>
+                                                    <span>Edit Profile</span>
+                                                </button>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <div class="w-full mt-5 max-w-full px-3 lg-max:mt-6 xl:w-4/12">
+                            <section>
+                                <div class="p-5 w-full rounded-xl border-0 shadow-2xl">
+                                    <h2 class="mb-0 font-bold">
+                                        Profile Information
+                                    </h2>
+                                    <p className="mt-4"></p>
+                                    <div class="mt-8 h-96 overflow-y-scroll hide-scroll-bar grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-1">
+                                        <div class="flex flex-wrap ">
+                                            <div class="flex items-center w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-none">
+                                                <h6 class="font-bold leading-tight uppercase text-xs text-slate-500">About</h6>
+                                            </div>
+                                            <p class="leading-normal mt-2 text-sm p-4">Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).</p>
+
+                                            <ul class="flex flex-col mt-2 pl-0 rounded-lg">
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Full Name:</strong> &nbsp; Alec M. Thompson</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Username:</strong> &nbsp; Alec M. Thompson</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Email:</strong> &nbsp; alecthompson@mail.com</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Gender:</strong> &nbsp; alecthompson@mail.com</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Age:</strong> &nbsp; alecthompson@mail.com</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Mobile:</strong> &nbsp; (44) 123 1234 123</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="w-full mt-5 max-w-full px-3 lg-max:mt-6 xl:w-4/12">
+                            <section>
+                                <div class="p-5 w-full rounded-xl border-0 shadow-2xl">
+                                    <h2 class="mb-0 font-bold">
+                                        Current Address
+                                    </h2>
+
+                                    <div class="flex items-center">
+                                        <p class="text-2xl font-medium">
+
+                                        </p>
+                                        <p className="ml-3">
+
+                                        </p>
+                                    </div>
+
+                                    <div class="mt-8 h-96 overflow-y-scroll hide-scroll-bar grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-1">
+                                        <div class="flex flex-wrap ">
+                                            <div class="flex items-center w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-none">
+                                                <h6 class="mb-0 font-bold"></h6>
+                                            </div>
+                                            <ul class="flex flex-col pl-0 mb-0 rounded-lg">
+                                                <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Address:</strong> &nbsp; Alec M. Thompson</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">City:</strong> &nbsp; (44) 123 1234 123</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">State:</strong> &nbsp; alecthompson@mail.com</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Country:</strong> &nbsp; USA</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Pincode:</strong> &nbsp; USA</li>
+                                            </ul>
+                                            <div class="flex mt-4 items-center w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-none">
+                                                <h6 class="mb-0 font-bold">Professional Details</h6>
+                                            </div>
+                                            <ul class="flex mt-4 flex-col pl-0 mb-2 rounded-lg">
+                                                <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Skill:</strong> &nbsp; Alec M. Thompson</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Google Drive:</strong> &nbsp; (44) 123 1234 123</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Github:</strong> &nbsp; alecthompson@mail.com</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">LinkedIn:</strong> &nbsp; USA</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="w-full mt-5 max-w-full px-3 lg-max:mt-6 xl:w-4/12 mb-4">
+                            <section>
+                                <div class="p-5 w-full rounded-xl border-0 shadow-2xl">
+                                    <h2 class="mb-0 font-bold">
+                                        Customer Reviews
+                                    </h2>
+                                    <div class="mt-8 h-96 overflow-y-scroll hide-scroll-bar grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-1">
+                                        <blockquote>
+                                            <header class="sm:flex sm:items-center">
+                                                <div class="flex items-center space-x-2">
+                                                    <img
+                                                        class="w-8 rounded-full"
+                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
+                                                        alt="sara"
+                                                    />
+                                                    <h2 class="text-gray-800 font-bold">
+                                                        Felipe Sacudon
+                                                    </h2>
+                                                </div>
+                                                <p className="ml-2 mr-2">|</p>
+                                                <Rating
+                                                    sx={{ height: "1%", width: "1%" }}
+                                                    name="read-only"
+                                                    value={value}
+                                                    readOnly
+                                                />
+                                            </header>
+                                            <p class="mt-2 font-medium sm:mt-3">
+                                                The best thing money can buy!
+                                            </p>
+
+                                            <p class="mt-2 text-gray-700">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
+                                                laboriosam est totam iusto alias incidunt cum tempore
+                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
+                                            </p>
+
+                                            <footer class="mt-4">
+                                                <p class="text-xs text-gray-500">
+                                                    John Doe - 12th January, 2024
+                                                </p>
+                                            </footer>
+                                        </blockquote>
+                                        <blockquote>
+                                            <header class="sm:flex sm:items-center">
+                                                <div class="flex items-center space-x-2">
+                                                    <img
+                                                        class="w-8 rounded-full"
+                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
+                                                        alt="sara"
+                                                    />
+                                                    <h2 class="text-gray-800 font-bold">
+                                                        Felipe Sacudon
+                                                    </h2>
+                                                </div>
+                                                <p className="ml-2 mr-2">|</p>
+                                                <Rating
+                                                    sx={{ height: "1%", width: "1%" }}
+                                                    name="read-only"
+                                                    value={value}
+                                                    readOnly
+                                                />
+                                            </header>
+                                            <p class="mt-2 font-medium sm:mt-3">
+                                                The best thing money can buy!
+                                            </p>
+
+                                            <p class="mt-2 text-gray-700">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
+                                                laboriosam est totam iusto alias incidunt cum tempore
+                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
+                                            </p>
+
+                                            <footer class="mt-4">
+                                                <p class="text-xs text-gray-500">
+                                                    John Doe - 12th January, 2024
+                                                </p>
+                                            </footer>
+                                        </blockquote>
+                                        <blockquote>
+                                            <header class="sm:flex sm:items-center">
+                                                <div class="flex items-center space-x-2">
+                                                    <img
+                                                        class="w-8 rounded-full"
+                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
+                                                        alt="sara"
+                                                    />
+                                                    <h2 class="text-gray-800 font-bold">
+                                                        Felipe Sacudon
+                                                    </h2>
+                                                </div>
+                                                <p className="ml-2 mr-2">|</p>
+                                                <Rating
+                                                    sx={{ height: "1%", width: "1%" }}
+                                                    name="read-only"
+                                                    value={value}
+                                                    readOnly
+                                                />
+                                            </header>
+                                            <p class="mt-2 font-medium sm:mt-3">
+                                                The best thing money can buy!
+                                            </p>
+
+                                            <p class="mt-2 text-gray-700">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
+                                                laboriosam est totam iusto alias incidunt cum tempore
+                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
+                                            </p>
+
+                                            <footer class="mt-4">
+                                                <p class="text-xs text-gray-500">
+                                                    John Doe - 12th January, 2024
+                                                </p>
+                                            </footer>
+                                        </blockquote>
+                                        <blockquote>
+                                            <header class="sm:flex sm:items-center">
+                                                <div class="flex items-center space-x-2">
+                                                    <img
+                                                        class="w-8 rounded-full"
+                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
+                                                        alt="sara"
+                                                    />
+                                                    <h2 class="text-gray-800 font-bold">
+                                                        Felipe Sacudon
+                                                    </h2>
+                                                </div>
+                                                <p className="ml-2 mr-2">|</p>
+                                                <Rating
+                                                    sx={{ height: "1%", width: "1%" }}
+                                                    name="read-only"
+                                                    value={value}
+                                                    readOnly
+                                                />
+                                            </header>
+                                            <p class="mt-2 font-medium sm:mt-3">
+                                                The best thing money can buy!
+                                            </p>
+
+                                            <p class="mt-2 text-gray-700">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
+                                                laboriosam est totam iusto alias incidunt cum tempore
+                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
+                                            </p>
+
+                                            <footer class="mt-4">
+                                                <p class="text-xs text-gray-500">
+                                                    John Doe - 12th January, 2024
+                                                </p>
+                                            </footer>
+                                        </blockquote>
+                                        <blockquote>
+                                            <header class="sm:flex sm:items-center">
+                                                <div class="flex items-center space-x-2">
+                                                    <img
+                                                        class="w-8 rounded-full"
+                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
+                                                        alt="sara"
+                                                    />
+                                                    <h2 class="text-gray-800 font-bold">
+                                                        Felipe Sacudon
+                                                    </h2>
+                                                </div>
+                                                <p className="ml-2 mr-2">|</p>
+                                                <Rating
+                                                    sx={{ height: "1%", width: "1%" }}
+                                                    name="read-only"
+                                                    value={value}
+                                                    readOnly
+                                                />
+                                            </header>
+                                            <p class="mt-2 font-medium sm:mt-3">
+                                                The best thing money can buy!
+                                            </p>
+
+                                            <p class="mt-2 text-gray-700">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
+                                                laboriosam est totam iusto alias incidunt cum tempore
+                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
+                                            </p>
+
+                                            <footer class="mt-4">
+                                                <p class="text-xs text-gray-500">
+                                                    John Doe - 12th January, 2024
+                                                </p>
+                                            </footer>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>

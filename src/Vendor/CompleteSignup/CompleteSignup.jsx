@@ -118,7 +118,20 @@ function CompleteSignup() {
                                                         className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                     />
                                                 </div>
+                                                <select
+                                                    id="select-role"
+                                                    name="roles[]"
+                                                    multiple
+                                                    placeholder="Select roles..."
+                                                    autocomplete="off"
+                                                    class="block w-full rounded-sm cursor-pointer focus:outline-none"
 
+                                                >
+                                                    <option value="1">super admin</option>
+                                                    <option value="2">admin</option>
+                                                    <option value="3">writer</option>
+                                                    <option value="4">user</option>
+                                                </select>
                                                 <div className="col-span-6 sm:col-span-3">
                                                     <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
                                                         Username
