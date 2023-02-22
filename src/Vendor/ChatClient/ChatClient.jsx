@@ -19,7 +19,7 @@ function ChatClient() {
 
 
     const getConnections = async () => {
-        await connections(vendorId, token).then((result) => {
+        await connections(vendorId).then((result) => {
             setClients(result.data)
             console.log(result.data);
         })
@@ -62,8 +62,8 @@ function ChatClient() {
             from: vendorId,
             message: inputMessage
         }
-
-        await sndMsg(data, token)
+        console.log(data);
+        await sndMsg(data)
         setMessage(message.concat(messages))
     }
 
@@ -85,7 +85,7 @@ function ChatClient() {
             if (vendor) {
                 const userId = currentChat._id
                 console.log(userId);
-                const { data } = await fetchMsg(vendorId, userId, token)
+                const { data } = await fetchMsg(vendorId, userId)
                 setMessage(data);
                 console.log(data);
             }
