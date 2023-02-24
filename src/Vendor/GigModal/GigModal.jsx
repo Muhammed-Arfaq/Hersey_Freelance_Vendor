@@ -15,6 +15,7 @@ export default function GigModal() {
     const [gigImage, setGigImage] = useState("");
     const [gigCategory, setGigCategory] = useState([])
     const token = localStorage.getItem("jwt");
+    const vendorId = localStorage.getItem("vendorId")
 
     const formik = useFormik({
         initialValues: {
@@ -27,10 +28,10 @@ export default function GigModal() {
         },
         onSubmit: async (values) => {
             const data = {
-                ...values, gigImage
+                ...values, gigImage, vendorId
             }
             console.log(data);
-            gigData(values, token).then((response) => {
+            gigData(data).then((response) => {
                 console.log(response);
                 navigate('/vendor/postGig')
             })
@@ -111,8 +112,9 @@ export default function GigModal() {
                                     </div>
 
                                     <div className="bg-gray-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                        <div class=" grid font-mono grid-cols-12">
+                                        <form onSubmit={formik.handleSubmit} class=" grid font-mono grid-cols-12">
                                             <div className="grid col-span-12 gap-6">
+
                                                 <div className="grid grid-cols-3 gap-6">
                                                     <div className="col-span-3 sm:col-span-2">
                                                         <label htmlFor="company-website" className="block mb-3 text-sm font-medium text-gray-700">
@@ -228,9 +230,10 @@ export default function GigModal() {
                                                             <div class="flex items-center justify-center w-full">
                                                                 <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-28 p-10 group text-center">
                                                                     <div class="h-full w-full text-center flex flex-col justify-center items-center">
-                                                                        <p class="pointer-none text-gray-500 "><span class="text-base font-bold cursor-pointer">Upload</span> your gig image here <br /></p>
+                                                                        <img src={gigImage} className="h-16 rounded-md" />
+                                                                        <p class="pointer-none text-gray-500 "><span class="text-base font-bold cursor-pointer" >Upload</span> your gig image here <br /></p>
                                                                     </div>
-                                                                    <input type="file" class="hidden" />
+                                                                    <input type="file" class="hidden" onChange={onUpload} />
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -246,7 +249,7 @@ export default function GigModal() {
                                                     Save
                                                 </button>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </Dialog.Panel>

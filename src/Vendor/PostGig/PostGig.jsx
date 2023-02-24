@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PostGig.css";
 import logo from "../../assets/img/Logo1.png";
 import cake from '../../assets/img/cake.jpeg'
@@ -15,12 +15,27 @@ import EditIcon from '@mui/icons-material/Edit';
 import EditGigModal from "../EditGigModal/EditGigModal";
 import { setCreateModalOn } from "../../Redux/Reducer/EditGigModal";
 import { Link } from "react-router-dom";
+import { viewGig } from "../../API";
 
 function PostGig() {
   const dispatch = useDispatch()
   const logout = () => {
     localStorage.clear();
   }
+
+  const [gigs, setGigs] = useState([])
+
+  const allGigs = async () => {
+    await viewGig().then((result) => {
+      setGigs(result.data.data.viewGig);
+    })
+  }
+
+  useEffect(() => {
+    allGigs()
+  }, [])
+
+
   return (
     <div>
       <EditGigModal />
@@ -363,174 +378,44 @@ function PostGig() {
                   </div>
                   <div className="flex-auto p-4">
                     <div className="flex flex-wrap -mx-3">
-                      <div className="w-full mt-5 max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-                        <div className="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl bg-clip-border">
-                          <div className="relative">
-                            <a className="block shadow-xl rounded-2xl">
-                              <img
-                                src={cake}
-                                alt="img-blur-shadow"
-                                className="object-cover w-64 h-36 shadow-soft-2xl rounded-2xl"
-                              />
-                            </a>
-                          </div>
-                          <div className="flex-auto px-1 pt-6">
-                            <p className="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-slate-800 text-sm bg-clip-text">
-                              Title
-                            </p>
-                            <a href="javascript:;">
-                              <h5>Modern</h5>
-                            </a>
-                            <p className="mb-6 leading-normal text-sm">
-                              As Uber works through a huge amount of internal
-                              management turmoil.
-                            </p>
-                            <div className="flex items-center justify-between">
-                              <button
-                                type="button"
-                                onClick={() => dispatch(modalOn())}
-                                className="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500"
-                              >
-                                View Gig
-                              </button>
-                              <button className="text-gray-500" onClick={() => dispatch(setCreateModalOn())}>
-                                <EditIcon fontSize="small" />
-                              </button>
+                      {gigs.map((gig) => (
+                        <div className="w-full mt-5 max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
+                          <div className="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl bg-clip-border">
+                            <div className="relative">
+                              <a className="block shadow-xl rounded-2xl">
+                                <img
+                                  src={gig?.image}
+                                  alt="img-blur-shadow"
+                                  className="object-cover w-64 h-36 shadow-soft-2xl rounded-2xl"
+                                />
+                              </a>
+                            </div>
+                            <div className="flex-auto px-1 pt-6">
+                              <p className="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-slate-800 text-sm bg-clip-text">
+                                {gig?.title}
+                              </p>
+                              <a href="javascript:;">
+                                <h5>{gig?.type}</h5>
+                              </a>
+                              <p className="mb-6 leading-normal text-sm truncate">
+                                {gig?.overview}
+                              </p>
+                              <div className="flex items-center justify-between">
+                                <button
+                                  type="button"
+                                  onClick={() => dispatch(modalOn(gig))}
+                                  className="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500"
+                                >
+                                  View Gig
+                                </button>
+                                <button className="text-gray-500" onClick={() => dispatch(setCreateModalOn(gig))}>
+                                  <EditIcon fontSize="small" />
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="w-full mt-5 max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-                        <div className="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl bg-clip-border">
-                          <div className="relative">
-                            <a className="block shadow-xl rounded-2xl">
-                              <img
-                                src={img2}
-                                alt="img-blur-shadow"
-                                className="max-w-full shadow-soft-2xl rounded-xl"
-                              />
-                            </a>
-                          </div>
-                          <div className="flex-auto px-1 pt-6">
-                            <p className="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-slate-800 text-sm bg-clip-text">
-                              Project #1
-                            </p>
-                            <a href="javascript:;">
-                              <h5>Scandinavian</h5>
-                            </a>
-                            <p className="mb-6 leading-normal text-sm">
-                              Music is something that every person has his or
-                              her own specific opinion about.
-                            </p>
-                            <div className="flex items-center justify-between">
-                              <button
-                                type="button"
-                                className="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500"
-                              >
-                                View Gig
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="w-full mt-5 max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-                        <div className="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl bg-clip-border">
-                          <div className="relative">
-                            <a className="block shadow-xl rounded-2xl">
-                              <img
-                                src={img2}
-                                alt="img-blur-shadow"
-                                className="max-w-full shadow-soft-2xl rounded-xl"
-                              />
-                            </a>
-                          </div>
-                          <div className="flex-auto px-1 pt-6">
-                            <p className="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-slate-800 text-sm bg-clip-text">
-                              Project #1
-                            </p>
-                            <a href="javascript:;">
-                              <h5>Scandinavian</h5>
-                            </a>
-                            <p className="mb-6 leading-normal text-sm">
-                              Music is something that every person has his or
-                              her own specific opinion about.
-                            </p>
-                            <div className="flex items-center justify-between">
-                              <button
-                                type="button"
-                                className="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500"
-                              >
-                                View Gig
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div><div className="w-full mt-5 max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-                        <div className="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl bg-clip-border">
-                          <div className="relative">
-                            <a className="block shadow-xl rounded-2xl">
-                              <img
-                                src={img2}
-                                alt="img-blur-shadow"
-                                className="max-w-full shadow-soft-2xl rounded-xl"
-                              />
-                            </a>
-                          </div>
-                          <div className="flex-auto px-1 pt-6">
-                            <p className="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-slate-800 text-sm bg-clip-text">
-                              Project #1
-                            </p>
-                            <a href="javascript:;">
-                              <h5>Scandinavian</h5>
-                            </a>
-                            <p className="mb-6 leading-normal text-sm">
-                              Music is something that every person has his or
-                              her own specific opinion about.
-                            </p>
-                            <div className="flex items-center justify-between">
-                              <button
-                                type="button"
-                                className="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500"
-                              >
-                                View Gig
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="w-full mt-5 max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-                        <div className="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl bg-clip-border">
-                          <div className="relative">
-                            <a className="block shadow-xl rounded-2xl">
-                              <img
-                                src={img3}
-                                alt="img-blur-shadow"
-                                className="max-w-full shadow-soft-2xl rounded-2xl"
-                              />
-                            </a>
-                          </div>
-                          <div className="flex-auto px-1 pt-6">
-                            <p className="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-slate-800 text-sm bg-clip-text">
-                              Project #3
-                            </p>
-                            <a href="javascript:;">
-                              <h5>Minimalist</h5>
-                            </a>
-                            <p className="mb-6 leading-normal text-sm">
-                              Different people have different taste, and various
-                              types of music.
-                            </p>
-                            <div className="flex items-center justify-between">
-                              <button
-                                type="button"
-                                className="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500"
-                              >
-                                View Gig
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      ))}
                       <div className="w-full mt-5 max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
                         <div className="relative flex flex-col h-full min-w-0 break-words bg-transparent border border-solid shadow-none rounded-2xl border-slate-100 bg-clip-border">
                           <div className="flex flex-col justify-center flex-auto p-6 text-center">

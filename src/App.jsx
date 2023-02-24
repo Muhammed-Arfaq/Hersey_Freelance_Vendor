@@ -20,13 +20,13 @@ function App() {
         <Routes>
           <Route path='/vendor/login' element={<ReRoute><VendorLogin /></ReRoute>}/>
           <Route path='/vendor/signup' element={<ReRoute><VendorSignup /></ReRoute>}/>
+          <Route path='/vendor/verifyOTP' element={<ReRoute><VendorOtp /></ReRoute>}/>
+          <Route path='/vendor/completeSignup' element={<CompleteSignup />}/>
           <Route path='/vendor/dashboard' element={<ProtectedRoutes><VendorDashboard /></ProtectedRoutes>}/>
           <Route path='/vendor/postGig' element={<ProtectedRoutes><PostGig /></ProtectedRoutes>}/>
           <Route path='/vendor/chat' element={<ProtectedRoutes><ChatClient /></ProtectedRoutes>}/>
           <Route path='/vendor/manageOrder' element={<ProtectedRoutes><ManageOrder /></ProtectedRoutes>}/>
           <Route path='/vendor/profile' element={<ProtectedRoutes><MyProfile /></ProtectedRoutes>}/>
-          <Route path='/vendor/verifyOTP' element={<ProtectedRoutes><VendorOtp /></ProtectedRoutes>}/>
-          <Route path='/vendor/completeSignup' element={<ProtectedRoutes><CompleteSignup /></ProtectedRoutes>}/>
         </Routes>
       </Router>
       <Toaster/>

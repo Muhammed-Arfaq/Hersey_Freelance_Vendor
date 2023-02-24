@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MyProfile.css";
 import logo from "../../assets/img/Logo1.png";
 import bg from '../../assets/img/curved0.jpg'
@@ -8,13 +8,28 @@ import { useDispatch } from "react-redux";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { switchOn } from "../../Redux/Reducer/EditProfileModal";
 import { Link } from "react-router-dom";
+import { getVendorDetails } from "../../API";
 
 function MyProfile() {
     const [value, setValue] = React.useState(2);
     const dispatch = useDispatch()
     const logout = () => {
         localStorage.clear();
-      }
+    }
+
+    const [profile, setProfile] = useState("")
+
+    const vendorProfile = async() => {
+        await getVendorDetails().then((result) => {
+            setProfile(result.data.data.profile);
+        })
+    }
+    // console.log(profile);
+
+    useEffect(() => {
+      vendorProfile()
+    }, [])
+    
     return (
         <div>
             <EditProfileModal />
@@ -355,13 +370,13 @@ function MyProfile() {
                             <div className="flex flex-wrap -mx-3">
                                 <div className="flex-none w-auto max-w-full px-3">
                                     <div className="text-base ease-soft-in-out h-18.5 w-18.5 relative inline-flex items-center justify-center rounded-xl text-white transition-all duration-200">
-                                        <img src={team1} alt="profile_image" className="w-full shadow-soft-sm rounded-xl" />
+                                        <img src={ profile?.profilePhoto || team1 } alt="profile_image" className="w-full shadow-soft-sm rounded-xl" />
                                     </div>
                                 </div>
                                 <div className="flex-none w-auto max-w-full px-3 my-auto">
                                     <div className="h-full">
-                                        <h5 className="mb-1">Alec Thompson</h5>
-                                        <p className="mb-0 font-semibold leading-normal text-sm">#274687364961</p>
+                                        <h5 className="mb-1">{profile?.userName}</h5>
+                                        <p className="mb-0 font-semibold leading-normal text-sm">#{profile?._id}</p>
                                     </div>
                                 </div>
                                 <div class="w-full max-w-full px-3 mx-auto mt-4 sm:my-auto sm:mr-0 md:w-1/2 md:flex-none lg:w-4/12">
@@ -374,7 +389,7 @@ function MyProfile() {
 
                                             </li>
                                             <li class="z-30 lg:-mx-28 xl:-mx-36 sm:-mx-56 md:-mx-28 flex-auto text-center">
-                                                <button class="flex items-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white px-4 py-2 rounded-lg text-sm space-x-2 transition duration-100" onClick={() => dispatch(switchOn())}>
+                                                <button class="flex items-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white px-4 py-2 rounded-lg text-sm space-x-2 transition duration-100" onClick={() => dispatch(switchOn(profile))}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                                         <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
                                                     </svg>
@@ -400,15 +415,15 @@ function MyProfile() {
                                             <div class="flex items-center w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-none">
                                                 <h6 class="font-bold leading-tight uppercase text-xs text-slate-500">About</h6>
                                             </div>
-                                            <p class="leading-normal mt-2 text-sm p-4">Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).</p>
+                                            <p class="leading-normal mt-2 text-sm p-4">{profile?.about}</p>
 
                                             <ul class="flex flex-col mt-2 pl-0 rounded-lg">
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Full Name:</strong> &nbsp; Alec M. Thompson</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Username:</strong> &nbsp; Alec M. Thompson</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Email:</strong> &nbsp; alecthompson@mail.com</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Gender:</strong> &nbsp; alecthompson@mail.com</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Age:</strong> &nbsp; alecthompson@mail.com</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Mobile:</strong> &nbsp; (44) 123 1234 123</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Full Name:</strong> &nbsp; {profile?.fullName}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Username:</strong> &nbsp; {profile?.userName}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Email:</strong> &nbsp; {profile?.email}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Gender:</strong> &nbsp; {profile?.gender}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">D.O.B:</strong> &nbsp; {profile?.dob}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Mobile:</strong> &nbsp; {profile?.phone}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -437,20 +452,20 @@ function MyProfile() {
                                                 <h6 class="mb-0 font-bold"></h6>
                                             </div>
                                             <ul class="flex flex-col pl-0 mb-0 rounded-lg">
-                                                <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Address:</strong> &nbsp; Alec M. Thompson</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">City:</strong> &nbsp; (44) 123 1234 123</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">State:</strong> &nbsp; alecthompson@mail.com</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Country:</strong> &nbsp; USA</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Pincode:</strong> &nbsp; USA</li>
+                                                <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Address:</strong> &nbsp; {profile?.address?.currentAddress}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">City:</strong> &nbsp; {profile?.address?.city}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">State:</strong> &nbsp; {profile?.address?.state}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Country:</strong> &nbsp; {profile?.address?.country}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Pincode:</strong> &nbsp; {profile?.address?.pincode}</li>
                                             </ul>
                                             <div class="flex mt-4 items-center w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-none">
                                                 <h6 class="mb-0 font-bold">Professional Details</h6>
                                             </div>
                                             <ul class="flex mt-4 flex-col pl-0 mb-2 rounded-lg">
-                                                <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Skill:</strong> &nbsp; Alec M. Thompson</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Google Drive:</strong> &nbsp; (44) 123 1234 123</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Github:</strong> &nbsp; alecthompson@mail.com</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">LinkedIn:</strong> &nbsp; USA</li>
+                                                <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Skill:</strong> &nbsp; {profile?.skill}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Google Drive:</strong> &nbsp; {profile?.googleDrive}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Github:</strong> &nbsp; {profile?.github}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">LinkedIn:</strong> &nbsp; {profile?.linkedIn}</li>
                                             </ul>
                                         </div>
                                     </div>

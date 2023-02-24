@@ -6,16 +6,9 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/img/Logo1.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Marketplace", href: "#" },
-  { name: "Services", href: "#" },
-  { name: "Products", href: "#" },
-];
-
+import { vendorOtp } from "../../API";
 
 export default function VendorSignup() {
   const navigate = useNavigate()
@@ -26,20 +19,25 @@ export default function VendorSignup() {
   const [userName, setUserName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
+  const [gender, setGender] = useState("")
+  const [dob, setDob] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirm, setPasswordConfirm] = useState("")
 
   const eventHandler = (e) => {
     e.preventDefault()
 
-    axios.post("http://localhost:3500/vendor/vendorOTP", {
+    vendorOtp(
       fullName,
       userName,
       email,
       phone,
+      gender,
+      dob,
       password,
       passwordConfirm
-    }).then(()=>{
+    ).then(()=>{
+      console.log("hereeeee");
       navigate("/vendor/verifyOTP")
     })
   }
@@ -66,27 +64,15 @@ export default function VendorSignup() {
               </button>
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
-              {navigation.map((item) => (
-                <a key={item.name} href={item.href} className="font-semibold text-gray-300 hover:text-gray-400">
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div className="py-6 sm:hidden lg:block">
-              <a
-                href="/vendorSignup"
-                className="-mx-3 block rounded-lg py-2.5 px-14 text-base font-semibold leading-6 text-gray-300 hover:text-gray-400"
-              >
-                  Become a Vendor
-              </a>
+              
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-              <a
-                href="/login"
+              <Link
+                to="/vendor/login"
                 className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-300 shadow-sm ring-1 ring-gray-900/20 hover:ring-gray-700 hover:text-gray-400"
               >
                 Login
-              </a>
+              </Link>
             </div>
           </nav>
           <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -116,31 +102,15 @@ export default function VendorSignup() {
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/10">
                   <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                    
                   </div>
                   <div className="py-6">
-                    <a
-                      href="/vendorSignup"
-                      className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
-                    >
-                      Become a Vendor
-                    </a>
-                  </div>
-                  <div className="py-6">
-                    <a
-                      href="/login"
+                    <Link
+                      to="/vendor/login"
                       className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
                     >
                       Login
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -270,6 +240,44 @@ export default function VendorSignup() {
                           value={phone}
                           onChange={(e)=>{
                             setPhone(e.target.value)
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 pl-8">
+                      <div className="relative w-64 mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Gender
+                        </label>
+                        <input
+                          type="text"
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="Gender"
+                          value={gender}
+                          onChange={(e)=>{
+                            setGender(e.target.value)
+                          }}
+                        />
+                      </div>
+
+                      <div className="relative w-64 mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          D.O.B
+                        </label>
+                        <input
+                          type="date"
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          placeholder="D.O.B"
+                          value={dob}
+                          onChange={(e)=>{
+                            setDob(e.target.value)
                           }}
                         />
                       </div>

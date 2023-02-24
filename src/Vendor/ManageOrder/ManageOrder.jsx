@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ManageOrder.css";
 import logo from "../../assets/img/Logo1.png";
 import { Link } from "react-router-dom";
+import { getReservedGigs } from "../../API";
 
 function ManageOrder() {
     const logout = () => {
         localStorage.clear();
-      }
+    }
+
+    const [orders, setOrders] = useState([])
+
+    const reservedGigs = async () => {
+        await getReservedGigs().then((result) => {
+            setOrders(result.data.data.reserved);
+        })
+    }
+
+    useEffect(() => {
+        reservedGigs()
+    }, [])
+
+
     return (
         <div>
             <div className="grid grid-cols-12">
@@ -358,195 +373,29 @@ function ManageOrder() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <div className="flex px-2 py-1 justify-center">
-                                                                <div className="flex flex-col justify-center">
-                                                                    <h6 className="mb-0 leading-normal text-sm">#3742734638648</h6>
+                                                    {orders.map((orders) => (
+                                                        <tr>
+                                                            <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                <div className="flex px-2 py-1 justify-center">
+                                                                    <div className="flex flex-col justify-center">
+                                                                        <h6 className="mb-0 leading-normal text-sm">#{orders._id}</h6>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <p className="mb-0 font-semibold leading-tight text-center text-xs">23/02/2023</p>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-xs text-slate-400">₹2500</span>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-base bg-gradient-to-r from-teal-900 to-green-400 bg-clip-text text-transparent">Active</span>
-                                                        </td>
-                                                        <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <div className="flex px-2 py-1 justify-center">
-                                                                <div className="flex flex-col justify-center">
-                                                                    <h6 className="mb-0 leading-normal text-sm">#3742734638648</h6>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <p className="mb-0 font-semibold leading-tight text-center text-xs">23/02/2023</p>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-xs text-slate-400">₹2500</span>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-base bg-gradient-to-r from-teal-900 to-green-400 bg-clip-text text-transparent">Active</span>
-                                                        </td>
-                                                        <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <div className="flex px-2 py-1 justify-center">
-                                                                <div className="flex flex-col justify-center">
-                                                                    <h6 className="mb-0 leading-normal text-sm">#3742734638648</h6>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <p className="mb-0 font-semibold leading-tight text-center text-xs">23/02/2023</p>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-xs text-slate-400">₹2500</span>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-base bg-gradient-to-r from-teal-900 to-green-400 bg-clip-text text-transparent">Active</span>
-                                                        </td>
-                                                        <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <div className="flex px-2 py-1 justify-center">
-                                                                <div className="flex flex-col justify-center">
-                                                                    <h6 className="mb-0 leading-normal text-sm">#3742734638648</h6>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <p className="mb-0 font-semibold leading-tight text-center text-xs">23/02/2023</p>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-xs text-slate-400">₹2500</span>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-base bg-gradient-to-r from-teal-900 to-green-400 bg-clip-text text-transparent">Active</span>
-                                                        </td>
-                                                        <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <div className="flex px-2 py-1 justify-center">
-                                                                <div className="flex flex-col justify-center">
-                                                                    <h6 className="mb-0 leading-normal text-sm">#3742734638648</h6>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <p className="mb-0 font-semibold leading-tight text-center text-xs">23/02/2023</p>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-xs text-slate-400">₹2500</span>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-base bg-gradient-to-r from-teal-900 to-green-400 bg-clip-text text-transparent">Active</span>
-                                                        </td>
-                                                        <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <div className="flex px-2 py-1 justify-center">
-                                                                <div className="flex flex-col justify-center">
-                                                                    <h6 className="mb-0 leading-normal text-sm">#3742734638648</h6>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <p className="mb-0 font-semibold leading-tight text-center text-xs">23/02/2023</p>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-xs text-slate-400">₹2500</span>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-base bg-gradient-to-r from-teal-900 to-green-400 bg-clip-text text-transparent">Active</span>
-                                                        </td>
-                                                        <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <div className="flex px-2 py-1 justify-center">
-                                                                <div className="flex flex-col justify-center">
-                                                                    <h6 className="mb-0 leading-normal text-sm">#3742734638648</h6>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <p className="mb-0 font-semibold leading-tight text-center text-xs">23/02/2023</p>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-xs text-slate-400">₹2500</span>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-base bg-gradient-to-r from-teal-900 to-green-400 bg-clip-text text-transparent">Active</span>
-                                                        </td>
-                                                        <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <div className="flex px-2 py-1 justify-center">
-                                                                <div className="flex flex-col justify-center">
-                                                                    <h6 className="mb-0 leading-normal text-sm">#3742734638648</h6>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <p className="mb-0 font-semibold leading-tight text-center text-xs">23/02/2023</p>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-xs text-slate-400">₹2500</span>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-base bg-gradient-to-r from-teal-900 to-green-400 bg-clip-text text-transparent">Active</span>
-                                                        </td>
-                                                        <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                                                            <div className="flex px-2 py-1 justify-center">
-                                                                <div className="flex flex-col justify-center">
-                                                                    <h6 className="mb-0 leading-normal text-sm">#3742734638648</h6>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="p-2 align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                                                            <p className="mb-0 font-semibold leading-tight text-center text-xs">23/02/2023</p>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-xs text-slate-400">₹2500</span>
-                                                        </td>
-                                                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                            <span className="font-semibold leading-tight text-base bg-gradient-to-r from-teal-900 to-green-400 bg-clip-text text-transparent">Active</span>
-                                                        </td>
-                                                        <td className="p-2 align-middle text-center bg-transparent border-b-0 whitespace-nowrap shadow-transparent">
-                                                            <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                            <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                <p className="mb-0 font-semibold leading-tight text-center text-xs">{orders.date}</p>
+                                                            </td>
+                                                            <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                <span className="font-semibold leading-tight text-xs text-slate-400">₹{orders.gigId.price}</span>
+                                                            </td>
+                                                            <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                <span className="font-semibold leading-tight text-base">{orders.status}</span>
+                                                            </td>
+                                                            <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
                                                 </tbody>
                                             </table>
                                         </div>

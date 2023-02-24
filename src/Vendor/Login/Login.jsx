@@ -7,15 +7,8 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/img/Logo1.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../API";
-
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Marketplace", href: "#" },
-  { name: "Services", href: "#" },
-  { name: "Products", href: "#" },
-];
 
 export default function VendorLogin() {
   const navigate = useNavigate()
@@ -64,31 +57,15 @@ export default function VendorLogin() {
               </button>
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="font-semibold text-gray-300 hover:text-gray-400"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-            <div className="py-6 sm:hidden lg:block">
-              <a
-                href="/vendorSignup"
-                className="-mx-3 block rounded-lg py-2.5 px-14 text-base font-semibold leading-6 text-gray-300 hover:text-gray-400"
-              >
-                Become a Seller
-              </a>
+              
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-              <a
-                href="/login"
+              <Link
+                to="/vendor/signup"
                 className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-300 shadow-sm ring-1 ring-gray-900/20 hover:ring-gray-700 hover:text-gray-400"
               >
-                Login
-              </a>
+                Signup
+              </Link>
             </div>
           </nav>
           <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -117,31 +94,15 @@ export default function VendorLogin() {
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/10">
                   <div className="space-y-2 py-6">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+                    
                   </div>
                   <div className="py-6">
-                    <a
-                      href="/vendorSignup"
+                    <Link
+                      to="/vendor/signup"
                       className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
                     >
-                      Become a Seller
-                    </a>
-                  </div>
-                  <div className="py-6">
-                    <a
-                      href="/login"
-                      className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
-                    >
-                      Login
-                    </a>
+                      Signup
+                    </Link>
                   </div>
                 </div>
               </div>

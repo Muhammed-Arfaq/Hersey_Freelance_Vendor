@@ -8,7 +8,8 @@ export default function ViewGigModal() {
     const cancelButtonRef = useRef(null);
     const dispatch = useDispatch()
     const show = useSelector((state) => state.viewGigDetails.show)
-
+    const data = useSelector((state) => state.viewGigDetails.data)
+    console.log(data);
 
     return (
         <Transition.Root show={show} as={Fragment}>
@@ -54,41 +55,27 @@ export default function ViewGigModal() {
                                             <div class="md:flex px-4 leading-none max-w-4xl">
                                                 <div class="flex-none ">
                                                     <img
-                                                        src="https://creativereview.imgix.net/content/uploads/2019/12/joker_full.jpg?auto=compress,format&q=60&w=1012&h=1500"
+                                                        src={data?.image}
                                                         alt="pic"
-                                                        class="h-72 w-56 rounded-md shadow-2xl transform -mt-4  "
+                                                        class="h-72 w-56 object-cover rounded-lg shadow-2xl transform -mt-4  "
                                                     />
                                                 </div>
 
                                                 <div class="flex-col ">
 
-                                                    <p class="pt-4 text-2xl font-bold">Joker (2020)</p>
+                                                    <p class="pt-4 text-2xl ml-1 font-bold">{data?.title}</p>
                                                     <hr class="hr-text" data-content="" />
 
-                                                    <p class="hidden md:block px-4 my-4 text-sm text-left">In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker. </p>
-                                                    
-                                                    <p class="hidden md:block px-4 my-4 text-sm text-left">In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society. He then embarks on a downward spiral of revolution and bloody crime. This path brings him face-to-face with his alter-ego: the Joker. </p>
+                                                    <p class="hidden md:block px-4 my-4 text-sm text-left"><span className="font-semibold mr-3">Overview:</span>{data?.overview}</p>
 
-                                                    <p class="flex text-md px-4 my-2">
-                                                        Category: Driver
-                                                    </p>
+                                                    <p class="hidden md:block px-4 my-4 text-sm text-left"><span className="font-semibold mr-3">Description:</span>{data?.description}</p>
 
-                                                    <p class="flex text-md px-4 my-2">
-                                                        Type: Service
-                                                    </p>
+                                                    <p class="hidden md:block px-4 my-4 text-sm text-left"><span className="font-semibold mr-3">Category:</span>{data?.category?.name}</p>
 
-                                                    <p class="flex text-md px-4 my-2">
-                                                        Price: ₹4000
-                                                    </p>
+                                                    <p class="hidden md:block px-4 my-4 text-sm text-left"><span className="font-semibold mr-3">Type:</span>{data?.type}</p>
+
+                                                    <p class="hidden md:block px-4 my-4 text-sm text-left"><span className="font-semibold mr-3">Price:</span>₹{data?.price}</p>
                                                 </div>
-                                            </div>
-                                            <div className="px-4 py-3 text-right sm:px-6">
-                                                <button
-                                                    type="submit"
-                                                    className="inline-flex justify-center rounded-md bg-gradient-to-r from-slate-500 to-gray-800 py-2 px-4 text-sm font-medium text-white shadow-sm"
-                                                >
-                                                    Reserve Now
-                                                </button>
                                             </div>
                                         </div>
                                     </div>

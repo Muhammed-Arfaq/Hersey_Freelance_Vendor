@@ -12,6 +12,7 @@ export default function EditGigModal() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const show = useSelector((state) => state.editGigDetails.show)
+    const data = useSelector((state) => state.editGigDetails.data)
     const [gigImage, setGigImage] = useState("");
     const [gigCategory, setGigCategory] = useState([])
 
@@ -122,8 +123,8 @@ export default function EditGigModal() {
                                                                 type="text"
                                                                 name="company-website"
                                                                 id="company-website"
+                                                                placeholder={data?.title}
                                                                 className="block w-fit shadow-md flex-1 rounded-lg rounded-r-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                                placeholder="Title here"
                                                                 {...formik.getFieldProps("title")}
                                                             />
                                                         </div>
@@ -140,7 +141,7 @@ export default function EditGigModal() {
                                                             name="about"
                                                             rows={3}
                                                             className="mt-1 block w-full rounded-md border-0 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                            placeholder="Brief overview about gig."
+                                                            placeholder={data?.overview}
                                                             {...formik.getFieldProps("overview")}
 
                                                         />
@@ -159,7 +160,7 @@ export default function EditGigModal() {
                                                             name="about"
                                                             rows={3}
                                                             className="mt-1 block w-full rounded-md border-0 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                            placeholder="Brief description about gig."
+                                                            placeholder={data?.description}
                                                             {...formik.getFieldProps("description")}
 
                                                         />
@@ -177,7 +178,7 @@ export default function EditGigModal() {
                                                             type="number"
                                                             name="city"
                                                             id="city"
-                                                            placeholder="Gig Value"
+                                                            placeholder={data?.price}
                                                             autoComplete="address-level2"
                                                             {...formik.getFieldProps("price")}
 
@@ -193,7 +194,7 @@ export default function EditGigModal() {
                                                             type="text"
                                                             name="region"
                                                             id="region"
-                                                            placeholder="Service Or Product"
+                                                            placeholder={data?.type}
                                                             autoComplete="address-level1"
                                                             {...formik.getFieldProps("type")}
 
@@ -212,7 +213,7 @@ export default function EditGigModal() {
                                                                     name="categoryId"
                                                                     {...formik.getFieldProps("category")}
                                                                     class="mt-5 block w-40  rounded-lg text-gray-500 border-gray-300 shadow-md border-0 sm:text-sm">
-                                                                    <option className="text-xs">Select from the categories</option>
+                                                                    <option className="text-xs">{data?.category?.name}</option>
                                                                     {gigCategory.map((cat) => (
                                                                         <option className="text-xs" value={cat._id}>{cat.name}</option>
                                                                     ))}
@@ -227,6 +228,7 @@ export default function EditGigModal() {
                                                             <div class="flex items-center justify-center w-full">
                                                                 <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-28 p-10 group text-center">
                                                                     <div class="h-full w-full text-center flex flex-col justify-center items-center">
+                                                                        <img src={gigImage || data?.image} className="h-16 rounded-lg" />
                                                                         <p class="pointer-none text-gray-500 "><span class="text-base font-bold cursor-pointer">Upload</span> your gig image here <br /></p>
                                                                     </div>
                                                                     <input type="file" class="hidden" />
