@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateModalOff } from "../../Redux/Reducer/editGigModal";
 import { useNavigate } from "react-router-dom";
-import { gigData, gigsCategory } from "../../API";
+import { editGigData, gigData, gigsCategory } from "../../API";
 import { useFormik } from "formik";
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -16,23 +16,24 @@ export default function EditGigModal() {
     const [gigImage, setGigImage] = useState("");
     const [gigCategory, setGigCategory] = useState([])
 
+    const gigId = data?._id
+
     const formik = useFormik({
         initialValues: {
-            title: "",
-            overview: "",
-            description: "",
-            price: "",
+            title: data?.title ||  "",
+            overview: data?.overview || "",
+            description: data?.description || "",
+            price: data?.price || "",
             category: "",
-            type: "",
+            type: data?.type || "",
         },
         onSubmit: async (values) => {
             const data = {
-                ...values, gigImage
+                ...values, gigImage, gigId
             }
             console.log(data);
-            gigData(values).then((response) => {
-                console.log(response);
-                navigate('/vendor/postGig')
+            editGigData(data).then(() => {
+                window.location.reload(false)
             })
         }
     })
@@ -111,7 +112,7 @@ export default function EditGigModal() {
                                     </div>
 
                                     <div className="bg-gray-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                        <div class=" grid font-mono grid-cols-12">
+                                        <form onSubmit={formik.handleSubmit} class=" grid font-mono grid-cols-12">
                                             <div className="grid col-span-12 gap-6">
                                                 <div className="grid grid-cols-3 gap-6">
                                                     <div className="col-span-3 sm:col-span-2">
@@ -123,7 +124,6 @@ export default function EditGigModal() {
                                                                 type="text"
                                                                 name="company-website"
                                                                 id="company-website"
-                                                                placeholder={data?.title}
                                                                 className="block w-fit shadow-md flex-1 rounded-lg rounded-r-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                 {...formik.getFieldProps("title")}
                                                             />
@@ -141,7 +141,6 @@ export default function EditGigModal() {
                                                             name="about"
                                                             rows={3}
                                                             className="mt-1 block w-full rounded-md border-0 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                            placeholder={data?.overview}
                                                             {...formik.getFieldProps("overview")}
 
                                                         />
@@ -160,7 +159,6 @@ export default function EditGigModal() {
                                                             name="about"
                                                             rows={3}
                                                             className="mt-1 block w-full rounded-md border-0 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                            placeholder={data?.description}
                                                             {...formik.getFieldProps("description")}
 
                                                         />
@@ -178,7 +176,6 @@ export default function EditGigModal() {
                                                             type="number"
                                                             name="city"
                                                             id="city"
-                                                            placeholder={data?.price}
                                                             autoComplete="address-level2"
                                                             {...formik.getFieldProps("price")}
 
@@ -194,7 +191,6 @@ export default function EditGigModal() {
                                                             type="text"
                                                             name="region"
                                                             id="region"
-                                                            placeholder={data?.type}
                                                             autoComplete="address-level1"
                                                             {...formik.getFieldProps("type")}
 
@@ -229,9 +225,9 @@ export default function EditGigModal() {
                                                                 <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-28 p-10 group text-center">
                                                                     <div class="h-full w-full text-center flex flex-col justify-center items-center">
                                                                         <img src={gigImage || data?.image} className="h-16 rounded-lg" />
-                                                                        <p class="pointer-none text-gray-500 "><span class="text-base font-bold cursor-pointer">Upload</span> your gig image here <br /></p>
+                                                                        <p class="pointer-none text-gray-500 "><span class="text-base font-bold cursor-pointer">Upload</span> your gig image <br /></p>
                                                                     </div>
-                                                                    <input type="file" class="hidden" />
+                                                                    <input type="file" class="hidden" onChange={onUpload} />
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -247,7 +243,7 @@ export default function EditGigModal() {
                                                     Save
                                                 </button>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </Dialog.Panel>

@@ -31,9 +31,8 @@ export default function GigModal() {
                 ...values, gigImage, vendorId
             }
             console.log(data);
-            gigData(data).then((response) => {
-                console.log(response);
-                navigate('/vendor/postGig')
+            gigData(data).then(() => {
+                window.location.reload(false)
             })
         }
     })
@@ -231,7 +230,7 @@ export default function GigModal() {
                                                                 <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-28 p-10 group text-center">
                                                                     <div class="h-full w-full text-center flex flex-col justify-center items-center">
                                                                         <img src={gigImage} className="h-16 rounded-md" />
-                                                                        <p class="pointer-none text-gray-500 "><span class="text-base font-bold cursor-pointer" >Upload</span> your gig image here <br /></p>
+                                                                        <p class="pointer-none text-gray-500 "><span class="text-base font-bold cursor-pointer" >Upload</span> your gig image <br /></p>
                                                                     </div>
                                                                     <input type="file" class="hidden" onChange={onUpload} />
                                                                 </label>

@@ -8,10 +8,11 @@ import { useDispatch } from "react-redux";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { switchOn } from "../../Redux/Reducer/EditProfileModal";
 import { Link } from "react-router-dom";
-import { getVendorDetails } from "../../API";
+import { getVendorDetails, viewVendorRatings } from "../../API";
 
 function MyProfile() {
     const [value, setValue] = React.useState(2);
+    const [review, setReview] = useState([])
     const dispatch = useDispatch()
     const logout = () => {
         localStorage.clear();
@@ -19,17 +20,23 @@ function MyProfile() {
 
     const [profile, setProfile] = useState("")
 
-    const vendorProfile = async() => {
+    const vendorProfile = async () => {
         await getVendorDetails().then((result) => {
             setProfile(result.data.data.profile);
         })
     }
-    // console.log(profile);
+
+    const viewVendorRating = async () => {
+        await viewVendorRatings().then((result) => {
+            setReview(result.data.data.review);
+        })
+    }
 
     useEffect(() => {
-      vendorProfile()
+        vendorProfile(),
+            viewVendorRating()
     }, [])
-    
+
     return (
         <div>
             <EditProfileModal />
@@ -370,7 +377,7 @@ function MyProfile() {
                             <div className="flex flex-wrap -mx-3">
                                 <div className="flex-none w-auto max-w-full px-3">
                                     <div className="text-base ease-soft-in-out h-18.5 w-18.5 relative inline-flex items-center justify-center rounded-xl text-white transition-all duration-200">
-                                        <img src={ profile?.profilePhoto || team1 } alt="profile_image" className="w-full shadow-soft-sm rounded-xl" />
+                                        <img src={profile?.profilePhoto || team1} alt="profile_image" className="w-full shadow-soft-sm rounded-xl" />
                                     </div>
                                 </div>
                                 <div className="flex-none w-auto max-w-full px-3 my-auto">
@@ -422,6 +429,7 @@ function MyProfile() {
                                                 <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 rounded-t-lg text-sm text-inherit"><strong class="text-slate-600">Username:</strong> &nbsp; {profile?.userName}</li>
                                                 <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Email:</strong> &nbsp; {profile?.email}</li>
                                                 <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Gender:</strong> &nbsp; {profile?.gender}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">UPI ID:</strong> &nbsp; {profile?.upiId}</li>
                                                 <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">D.O.B:</strong> &nbsp; {profile?.dob}</li>
                                                 <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Mobile:</strong> &nbsp; {profile?.phone}</li>
                                             </ul>
@@ -479,191 +487,42 @@ function MyProfile() {
                                         Customer Reviews
                                     </h2>
                                     <div class="mt-8 h-96 overflow-y-scroll hide-scroll-bar grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-1">
-                                        <blockquote>
-                                            <header class="sm:flex sm:items-center">
-                                                <div class="flex items-center space-x-2">
-                                                    <img
-                                                        class="w-8 rounded-full"
-                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
-                                                        alt="sara"
+                                        {review.map((review) => (
+                                            <blockquote>
+                                                <header class="sm:flex sm:items-center">
+                                                    <div class="flex items-center space-x-2">
+                                                        <img
+                                                            class="w-8 rounded-full"
+                                                            src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
+                                                            alt="sara"
+                                                        />
+                                                        <h2 class="text-gray-800 font-bold">
+                                                            {review?.userId?.fullName}
+                                                        </h2>
+                                                    </div>
+                                                    <p className="ml-2 mr-2">|</p>
+                                                    <Rating
+                                                        sx={{ height: "1%", width: "1%" }}
+                                                        name="read-only"
+                                                        value={review?.rating}
+                                                        readOnly
                                                     />
-                                                    <h2 class="text-gray-800 font-bold">
-                                                        Felipe Sacudon
-                                                    </h2>
-                                                </div>
-                                                <p className="ml-2 mr-2">|</p>
-                                                <Rating
-                                                    sx={{ height: "1%", width: "1%" }}
-                                                    name="read-only"
-                                                    value={value}
-                                                    readOnly
-                                                />
-                                            </header>
-                                            <p class="mt-2 font-medium sm:mt-3">
-                                                The best thing money can buy!
-                                            </p>
-
-                                            <p class="mt-2 text-gray-700">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
-                                                laboriosam est totam iusto alias incidunt cum tempore
-                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
-                                            </p>
-
-                                            <footer class="mt-4">
-                                                <p class="text-xs text-gray-500">
-                                                    John Doe - 12th January, 2024
+                                                </header>
+                                                <p class="mt-2 font-medium sm:mt-3">
+                                                    {review?.title}
                                                 </p>
-                                            </footer>
-                                        </blockquote>
-                                        <blockquote>
-                                            <header class="sm:flex sm:items-center">
-                                                <div class="flex items-center space-x-2">
-                                                    <img
-                                                        class="w-8 rounded-full"
-                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
-                                                        alt="sara"
-                                                    />
-                                                    <h2 class="text-gray-800 font-bold">
-                                                        Felipe Sacudon
-                                                    </h2>
-                                                </div>
-                                                <p className="ml-2 mr-2">|</p>
-                                                <Rating
-                                                    sx={{ height: "1%", width: "1%" }}
-                                                    name="read-only"
-                                                    value={value}
-                                                    readOnly
-                                                />
-                                            </header>
-                                            <p class="mt-2 font-medium sm:mt-3">
-                                                The best thing money can buy!
-                                            </p>
 
-                                            <p class="mt-2 text-gray-700">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
-                                                laboriosam est totam iusto alias incidunt cum tempore
-                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
-                                            </p>
-
-                                            <footer class="mt-4">
-                                                <p class="text-xs text-gray-500">
-                                                    John Doe - 12th January, 2024
+                                                <p class="mt-2 text-gray-700">
+                                                   {review?.description}
                                                 </p>
-                                            </footer>
-                                        </blockquote>
-                                        <blockquote>
-                                            <header class="sm:flex sm:items-center">
-                                                <div class="flex items-center space-x-2">
-                                                    <img
-                                                        class="w-8 rounded-full"
-                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
-                                                        alt="sara"
-                                                    />
-                                                    <h2 class="text-gray-800 font-bold">
-                                                        Felipe Sacudon
-                                                    </h2>
-                                                </div>
-                                                <p className="ml-2 mr-2">|</p>
-                                                <Rating
-                                                    sx={{ height: "1%", width: "1%" }}
-                                                    name="read-only"
-                                                    value={value}
-                                                    readOnly
-                                                />
-                                            </header>
-                                            <p class="mt-2 font-medium sm:mt-3">
-                                                The best thing money can buy!
-                                            </p>
 
-                                            <p class="mt-2 text-gray-700">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
-                                                laboriosam est totam iusto alias incidunt cum tempore
-                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
-                                            </p>
-
-                                            <footer class="mt-4">
-                                                <p class="text-xs text-gray-500">
-                                                    John Doe - 12th January, 2024
-                                                </p>
-                                            </footer>
-                                        </blockquote>
-                                        <blockquote>
-                                            <header class="sm:flex sm:items-center">
-                                                <div class="flex items-center space-x-2">
-                                                    <img
-                                                        class="w-8 rounded-full"
-                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
-                                                        alt="sara"
-                                                    />
-                                                    <h2 class="text-gray-800 font-bold">
-                                                        Felipe Sacudon
-                                                    </h2>
-                                                </div>
-                                                <p className="ml-2 mr-2">|</p>
-                                                <Rating
-                                                    sx={{ height: "1%", width: "1%" }}
-                                                    name="read-only"
-                                                    value={value}
-                                                    readOnly
-                                                />
-                                            </header>
-                                            <p class="mt-2 font-medium sm:mt-3">
-                                                The best thing money can buy!
-                                            </p>
-
-                                            <p class="mt-2 text-gray-700">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
-                                                laboriosam est totam iusto alias incidunt cum tempore
-                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
-                                            </p>
-
-                                            <footer class="mt-4">
-                                                <p class="text-xs text-gray-500">
-                                                    John Doe - 12th January, 2024
-                                                </p>
-                                            </footer>
-                                        </blockquote>
-                                        <blockquote>
-                                            <header class="sm:flex sm:items-center">
-                                                <div class="flex items-center space-x-2">
-                                                    <img
-                                                        class="w-8 rounded-full"
-                                                        src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
-                                                        alt="sara"
-                                                    />
-                                                    <h2 class="text-gray-800 font-bold">
-                                                        Felipe Sacudon
-                                                    </h2>
-                                                </div>
-                                                <p className="ml-2 mr-2">|</p>
-                                                <Rating
-                                                    sx={{ height: "1%", width: "1%" }}
-                                                    name="read-only"
-                                                    value={value}
-                                                    readOnly
-                                                />
-                                            </header>
-                                            <p class="mt-2 font-medium sm:mt-3">
-                                                The best thing money can buy!
-                                            </p>
-
-                                            <p class="mt-2 text-gray-700">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                elit. Ullam possimus fuga dolor rerum dicta, ipsum
-                                                laboriosam est totam iusto alias incidunt cum tempore
-                                                aliquid aliquam error quisquam ipsam asperiores! Iste?
-                                            </p>
-
-                                            <footer class="mt-4">
-                                                <p class="text-xs text-gray-500">
-                                                    John Doe - 12th January, 2024
-                                                </p>
-                                            </footer>
-                                        </blockquote>
+                                                <footer class="mt-4">
+                                                    <p class="text-xs text-gray-500">
+                                                        {review?.userId?.fullName} - {review?.date}
+                                                    </p>
+                                                </footer>
+                                            </blockquote>
+                                        ))}
                                     </div>
                                 </div>
                             </section>

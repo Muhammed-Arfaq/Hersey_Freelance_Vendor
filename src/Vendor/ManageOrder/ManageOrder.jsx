@@ -2,18 +2,36 @@ import React, { useEffect, useState } from "react";
 import "./ManageOrder.css";
 import logo from "../../assets/img/Logo1.png";
 import { Link } from "react-router-dom";
-import { getReservedGigs } from "../../API";
+import { cancelUserOrder, completeUserOrder, getReservedGigs } from "../../API";
+import { useDispatch } from "react-redux";
+import OrderViewModal from "../OrderViewModal/OrderViewModal";
+import { orderModalOn } from "../../Redux/Reducer/viewOrderModal";
 
 function ManageOrder() {
+
+    const dispatch = useDispatch()
+
     const logout = () => {
         localStorage.clear();
     }
-
+    const token = localStorage.getItem("jwt")
     const [orders, setOrders] = useState([])
 
     const reservedGigs = async () => {
         await getReservedGigs().then((result) => {
             setOrders(result.data.data.reserved);
+        })
+    }
+
+    const cancelGig = (orderId) => {
+        cancelUserOrder(orderId, token).then(() => {
+            window.location.reload(false)
+        })
+    }
+
+    const completeGig = (orderId) => {
+        completeUserOrder(orderId, token).then(() => {
+            window.location.reload(false)
         })
     }
 
@@ -24,6 +42,7 @@ function ManageOrder() {
 
     return (
         <div>
+            <OrderViewModal />
             <div className="grid grid-cols-12">
                 <div className="z-10 my-4 mx-3 col-span-3">
                     <div className="w-full max-w-full px-3 lg:w-80 lg:flex-none fixed">
@@ -378,21 +397,25 @@ function ManageOrder() {
                                                             <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                                 <div className="flex px-2 py-1 justify-center">
                                                                     <div className="flex flex-col justify-center">
-                                                                        <h6 className="mb-0 leading-normal text-sm">#{orders._id}</h6>
+                                                                        <h6 className="mb-0 leading-normal text-sm cursor-pointer" onClick={() => dispatch(orderModalOn(orders))}>#{orders?._id}</h6>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                <p className="mb-0 font-semibold leading-tight text-center text-xs">{orders.date}</p>
+                                                                <p className="mb-0 font-semibold leading-tight text-center text-xs">{orders?.date}</p>
                                                             </td>
                                                             <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                <span className="font-semibold leading-tight text-xs text-slate-400">₹{orders.gigId.price}</span>
+                                                                <span className="font-semibold leading-tight text-xs text-slate-400">₹{orders?.gigId?.price}</span>
                                                             </td>
                                                             <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                <span className="font-semibold leading-tight text-base">{orders.status}</span>
+                                                                <span className="font-semibold leading-tight text-base">{orders?.status}</span>
                                                             </td>
                                                             <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                <a href=""><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">Cancel</span></a>
+                                                                {orders?.status == 'Cancelled' ?
+                                                                    <a><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white ">Cancelled</span></a>
+                                                                    :
+                                                                    <a href=""><span className="bg-gradient-to-r from-emerald-500 to-emerald-900 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white" onClick={() => completeGig(orders?._id)}>Complete</span></a>
+                                                                }
                                                             </td>
                                                         </tr>
                                                     ))}

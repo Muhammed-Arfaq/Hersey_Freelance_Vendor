@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./ChatClient.css";
 import io from "socket.io-client";
 import logo from "../../assets/img/Logo1.png";
+import team1 from "../../assets/img/team-2.jpg";
 import { connections, fetchMsg, sndMsg } from "../../API";
 import { Link } from "react-router-dom";
 
@@ -433,11 +434,11 @@ function ChatClient() {
                                 <div
                                     class="flex flex-col items-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 border border-gray-200 mt-4 w-full py-6 px-4 rounded-lg"
                                 >
-                                    <div class="h-20 w-20 rounded-full border overflow-hidden">
+                                    <div class="h-20 w-20 rounded-full border-0 overflow-hidden">
                                         <img
-                                            src="https://avatars3.githubusercontent.com/u/2763884?s=128"
+                                            src={currentChat.profilePhoto || team1}
                                             alt="Avatar"
-                                            class="h-full w-full"
+                                            class="h-20 w-20"
                                         />
                                     </div>
                                     <div class="text-sm text-white font-semibold mt-2">{currentChat.fullName}</div>
@@ -446,9 +447,9 @@ function ChatClient() {
                                 <div class="flex flex-col mt-8">
                                     <div class="flex flex-row items-center justify-between text-xs">
                                         <span class="font-bold text-base">Messages</span>
-                                        <span
+                                        {/* <span
                                             class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full"
-                                        >4</span>
+                                        ></span> */}
                                     </div>
                                     <div class="flex flex-col space-y-1 mt-5 -mx-2 h-96 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
                                         {clients.map((client) => (

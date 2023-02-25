@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { switchOff } from "../../Redux/Reducer/EditProfileModal";
 import CloseIcon from '@mui/icons-material/Close';
+import { updateVendorProfile } from "../../API";
 
 export default function EditProfileModal() {
     const cancelButtonRef = useRef(null);
@@ -10,7 +11,49 @@ export default function EditProfileModal() {
 
     const show = useSelector((state) => state.editVendorProfile.show)
     const data = useSelector((state) => state.editVendorProfile.data)
-    console.log(data);
+    
+
+    const [userName, setUserName] = useState(data?.userName || "")
+    const [dob, setDob] = useState(data?.dob || "")
+    const [gender, setGender] = useState(data?.gender || "")
+    const [phone, setPhone] = useState(data?.phone || "")
+    const [address, setAddress] = useState(data?.address?.currentAddress || "")
+    const [profilePhoto, setProfilePhoto] = useState("")
+    const [upiId, setUpiId] = useState(data?.upiId || "")
+    const [skill, setSkill] = useState(data?.skill || "")
+    const [googleDrive, setGoogleDrive] = useState(data?.googleDrive || "")
+    const [github, setGithub] = useState(data?.github || "")
+    const [about, setAbout] = useState(data?.about || "")
+    const [linkedIn, setLinkedIn] = useState(data?.linkedIn || "")
+    const [city, setCity] = useState(data?.address?.city || "")
+    const [state, setState] = useState(data?.address?.state || "") 
+    const [country, setCountry] = useState(data?.address?.country || "")
+
+    function converToBase64(file) { 
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    }
+
+    const onUpload = async (e) => {
+        const base64 = await converToBase64(e.target.files[0]);
+        setProfilePhoto(base64);
+    };
+
+    const updateVendorDetails = () => {
+        updateVendorProfile(userName, dob, gender, phone, address, profilePhoto, upiId, skill, googleDrive, github, about, linkedIn, city, state, country).then(() => {
+            window.location.reload(false)
+        })
+    }
 
     return (
         <Transition.Root show={show} as={Fragment}>
@@ -59,7 +102,7 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="first-name"
                                                     id="first-name"
-                                                    defaultValue={data?.fullName}
+                                                    placeholder={data?.fullName}
                                                     autoComplete="given-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -73,7 +116,10 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="last-name"
                                                     id="last-name"
-                                                    defaultValue={data?.userName}
+                                                    value={userName}
+                                                    onChange={(e) => {
+                                                        setUserName(e.target.value)
+                                                    }}
                                                     autoComplete="family-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -81,13 +127,16 @@ export default function EditProfileModal() {
 
                                             <div className="col-span-6 sm:col-span-3">
                                                 <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                                                    Email Address
+                                                    UPI ID
                                                 </label>
                                                 <input
                                                     type="text"
                                                     name="email-address"
                                                     id="email-address"
-                                                    defaultValue={data?.email}
+                                                    value={upiId}
+                                                    onChange={(e) => {
+                                                        setUpiId(e.target.value)
+                                                    }}
                                                     autoComplete="email"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -101,7 +150,10 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="country"
                                                     id="country"
-                                                    defaultValue={data?.skill}
+                                                    value={skill}
+                                                    onChange={(e) => {
+                                                        setSkill(e.target.value)
+                                                    }}
                                                     autoComplete="country"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -114,7 +166,10 @@ export default function EditProfileModal() {
                                                 <input
                                                     type="text"
                                                     name="city"
-                                                    defaultValue={data?.phone}
+                                                    value={phone}
+                                                    onChange={(e) => {
+                                                        setPhone(e.target.value)
+                                                    }}
                                                     id="city"
                                                     autoComplete="address-level2"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -126,12 +181,15 @@ export default function EditProfileModal() {
                                                     D.O.B
                                                 </label>
                                                 <input
-                                                    type="text"
+                                                    type="date"
                                                     name="region"
                                                     id="region"
-                                                    defaultValue={data?.dob}
+                                                    value={dob}
+                                                    onChange={(e) => {
+                                                        setDob(e.target.value)
+                                                    }}
                                                     autoComplete="address-level1"
-                                                    className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                    className="mt-5 block h-9 w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
                                             </div>
 
@@ -143,7 +201,10 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="postal-code"
                                                     id="postal-code"
-                                                    defaultValue={data?.gender}
+                                                    value={gender}
+                                                    onChange={(e) => {
+                                                        setGender(e.target.value)
+                                                    }}
                                                     autoComplete="postal-code"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -157,7 +218,10 @@ export default function EditProfileModal() {
                                                     <textarea
                                                         id="about"
                                                         name="about"
-                                                        defaultValue={data?.about}
+                                                        value={about}
+                                                        onChange={(e) => {
+                                                            setAbout(e.target.value)
+                                                        }}
                                                         rows={3}
                                                         className="mt-1 block w-full rounded-md border-0 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                     />
@@ -172,7 +236,10 @@ export default function EditProfileModal() {
                                                     <textarea
                                                         id="about"
                                                         name="about"
-                                                        defaultValue={data?.address?.currentAddress}
+                                                        value={address}
+                                                        onChange={(e) => {
+                                                            setAddress(e.target.value)
+                                                        }}
                                                         rows={1}
                                                         className="mt-1 block w-full rounded-md border-0 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                     />
@@ -187,7 +254,10 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="city"
                                                     id="city"
-                                                    defaultValue={data?.address?.city}
+                                                    value={city}
+                                                    onChange={(e) => {
+                                                        setCity(e.target.value)
+                                                    }}
                                                     autoComplete="address-level2"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -201,7 +271,10 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="region"
                                                     id="region"
-                                                    defaultValue={data?.address?.state}
+                                                    value={state}
+                                                    onChange={(e) => {
+                                                        setState(e.target.value)
+                                                    }}
                                                     autoComplete="address-level1"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -215,7 +288,10 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="postal-code"
                                                     id="postal-code"
-                                                    defaultValue={data?.address?.country}
+                                                    value={country}
+                                                    onChange={(e) => {
+                                                        setCountry(e.target.value)
+                                                    }}
                                                     autoComplete="postal-code"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -229,7 +305,10 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="first-name"
                                                     id="first-name"
-                                                    defaultValue={data?.googleDrive}
+                                                    value={googleDrive}
+                                                    onChange={(e) => {
+                                                        setGoogleDrive(e.target.value)
+                                                    }}
                                                     autoComplete="given-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -243,7 +322,10 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="last-name"
                                                     id="last-name"
-                                                    defaultValue={data?.linkedIn}
+                                                    value={linkedIn}
+                                                    onChange={(e) => {
+                                                        setLinkedIn(e.target.value)
+                                                    }}
                                                     autoComplete="family-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -257,7 +339,10 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="last-name"
                                                     id="last-name"
-                                                    defaultValue={data?.github}
+                                                    value={github}
+                                                    onChange={(e) => {
+                                                        setGithub(e.target.value)
+                                                    }}
                                                     autoComplete="family-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -269,10 +354,10 @@ export default function EditProfileModal() {
                                                     <div class="flex items-center justify-center w-full">
                                                         <label class="flex flex-col rounded-lg border-4 border-dashed w-full h-28 p-10 group text-center">
                                                             <div class="h-full w-full text-center flex flex-col justify-center items-center">
-                                                                <img src={data?.profilePhoto} className="h-16 mt-1 rounded-md" />
+                                                                <img src={ profilePhoto || data?.profilePhoto} className="h-16 mt-1 rounded-md" />
                                                                 <p class="pointer-none text-gray-500 "><span class="text-base font-bold cursor-pointer">Upload</span> your photo <br /></p>
                                                             </div>
-                                                            <input type="file" class="hidden"/>
+                                                            <input type="file" class="hidden" onChange={onUpload} />
                                                         </label>
                                                     </div>
                                                 </div>
@@ -282,6 +367,7 @@ export default function EditProfileModal() {
                                     </div>
                                     <div className="px-4 py-3 mt-4 text-right sm:px-6">
                                         <button
+                                            onClick={updateVendorDetails}
                                             type="submit"
                                             className="inline-flex justify-center rounded-md bg-gradient-to-r from-fuchsia-800 to-indigo-900 py-2 px-4 text-sm font-medium text-white shadow-sm"
                                         >

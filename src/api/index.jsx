@@ -16,7 +16,7 @@ export const vendorOtp = (fullName, userName, email, phone, gender, dob, passwor
     passwordConfirm
 })
 
-export const verifyVendorOTP = (otp) => axios.post("vendor/verifyVendorOTP",{ otp })
+export const verifyVendorOTP = (otp) => axios.post("/vendor/verifyVendorOTP",{ otp })
 
 export const gigData = (data) => axios.post("/vendor/newGig", data, config)
 
@@ -37,3 +37,13 @@ export const updateAddress = ( country, currentAddress, city, state, pincode, ve
 export const updatePersonalInfo = (skill, googleDrive, linkedIn, github, about, profilePhoto, vendorId) => axios.patch(`/vendor/addSkill/${vendorId}`, { skill, googleDrive, linkedIn, github, about, profilePhoto })
 
 export const viewGig = () => axios.get("/vendor/viewGigs", config)
+
+export const viewVendorRatings = () => axios.get("/vendor/viewVendorRating", config)
+
+export const updateVendorProfile = (userName, dob, gender, phone, address, profilePhoto, upiId, skill, googleDrive, github, about, linkedIn, city, state, country) => axios.patch("/vendor/updateVendorProfile", { userName, dob, gender, phone, address, profilePhoto, upiId, skill, googleDrive, github, about, linkedIn, city, state, country }, config)
+
+export const editGigData = (data) => axios.patch("/vendor/updateVendorGig", { data }, config)
+
+export const cancelUserOrder = (orderId) => axios.patch("/vendor/cancelUserOrder", { orderId }, config)
+
+export const completeUserOrder = (orderId) => axios.patch("/vendor/completeUserOrder", { orderId }, config)
