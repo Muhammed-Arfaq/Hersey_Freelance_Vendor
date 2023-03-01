@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./PostGig.css";
 import logo from "../../assets/img/Logo1.png";
-import cake from '../../assets/img/cake.jpeg'
-import img1 from "../../assets/img/home-decor-1.jpg";
-import img2 from "../../assets/img/home-decor-2.jpg";
-import img3 from "../../assets/img/home-decor-3.jpg";
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch } from "react-redux";
 import { setCreateSwitchOn } from "../../Redux/Reducer/gigModal";

@@ -38,6 +38,8 @@ export const updatePersonalInfo = (skill, googleDrive, linkedIn, github, about, 
 
 export const viewGig = () => axios.get("/vendor/viewGigs", config)
 
+export const deleteGig = (gigId) => axios.delete(`/vendor/deleteGig/${gigId}`, config)
+
 export const viewVendorRatings = () => axios.get("/vendor/viewVendorRating", config)
 
 export const updateVendorProfile = (userName, dob, gender, phone, address, profilePhoto, upiId, skill, googleDrive, github, about, linkedIn, city, state, country) => axios.patch("/vendor/updateVendorProfile", { userName, dob, gender, phone, address, profilePhoto, upiId, skill, googleDrive, github, about, linkedIn, city, state, country }, config)
@@ -47,3 +49,5 @@ export const editGigData = (data) => axios.patch("/vendor/updateVendorGig", { da
 export const cancelUserOrder = (orderId) => axios.patch("/vendor/cancelUserOrder", { orderId }, config)
 
 export const completeUserOrder = (orderId) => axios.patch("/vendor/completeUserOrder", { orderId }, config)
+
+export const vendorAuth = (vendorId, token) => axios.get(`/vendor/vendorAuth/${vendorId}`, { headers: { Authorization: `Bearer ${token}` }})

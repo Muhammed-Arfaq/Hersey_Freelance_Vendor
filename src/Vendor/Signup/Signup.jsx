@@ -7,8 +7,9 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/img/Logo1.png";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { vendorOtp } from "../../API";
+import toast, { Toaster } from "react-hot-toast";
+import { vendorSignup } from "../../YupSchema/VendorSignup";
 
 export default function VendorSignup() {
   const navigate = useNavigate()
@@ -23,11 +24,12 @@ export default function VendorSignup() {
   const [dob, setDob] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirm, setPasswordConfirm] = useState("")
+  const [errors, setErrors] = useState({})
 
-  const eventHandler = (e) => {
+  const eventHandler = async (e) => {
     e.preventDefault()
 
-    vendorOtp(
+    const formData = {
       fullName,
       userName,
       email,
@@ -36,15 +38,46 @@ export default function VendorSignup() {
       dob,
       password,
       passwordConfirm
-    ).then(()=>{
-      console.log("hereeeee");
-      navigate("/vendor/verifyOTP")
-    })
+    }
+
+    await vendorSignup
+      .validate(formData, { abortEarly: false })
+      .then(() => {
+        vendorOtp(
+          fullName,
+          userName,
+          email,
+          phone,
+          gender,
+          dob,
+          password,
+          passwordConfirm
+        ).then(() => {
+          console.log("hereeeee");
+          navigate("/vendor/verifyOTP")
+        })
+      })
+      .catch((validationErrors) => {
+        const errors = validationErrors.inner.reduce((acc, error) => {
+          return { ...acc, [error.path]: error.message };
+        }, {});
+
+        setErrors(errors);
+        console.log(errors);
+
+        Object.values(errors).forEach((error) => {
+          toast.error(error, {
+            position: "bottom-right",
+            autoClose: 10000,
+          })
+        });
+      });
   }
 
   return (
     <>
       <div className="relative z-10 px-6 pt-4 pb-4 lg:px-8">
+        <Toaster />
         <div>
           <nav className="flex h-9 items-center justify-between" aria-label="Global">
             <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
@@ -64,7 +97,7 @@ export default function VendorSignup() {
               </button>
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
-              
+
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
               <Link
@@ -102,7 +135,7 @@ export default function VendorSignup() {
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/10">
                   <div className="space-y-2 py-6">
-                    
+
                   </div>
                   <div className="py-6">
                     <Link
@@ -183,7 +216,7 @@ export default function VendorSignup() {
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Full Name"
                           value={fullName}
-                          onChange={(e)=>{
+                          onChange={(e) => {
                             setFullName(e.target.value)
                           }}
                         />
@@ -200,7 +233,7 @@ export default function VendorSignup() {
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Username"
                           value={userName}
-                          onChange={(e)=>{
+                          onChange={(e) => {
                             setUserName(e.target.value)
                           }}
                         />
@@ -220,7 +253,7 @@ export default function VendorSignup() {
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Email"
                           value={email}
-                          onChange={(e)=>{
+                          onChange={(e) => {
                             setEmail(e.target.value)
                           }}
                         />
@@ -238,7 +271,7 @@ export default function VendorSignup() {
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Phone"
                           value={phone}
-                          onChange={(e)=>{
+                          onChange={(e) => {
                             setPhone(e.target.value)
                           }}
                         />
@@ -258,7 +291,7 @@ export default function VendorSignup() {
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Gender"
                           value={gender}
-                          onChange={(e)=>{
+                          onChange={(e) => {
                             setGender(e.target.value)
                           }}
                         />
@@ -276,7 +309,7 @@ export default function VendorSignup() {
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="D.O.B"
                           value={dob}
-                          onChange={(e)=>{
+                          onChange={(e) => {
                             setDob(e.target.value)
                           }}
                         />
@@ -296,7 +329,7 @@ export default function VendorSignup() {
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Password"
                           value={password}
-                          onChange={(e)=>{
+                          onChange={(e) => {
                             setPassword(e.target.value)
                           }}
                         />
@@ -314,7 +347,7 @@ export default function VendorSignup() {
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Confirm Password"
                           value={passwordConfirm}
-                          onChange={(e)=>{
+                          onChange={(e) => {
                             setPasswordConfirm(e.target.value)
                           }}
                         />
@@ -323,7 +356,7 @@ export default function VendorSignup() {
 
                     <div className="pl-8">
                       <label className="inline-flex items-center cursor-pointer">
-                        
+
                       </label>
                     </div>
 

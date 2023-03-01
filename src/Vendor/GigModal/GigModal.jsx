@@ -107,7 +107,7 @@ export default function GigModal() {
                                 </div>
                                 <div className="bg-gray-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                     <div className="hidden sm:block" aria-hidden="true">
-                                        
+
                                     </div>
 
                                     <div className="bg-gray-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -191,36 +191,38 @@ export default function GigModal() {
                                                         <label htmlFor="region" className="block mt-3 text-sm font-medium text-gray-700">
                                                             Type
                                                         </label>
-                                                        <input
-                                                            type="text"
-                                                            name="region"
-                                                            id="region"
-                                                            placeholder="Service Or Product"
-                                                            autoComplete="address-level1"
-                                                            {...formik.getFieldProps("type")}
-
-                                                            className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                        />
+                                                        <div class="relative">
+                                                            <select
+                                                                type="text"
+                                                                name="region"
+                                                                id="region"
+                                                                {...formik.getFieldProps("type")}
+                                                                class="mt-5 block w-40 rounded-lg text-gray-500 border-gray-300 shadow-md border-0 sm:text-sm">
+                                                                <option className="text-xs">Select Types</option>
+                                                                <option className="text-xs" value={"Service"}>Service</option>
+                                                                <option className="text-xs" value={"Product"}>Product</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
 
                                                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                                <label class="block mt-3 text-sm font-medium text-gray-700" for="grid-state">
-                                                                    Categories
-                                                                </label>
-                                                                <div class="relative">
-                                                                    <select
-                                                                        id="category"
-                                                                        name="categoryId"
-                                                                        {...formik.getFieldProps("category")}
-                                                                        class="mt-5 block w-40  rounded-lg text-gray-500 border-gray-300 shadow-md border-0 sm:text-sm">
-                                                                        <option className="text-xs">Select from the categories</option>
-                                                                        {gigCategory.map((cat) => (
+                                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                                            <label class="block mt-3 text-sm font-medium text-gray-700" for="grid-state">
+                                                                Categories
+                                                            </label>
+                                                            <div class="relative">
+                                                                <select
+                                                                    id="category"
+                                                                    name="categoryId"
+                                                                    {...formik.getFieldProps("category")}
+                                                                    class="mt-5 block w-40  rounded-lg text-gray-500 border-gray-300 shadow-md border-0 sm:text-sm">
+                                                                    <option className="text-xs">Select from the categories</option>
+                                                                    {gigCategory.map((cat) => (
                                                                         <option className="text-xs" value={cat._id}>{cat.name}</option>
-                                                                        ))}
-                                                                    </select>
-                                                                </div>
+                                                                    ))}
+                                                                </select>
                                                             </div>
+                                                        </div>
                                                     </div>
 
                                                     <div className="col-span-6 sm:col-span-6">

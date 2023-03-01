@@ -3,13 +3,23 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { modalOff } from "../../Redux/Reducer/ViewGigModal";
 import CloseIcon from '@mui/icons-material/Close';
+import { deleteGig } from "../../API";
+import { toast } from "react-hot-toast";
 
 export default function ViewGigModal() {
     const cancelButtonRef = useRef(null);
     const dispatch = useDispatch()
     const show = useSelector((state) => state.viewGigDetails.show)
     const data = useSelector((state) => state.viewGigDetails.data)
-    console.log(data);
+
+    const dltGig = (gigId) => {
+        deleteGig(gigId).then((result) => {
+            toast.success("Gig Deleted Successfully", {
+                autoClose: 10000,
+            })
+            window.location.reload()
+        })
+    }
 
     return (
         <Transition.Root show={show} as={Fragment}>
@@ -79,6 +89,15 @@ export default function ViewGigModal() {
                                             </div>
                                         </div>
                                     </div>
+                                        <div className="flex justify-end">
+                                            <button
+                                                onClick={() => dltGig(data?._id)}
+                                                type="button"
+                                                className="px-8 py-2 mb-0 font-bold uppercase transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-red-500 text-red-500 hover:border-red-500 hover:bg-transparent hover:text-red-500 hover:opacity-75 hover:shadow-none active:bg-red-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500"
+                                            >
+                                                Delete Gig
+                                            </button>
+                                        </div>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>

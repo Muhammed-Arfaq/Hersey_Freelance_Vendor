@@ -9,6 +9,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/img/Logo1.png";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../API";
+import toast, { Toaster } from "react-hot-toast";
+import { vendorLogin } from "../../YupSchema/VendorLogin";
 
 export default function VendorLogin() {
   const navigate = useNavigate()
@@ -17,24 +19,51 @@ export default function VendorLogin() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [errors, setErrors] = useState({})
 
-  const eventHandler = (e) => {
+  const eventHandler = async(e) => {
     e.preventDefault()
     const data = {
       email, password
     }
-    login(data).then((result) => {
-      localStorage.setItem("jwt", result.data.token)
-      localStorage.setItem( "vendorId", result.data.data.user._id )
-      localStorage.setItem( "userName", result.data.data.user.userName )
-      localStorage.setItem( "email", result.data.data.user.email )
-      navigate('/vendor/Dashboard')
-    })
+
+    await vendorLogin
+      .validate(data, { abortEarly: false })
+      .then(() => {
+        login(data).then((result) => {
+          if(result.data.status == "Success") {
+            localStorage.setItem("jwt", result.data.token)
+            localStorage.setItem( "vendorId", result.data.data.user._id )
+            localStorage.setItem( "userName", result.data.data.user.userName )
+            localStorage.setItem( "email", result.data.data.user.email )
+            toast.success("Login Successful")
+            navigate('/vendor/Dashboard')
+          } else {
+            toast.error("Wrong Email or Password")
+          }
+        })
+      })
+      .catch((validationErrors) => {
+        const errors = validationErrors.inner.reduce((acc, error) => {
+          return { ...acc, [error.path]: error.message };
+        }, {});
+
+        setErrors(errors);
+        console.log(errors);
+
+        Object.values(errors).forEach((error) => {
+          toast.error(error, {
+            position: "bottom-right",
+            autoClose: 10000,
+          })
+        });
+      });
   }
 
   return (
     <>
       <div className="relative z-10 px-6 pt-4 pb-4 lg:px-8">
+      <Toaster />
         <div>
           <nav
             className="flex h-9 items-center justify-between"

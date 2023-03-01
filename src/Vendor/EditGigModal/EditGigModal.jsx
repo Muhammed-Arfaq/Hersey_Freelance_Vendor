@@ -9,7 +9,6 @@ import CloseIcon from '@mui/icons-material/Close';
 
 export default function EditGigModal() {
     const cancelButtonRef = useRef(null);
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const show = useSelector((state) => state.editGigDetails.show)
     const data = useSelector((state) => state.editGigDetails.data)
@@ -20,7 +19,7 @@ export default function EditGigModal() {
 
     const formik = useFormik({
         initialValues: {
-            title: data?.title ||  "",
+            title: data?.title || "",
             overview: data?.overview || "",
             description: data?.description || "",
             price: data?.price || "",
@@ -187,15 +186,16 @@ export default function EditGigModal() {
                                                         <label htmlFor="region" className="block mt-3 text-sm font-medium text-gray-700">
                                                             Type
                                                         </label>
-                                                        <input
+                                                        <select
                                                             type="text"
                                                             name="region"
                                                             id="region"
-                                                            autoComplete="address-level1"
                                                             {...formik.getFieldProps("type")}
-
-                                                            className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                        />
+                                                            class="mt-5 block w-40 rounded-lg text-gray-500 border-gray-300 shadow-md border-0 sm:text-sm">
+                                                            <option className="text-xs">Select Types</option>
+                                                            <option className="text-xs" value={"Service"}>Service</option>
+                                                            <option className="text-xs" value={"Product"}>Product</option>
+                                                        </select>
                                                     </div>
 
                                                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">

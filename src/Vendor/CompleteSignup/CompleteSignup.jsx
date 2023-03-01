@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./CompleteSignup.css";
-import logo from "../../assets/img/Logo1.png";
 import bg from '../../assets/img/curved0.jpg'
 import team1 from '../../assets/img/team-2.jpg'
 import { updateAddress, updatePersonalInfo } from "../../API";
+import { VendorAddress } from "../../YupSchema/VendorAddress";
+import { toast, Toaster } from "react-hot-toast";
+import { VendorSkills } from "../../YupSchema/VendorSkills";
 
 
 function CompleteSignup() {
@@ -19,18 +21,68 @@ function CompleteSignup() {
     const [github, setGithub] = useState("")
     const [about, setAbout] = useState("")
     const [profilePhoto, setProfilePhoto] = useState("")
+    const [errors, setErrors] = useState({})
 
     console.log(profilePhoto);
 
     const vendorId = localStorage.getItem("vendorId")
 
-    const addressInformation = (e) => {
+    const addressInformation = async (e) => {
         e.preventDefault()
-        updateAddress( country, currentAddress, city, state, pincode, vendorId)
+
+        const formData = {
+            country, currentAddress, city, state, pincode, vendorId
+        }
+
+        await VendorAddress
+            .validate(formData, { abortEarly: false })
+            .then(() => {
+                updateAddress(country, currentAddress, city, state, pincode, vendorId)
+            })
+            .catch((validationErrors) => {
+                const errors = validationErrors.inner.reduce((acc, error) => {
+                    return { ...acc, [error.path]: error.message };
+                }, {});
+
+                setErrors(errors);
+
+                Object.values(errors).forEach((error) => {
+                    toast.error(error, {
+                        position: "bottom-right",
+                        autoClose: 10000,
+                    })
+                });
+            });
     }
 
-    const personalInformation = () => {
-        updatePersonalInfo(skill, googleDrive, linkedIn, github, about, profilePhoto, vendorId)
+    const personalInformation = async(e) => {
+        e.preventDefault()
+
+        const data = {
+            skill, googleDrive, linkedIn, github, about, profilePhoto
+        }
+
+        await VendorSkills
+            .validate(data, { abortEarly: false })
+            .then(() => {
+                updatePersonalInfo(skill, googleDrive, linkedIn, github, about, profilePhoto, vendorId)
+            })
+            .catch((validationErrors) => {
+                console.log(validationErrors, "dtf");
+                const errors = validationErrors.inner.reduce((acc, error) => {
+                    return { ...acc, [error.path]: error.message };
+                }, {});
+
+                setErrors(errors);
+                console.log(errors);
+
+                Object.values(errors).forEach((error) => {
+                    toast.error(error, {
+                        position: "bottom-right",
+                        autoClose: 10000,
+                    })
+                });
+            });
     }
 
     function converToBase64(file) {
@@ -56,7 +108,7 @@ function CompleteSignup() {
     return (
         <div>
             <div className="grid grid-cols-12">
-
+            <Toaster/>
                 <div className="col-span-12 ">
                     <div className="w-full px-6 mx-auto">
                         <div className="relative flex items-center p-0 mt-6 overflow-hidden bg-center bg-cover min-h-75 rounded-2xl">
@@ -395,7 +447,7 @@ function CompleteSignup() {
                                                 <label className="block text-sm font-medium text-gray-700">Profile Photo</label>
                                                 <div className="mt-3 flex items-center">
                                                     <span className="inline-block h-12 w-12 overflow-hidden rounded-md border-0 shadow-md bg-gray-100">
-                                                        <img src={ profilePhoto || team1 }  />
+                                                        <img src={profilePhoto || team1} />
                                                         {/* <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                                                             <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                                                         </svg> */}
