@@ -28,6 +28,8 @@ export const sndMsg = (data) => axios.post('/chat', data)
 
 export const fetchMsg = (vendorId, userId) => axios.get(`/getMessage/${vendorId}/${userId}`);
 
+export const getMsgCount = (vendorId) => axios.get(`/vendor/getVendorMessageCount/${vendorId}`)
+
 export const getReservedGigs = () => axios.get("/vendor/bookedGigs", config)
 
 export const getVendorDetails = () => axios.get("/vendor/vendorProfile", config)

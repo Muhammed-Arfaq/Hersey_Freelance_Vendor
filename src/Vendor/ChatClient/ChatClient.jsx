@@ -3,12 +3,14 @@ import "./ChatClient.css";
 import io from "socket.io-client";
 import logo from "../../assets/img/Logo1.png";
 import team1 from "../../assets/img/team-2.jpg";
-import { connections, fetchMsg, sndMsg } from "../../API";
+import { connections, fetchMsg, getMsgCount, sndMsg } from "../../API";
 import { Link } from "react-router-dom";
 
 function ChatClient() {
     const vendorId = localStorage.getItem("vendorId")
     const [clients, setClients] = useState([])
+    const [getCount, setGetCount] = useState([])
+    const [msgCount, setMsgCount] = useState("")
     const [currentChat, setCurrentChat] = useState({});
     const [message, setMessage] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
@@ -21,12 +23,20 @@ function ChatClient() {
 
     const getConnections = async () => {
         await connections(vendorId).then((result) => {
-            setClients(result.data)
+            setClients(result.data.sortedUsers)
+            setGetCount(result.data.connectionCount)
             console.log(result.data);
         })
     }
 
+    const getMessageCount = () => {
+        getMsgCount(vendorId).then((result) => {
+            setMsgCount(result.data.count);
+        })
+    }
+
     useEffect(() => {
+        getMessageCount()
         getConnections()
     }, [])
 
@@ -66,6 +76,7 @@ function ChatClient() {
         console.log(data);
         await sndMsg(data)
         setMessage(message.concat(messages))
+        setInputMessage("")
     }
 
     useEffect(() => {
@@ -96,7 +107,7 @@ function ChatClient() {
 
     const logout = () => {
         localStorage.clear();
-      }
+    }
 
     return (
         <div>
@@ -436,34 +447,39 @@ function ChatClient() {
                                 >
                                     <div class="h-20 w-20 rounded-full border-0 overflow-hidden">
                                         <img
-                                            src={currentChat.profilePhoto || team1}
+                                            src={currentChat?.profilePhoto || team1}
                                             alt="Avatar"
                                             class="h-20 w-20"
                                         />
                                     </div>
-                                    <div class="text-sm text-white font-semibold mt-2">{currentChat.fullName}</div>
+                                    <div class="text-sm text-white font-semibold mt-2">{currentChat?.fullName}</div>
 
                                 </div>
                                 <div class="flex flex-col mt-8">
                                     <div class="flex flex-row items-center justify-between text-xs">
                                         <span class="font-bold text-base">Messages</span>
-                                        {/* <span
-                                            class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full"
-                                        ></span> */}
+                                        <span
+                                            class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none"
+                                        >{msgCount}</span>
                                     </div>
                                     <div class="flex flex-col space-y-1 mt-5 -mx-2 h-96 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
                                         {clients.map((client) => (
                                             <button
-                                                key={client._id}
+                                                key={client?._id}
                                                 onClick={() => handleSelect(client)}
                                                 class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
                                             >
                                                 <div
                                                     class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full"
                                                 >
-                                                    H
+                                                    {client?.profilePhoto}
                                                 </div>
-                                                <div class="ml-2 text-sm font-semibold" >{client.fullName}</div>
+                                                <div class="ml-2 text-sm font-semibold" >{client?.fullName}</div>
+                                                <div
+                                                    class="flex items-center justify-center ml-auto text-xs text-white bg-gray-500 h-4 w-4 rounded leading-none"
+                                                >
+                                                    {getCount?.find((count) => count?.userId === client?._id)?.count || 0}
+                                                </div>
                                             </button>
                                         ))}
                                     </div>
@@ -484,7 +500,11 @@ function ChatClient() {
                                                                 <div
                                                                     class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
                                                                 >
-                                                                    A
+                                                                    <img
+                                                                        src={currentChat?.profilePhoto || team1}
+                                                                        alt="Avatar"
+                                                                        class="h-full w-full rounded-lg"
+                                                                    />
                                                                 </div>
                                                                 <div
                                                                     class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
@@ -500,7 +520,11 @@ function ChatClient() {
                                                                 <div
                                                                     class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
                                                                 >
-                                                                    A
+                                                                    <img
+                                                                        src={currentChat?.profilePhoto || team1}
+                                                                        alt="Avatar"
+                                                                        class="h-full w-full rounded-lg"
+                                                                    />
                                                                 </div>
                                                                 <div
                                                                     class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
@@ -522,6 +546,7 @@ function ChatClient() {
                                         <div class="flex-grow ml-4">
                                             <div class="relative w-full">
                                                 <input
+                                                    value={inputMessage}
                                                     onChange={(e) => setInputMessage(e.target.value)}
                                                     type="text"
                                                     className="block w-full border-0 flex-1 rounded-lg sm:text-sm"
