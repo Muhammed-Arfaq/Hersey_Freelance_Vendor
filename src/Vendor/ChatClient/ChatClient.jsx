@@ -3,7 +3,7 @@ import "./ChatClient.css";
 import io from "socket.io-client";
 import logo from "../../assets/img/Logo1.png";
 import team1 from "../../assets/img/team-2.jpg";
-import { connections, fetchMsg, getMsgCount, sndMsg } from "../../API";
+import { connections, fetchMsg, getMsgCount, sndMsg } from "../../api";
 import { Link } from "react-router-dom";
 
 function ChatClient() {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ManageOrder.css";
 import logo from "../../assets/img/Logo1.png";
 import { Link } from "react-router-dom";
-import { cancelUserOrder, completeUserOrder, getReservedGigs } from "../../API";
+import { cancelUserOrder, completeUserOrder, getReservedGigs } from "../../api";
 import { useDispatch } from "react-redux";
 import OrderViewModal from "../OrderViewModal/OrderViewModal";
 import { orderModalOn } from "../../Redux/Reducer/viewOrderModal";

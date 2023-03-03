@@ -10,7 +10,7 @@ import logo from '../../assets/img/Logo1.png'
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
-import { verifyVendorOTP } from "../../API";
+import { verifyVendorOTP } from "../../api";
 
 export default function VendorOtp() {
 
