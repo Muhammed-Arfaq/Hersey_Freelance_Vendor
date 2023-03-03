@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom"
-import { vendorAuth } from "./API"
+import { vendorAuth } from "../src/API"
 
 const ProtectedRoutes = ({ children }) => {
     const token = localStorage.getItem("jwt")
