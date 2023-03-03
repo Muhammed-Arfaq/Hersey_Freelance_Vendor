@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Navigate } from "react-router-dom"
-import { vendorAuth } from "./API"
+import { vendorAuth } from "./API/index"
 
 const protectedRoutes = ({ children }) => {
     const token = localStorage.getItem("jwt")
