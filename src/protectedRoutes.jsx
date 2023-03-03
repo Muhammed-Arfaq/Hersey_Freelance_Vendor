@@ -16,7 +16,7 @@ const ProtectedRoutes = ({ children }) => {
     }
 
     if(!token) {
-        return <Navigate to = {"/vendor/login"} replace = {true}></Navigate>
+        return <Navigate to = {"/"} replace = {true}></Navigate>
     }
     return children
 }

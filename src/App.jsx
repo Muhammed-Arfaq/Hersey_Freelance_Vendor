@@ -18,7 +18,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path='/vendor/login' element={<ReRoute><VendorLogin /></ReRoute>}/>
+          <Route path='/' element={<ReRoute><VendorLogin /></ReRoute>}/>
           <Route path='/vendor/signup' element={<ReRoute><VendorSignup /></ReRoute>}/>
           <Route path='/vendor/verifyOTP' element={<ReRoute><VendorOtp /></ReRoute>}/>
           <Route path='/vendor/completeSignup' element={<CompleteSignup />}/>

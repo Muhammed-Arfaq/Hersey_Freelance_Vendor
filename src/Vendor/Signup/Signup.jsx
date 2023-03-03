@@ -101,7 +101,7 @@ export default function VendorSignup() {
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
               <Link
-                to="/vendor/login"
+                to="/"
                 className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-300 shadow-sm ring-1 ring-gray-900/20 hover:ring-gray-700 hover:text-gray-400"
               >
                 Login
@@ -139,7 +139,7 @@ export default function VendorSignup() {
                   </div>
                   <div className="py-6">
                     <Link
-                      to="/vendor/login"
+                      to="/"
                       className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
                     >
                       Login
