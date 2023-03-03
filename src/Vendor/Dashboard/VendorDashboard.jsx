@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./vendorDashboard.css";
 import logo from "../../assets/img/Logo1.png";
 import { Link } from "react-router-dom";
-import { getOrdersCount, vendorDasboardCount } from "../../API";
+import { getOrdersCount, vendorDasboardCount } from "../../Api";
 import { Chart, registerables } from "chart.js";
 import { LinearScale } from 'chart.js';
 Chart.register(LinearScale);
