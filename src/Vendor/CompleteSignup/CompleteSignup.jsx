@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./CompleteSignup.css";
 import bg from '../../assets/img/curved0.jpg'
 import team1 from '../../assets/img/team-2.jpg'
-import { updateAddress, updatePersonalInfo } from "../../API";
+import { updateAddress, updatePersonalInfo } from "../../api";
 import { VendorAddress } from "../../YupSchema/VendorAddress";
 import { toast, Toaster } from "react-hot-toast";
 import { VendorSkills } from "../../YupSchema/VendorSkills";
