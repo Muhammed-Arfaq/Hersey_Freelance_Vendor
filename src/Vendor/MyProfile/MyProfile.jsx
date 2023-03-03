@@ -23,13 +23,13 @@ function MyProfile() {
     const vendorProfile = async () => {
         await getVendorDetails().then((result) => {
             setProfile(result.data.data.profile);
-        })
+        }).catch(err => console.log(err));
     }
 
     const viewVendorRating = async () => {
         await viewVendorRatings().then((result) => {
             setReview(result.data.data.review);
-        })
+        }).catch(err => console.log(err));
     }
 
     useEffect(() => {

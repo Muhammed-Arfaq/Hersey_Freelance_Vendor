@@ -20,19 +20,19 @@ function ManageOrder() {
     const reservedGigs = async () => {
         await getReservedGigs().then((result) => {
             setOrders(result.data.data.reserved);
-        })
+        }).catch(err => console.log(err));
     }
 
     const cancelGig = (orderId) => {
         cancelUserOrder(orderId, token).then(() => {
             window.location.reload(false)
-        })
+        }).catch(err => console.log(err));
     }
 
     const completeGig = (orderId) => {
         completeUserOrder(orderId, token).then(() => {
             window.location.reload(false)
-        })
+        }).catch(err => console.log(err));
     }
 
     useEffect(() => {

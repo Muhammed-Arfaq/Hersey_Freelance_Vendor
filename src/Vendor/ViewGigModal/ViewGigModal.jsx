@@ -18,7 +18,7 @@ export default function ViewGigModal() {
                 autoClose: 10000,
             })
             window.location.reload()
-        })
+        }).catch(err => console.log(err));
     }
 
     return (

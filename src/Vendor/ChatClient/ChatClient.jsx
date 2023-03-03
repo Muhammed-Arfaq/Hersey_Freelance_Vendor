@@ -26,13 +26,13 @@ function ChatClient() {
             setClients(result.data.sortedUsers)
             setGetCount(result.data.connectionCount)
             console.log(result.data);
-        })
+        }).catch(err => console.log(err));
     }
 
     const getMessageCount = () => {
         getMsgCount(vendorId).then((result) => {
             setMsgCount(result.data.count);
-        })
+        }).catch(err => console.log(err));
     }
 
     useEffect(() => {

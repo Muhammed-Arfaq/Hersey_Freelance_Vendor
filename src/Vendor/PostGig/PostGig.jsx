@@ -24,7 +24,7 @@ function PostGig() {
   const allGigs = async () => {
     await viewGig().then((result) => {
       setGigs(result.data.data.viewGig);
-    })
+    }).catch(err => console.log(err));
   }
 
   useEffect(() => {

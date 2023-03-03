@@ -53,3 +53,7 @@ export const cancelUserOrder = (orderId) => axios.patch("/vendor/cancelUserOrder
 export const completeUserOrder = (orderId) => axios.patch("/vendor/completeUserOrder", { orderId }, config)
 
 export const vendorAuth = (vendorId, token) => axios.get(`/vendor/vendorAuth/${vendorId}`, { headers: { Authorization: `Bearer ${token}` }})
+
+export const vendorDasboardCount = () => axios.get("/vendor/vendorDasboardCount", config)
+
+export const getOrdersCount = () => axios.get("/vendor/completed-orders-by-date", config)
