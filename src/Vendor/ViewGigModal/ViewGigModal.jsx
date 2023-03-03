@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { modalOff } from "../../Redux/Reducer/ViewGigModal";
+import { modalOff } from "../../Redux/Reducer/viewGigModal";
 import CloseIcon from '@mui/icons-material/Close';
 import { deleteGig } from "../../API";
 import { toast } from "react-hot-toast";

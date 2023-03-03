@@ -2,8 +2,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateModalOff } from "../../Redux/Reducer/editGigModal";
-import { useNavigate } from "react-router-dom";
-import { editGigData, gigData, gigsCategory } from "../../API";
+import { editGigData, gigsCategory } from "../../API";
 import { useFormik } from "formik";
 import CloseIcon from '@mui/icons-material/Close';
 

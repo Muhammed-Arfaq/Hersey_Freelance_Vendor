@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { switchOff } from "../../Redux/Reducer/EditProfileModal";
+import { switchOff } from "../../Redux/Reducer/editProfileModal";
 import CloseIcon from '@mui/icons-material/Close';
 import { updateVendorProfile } from "../../API";
 

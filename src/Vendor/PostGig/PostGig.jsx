@@ -5,11 +5,11 @@ import AddIcon from '@mui/icons-material/Add';
 import { useDispatch } from "react-redux";
 import { setCreateSwitchOn } from "../../Redux/Reducer/gigModal";
 import GigModal from "../GigModal/GigModal";
-import { modalOn } from "../../Redux/Reducer/ViewGigModal";
+import { modalOn } from "../../Redux/Reducer/viewGigModal";
 import ViewGigModal from "../ViewGigModal/ViewGigModal";
 import EditIcon from '@mui/icons-material/Edit';
 import EditGigModal from "../EditGigModal/EditGigModal";
-import { setCreateModalOn } from "../../Redux/Reducer/EditGigModal";
+import { setCreateModalOn } from "../../Redux/Reducer/editGigModal";
 import { Link } from "react-router-dom";
 import { viewGig } from "../../API";
 

@@ -6,7 +6,7 @@ import team1 from '../../assets/img/team-2.jpg'
 import { Rating } from "@mui/material";
 import { useDispatch } from "react-redux";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import { switchOn } from "../../Redux/Reducer/EditProfileModal";
+import { switchOn } from "../../Redux/Reducer/editProfileModal";
 import { Link } from "react-router-dom";
 import { getVendorDetails, viewVendorRatings } from "../../API";
 
