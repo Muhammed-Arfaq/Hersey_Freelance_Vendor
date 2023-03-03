@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom"
 
-const reRoute = ({ children }) => {
+const ReRoute = ({ children }) => {
     const token = localStorage.getItem("jwt")
 
     if(token) {
@@ -9,4 +9,4 @@ const reRoute = ({ children }) => {
     return children
 }
 
-export default reRoute
+export default ReRoute

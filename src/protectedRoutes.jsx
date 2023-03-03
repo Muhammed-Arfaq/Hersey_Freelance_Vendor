@@ -1,8 +1,7 @@
-import { useState } from "react"
 import { Navigate } from "react-router-dom"
-import { vendorAuth } from "./API/index"
+import { vendorAuth } from "./API"
 
-const protectedRoutes = ({ children }) => {
+const ProtectedRoutes = ({ children }) => {
     const token = localStorage.getItem("jwt")
 
     if (token) {
@@ -22,4 +21,4 @@ const protectedRoutes = ({ children }) => {
     return children
 }
 
-export default protectedRoutes
+export default ProtectedRoutes
