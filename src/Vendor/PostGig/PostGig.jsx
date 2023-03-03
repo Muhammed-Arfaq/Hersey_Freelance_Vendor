@@ -11,7 +11,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import EditGigModal from "../EditGigModal/EditGigModal";
 import { setCreateModalOn } from "../../Redux/Reducer/editGigModal";
 import { Link } from "react-router-dom";
-import { viewGig } from "../../Api";
+import { viewGig } from "../../API";
 
 function PostGig() {
   const dispatch = useDispatch()

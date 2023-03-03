@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { modalOff } from "../../Redux/Reducer/viewGigModal";
 import CloseIcon from '@mui/icons-material/Close';
-import { deleteGig } from "../../Api";
+import { deleteGig } from "../../API";
 import { toast } from "react-hot-toast";
 
 export default function ViewGigModal() {

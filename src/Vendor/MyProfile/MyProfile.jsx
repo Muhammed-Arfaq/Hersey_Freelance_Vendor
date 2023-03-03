@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { switchOn } from "../../Redux/Reducer/editProfileModal";
 import { Link } from "react-router-dom";
-import { getVendorDetails, viewVendorRatings } from "../../Api";
+import { getVendorDetails, viewVendorRatings } from "../../API";
 
 function MyProfile() {
     const [value, setValue] = React.useState(2);

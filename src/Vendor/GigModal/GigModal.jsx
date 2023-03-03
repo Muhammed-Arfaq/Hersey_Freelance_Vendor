@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOff } from "../../Redux/Reducer/gigModal";
 import { useNavigate } from "react-router-dom";
-import { gigData, gigsCategory } from "../../Api";
+import { gigData, gigsCategory } from "../../API";
 import { useFormik } from "formik";
 import CloseIcon from '@mui/icons-material/Close';
 

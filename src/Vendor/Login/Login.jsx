@@ -8,7 +8,7 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/img/Logo1.png";
 import { Link, useNavigate } from "react-router-dom";
-import  login  from '../../Api';
+import  {login}  from '../../API';
 import toast, { Toaster } from "react-hot-toast";
 import { vendorLogin } from "../../YupSchema/VendorLogin";
 
@@ -18,7 +18,7 @@ export default function VendorLogin() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [password, setPassword] = useState("")  
   const [errors, setErrors] = useState({})
 
   const eventHandler = async(e) => {
