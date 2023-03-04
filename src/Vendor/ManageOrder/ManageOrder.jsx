@@ -414,9 +414,9 @@ function ManageOrder() {
                                                             </td>
                                                             <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                                 {orders?.status == 'Cancelled' ?
-                                                                    <a><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white ">Cancelled</span></a>
+                                                                    <button><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white ">Cancelled</span></button>
                                                                     :
-                                                                    <a href=""><span className="bg-gradient-to-r from-emerald-500 to-emerald-900 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white" onClick={() => completeGig(orders?._id)}>Complete</span></a>
+                                                                    <button ><span className="bg-gradient-to-r from-emerald-500 to-emerald-900 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white" onClick={() => completeGig(orders?._id)}>Complete</span></button>
                                                                 }
                                                             </td>
                                                         </tr>
