@@ -37,7 +37,10 @@ function CompleteSignup() {
         await VendorAddress
             .validate(formData, { abortEarly: false })
             .then(() => {
-                updateAddress(country, currentAddress, city, state, pincode, vendorId)
+                updateAddress(country, currentAddress, city, state, pincode, vendorId).then(()=>{
+                    toast.success("Address Added Successfully")
+                })
+
             })
             .catch((validationErrors) => {
                 const errors = validationErrors.inner.reduce((acc, error) => {
@@ -65,7 +68,9 @@ function CompleteSignup() {
         await VendorSkills
             .validate(data, { abortEarly: false })
             .then(() => {
-                updatePersonalInfo(skill, googleDrive, linkedIn, github, about, profilePhoto, vendorId)
+                updatePersonalInfo(skill, googleDrive, linkedIn, github, about, profilePhoto, vendorId).then(() => {
+                    toast.success("Personal Information Added Successfully")
+                })
             })
             .catch((validationErrors) => {
                 console.log(validationErrors, "dtf");

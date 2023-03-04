@@ -449,7 +449,7 @@ function ChatClient() {
                                         <img
                                             src={currentChat?.profilePhoto || team1}
                                             alt="Avatar"
-                                            class="h-20 w-20"
+                                            class="h-20 w-20 object-cover"
                                         />
                                     </div>
                                     <div class="text-sm text-white font-semibold mt-2">{currentChat?.fullName}</div>
@@ -472,7 +472,7 @@ function ChatClient() {
                                                 <div
                                                     class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full"
                                                 >
-                                                    {client?.profilePhoto}
+                                                    <img src={client?.profilePhoto} className="rounded-full object-cover h-8 w-8" alt="" srcset="" />
                                                 </div>
                                                 <div class="ml-2 text-sm font-semibold" >{client?.fullName}</div>
                                                 <div
@@ -501,9 +501,9 @@ function ChatClient() {
                                                                     class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
                                                                 >
                                                                     <img
-                                                                        src={currentChat?.profilePhoto || team1}
+                                                                        src={team1}
                                                                         alt="Avatar"
-                                                                        class="h-full w-full rounded-lg"
+                                                                        class="h-full w-full object-cover rounded-lg"
                                                                     />
                                                                 </div>
                                                                 <div
@@ -523,7 +523,7 @@ function ChatClient() {
                                                                     <img
                                                                         src={currentChat?.profilePhoto || team1}
                                                                         alt="Avatar"
-                                                                        class="h-full w-full rounded-lg"
+                                                                        class="h-full w-full object-cover rounded-lg"
                                                                     />
                                                                 </div>
                                                                 <div

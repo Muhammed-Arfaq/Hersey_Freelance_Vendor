@@ -6,6 +6,7 @@ import { cancelUserOrder, completeUserOrder, getReservedGigs } from "../../api";
 import { useDispatch } from "react-redux";
 import OrderViewModal from "../OrderViewModal/OrderViewModal";
 import { orderModalOn } from "../../Redux/Reducer/viewOrderModal";
+import { toast } from "react-hot-toast";
 
 function ManageOrder() {
 
@@ -31,6 +32,7 @@ function ManageOrder() {
 
     const completeGig = (orderId) => {
         completeUserOrder(orderId, token).then(() => {
+            toast.success("Gig Completed")
             window.location.reload(false)
         }).catch(err => console.log(err));
     }
