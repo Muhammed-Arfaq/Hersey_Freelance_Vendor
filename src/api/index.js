@@ -57,3 +57,5 @@ export const vendorAuth = (vendorId, token) => axios.get(`/vendor/vendorAuth/${v
 export const vendorDasboardCount = () => axios.get("/vendor/vendorDasboardCount", config)
 
 export const getOrdersCount = () => axios.get("/vendor/completed-orders-by-date", config)
+
+export const fetchAllOrders = () => axios.get("/vendor/fetchAllOrders", config)
