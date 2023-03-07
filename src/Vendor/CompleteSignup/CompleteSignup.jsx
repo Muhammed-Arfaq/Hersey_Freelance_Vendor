@@ -68,7 +68,6 @@ function CompleteSignup() {
         await VendorSkills
             .validate(data, { abortEarly: false })
             .then(() => {
-                console.log("here");
                 updatePersonalInfo(skill, googleDrive, linkedIn, github, about, profilePhoto, vendorId).then(() => {
                     toast.success("Personal Information Added Successfully")
                 })
