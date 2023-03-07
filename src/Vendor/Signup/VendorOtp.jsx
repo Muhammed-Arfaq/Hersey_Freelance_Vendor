@@ -23,10 +23,12 @@ export default function VendorOtp() {
   const eventHandler = (e) => {
     e.preventDefault()
 
-    verifyVendorOTP(otp).then((result) =>{
-      localStorage.setItem( "vendorId", result.data.data.user._id )
+    verifyVendorOTP(otp).then((result) => {
+      localStorage.setItem("vendorId", result.data.data.user._id)
       toast.success('Signup successful')
-      navigate("/vendor/completeSignup")
+      setTimeout(() => {
+        navigate("/vendor/completeSignup")
+      }, 800)
     })
   }
 
@@ -52,9 +54,9 @@ export default function VendorOtp() {
               </button>
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
-              
+
             </div>
-            
+
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
               <Link
                 to="/"
@@ -91,9 +93,9 @@ export default function VendorOtp() {
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-gray-500/10">
                   <div className="space-y-2 py-6">
-                    
+
                   </div>
-                  
+
                   <div className="py-6">
                     <Link
                       to="/"
@@ -169,7 +171,7 @@ export default function VendorOtp() {
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Enter OTP"
                         value={otp}
-                        onChange={(e)=>{
+                        onChange={(e) => {
                           setOtp(e.target.value)
                         }}
                       />
