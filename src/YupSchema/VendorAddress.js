@@ -2,7 +2,7 @@ import * as yup from 'yup'
 
 const regex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
 // const addr = /^[\w\W\d\s#,./()-]+$/;
-const addr = /^[a-zA-Z0-9]+(?:[-, ](?:[a-zA-Z0-9]+|\([a-zA-Z0-9]+\)))*(?<[#,./()-\s])$/;
+const addr = /^[\w\W\d\s#,./()-]+(?<![.,\s])$/;
 
 export const VendorAddress = yup.object().shape({
     country: yup.string().matches(regex, 'Country is not valid').required('country is required'),
