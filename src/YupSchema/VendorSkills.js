@@ -13,7 +13,7 @@ export const VendorSkills = yup.object().shape({
         'Unsupported file format',
         (value) => {
           if (value && value.type) {
-            return ['image/jpeg', 'image/png'].includes(value.type);
+            return ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type);
           }
           return false;
         }
