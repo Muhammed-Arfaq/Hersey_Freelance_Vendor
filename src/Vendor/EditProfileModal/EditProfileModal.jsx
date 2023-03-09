@@ -13,22 +13,21 @@ export default function EditProfileModal() {
     const show = useSelector((state) => state.editVendorProfile.show)
     const data = useSelector((state) => state.editVendorProfile.data)
     
-
-    const [userName, setUserName] = useState(data?.userName || "")
-    const [dob, setDob] = useState(data?.dob || "")
-    const [gender, setGender] = useState(data?.gender || "")
-    const [phone, setPhone] = useState(data?.phone || "")
-    const [address, setAddress] = useState(data?.address?.currentAddress || "")
+    const [userName, setUserName] = useState(data?.userName)
+    const [dob, setDob] = useState(data?.dob)
+    const [gender, setGender] = useState(data?.gender)
+    const [phone, setPhone] = useState(data?.phone)
+    const [address, setAddress] = useState(data?.address?.currentAddress)
     const [profilePhoto, setProfilePhoto] = useState("")
-    const [upiId, setUpiId] = useState(data?.upiId || "")
-    const [skill, setSkill] = useState(data?.skill || "")
-    const [googleDrive, setGoogleDrive] = useState(data?.googleDrive || "")
-    const [github, setGithub] = useState(data?.github || "")
-    const [about, setAbout] = useState(data?.about || "")
-    const [linkedIn, setLinkedIn] = useState(data?.linkedIn || "")
-    const [city, setCity] = useState(data?.address?.city || "")
-    const [state, setState] = useState(data?.address?.state || "") 
-    const [country, setCountry] = useState(data?.address?.country || "")
+    const [upiId, setUpiId] = useState(data?.upiId)
+    const [skill, setSkill] = useState(data?.skill)
+    const [googleDrive, setGoogleDrive] = useState(data?.googleDrive)
+    const [github, setGithub] = useState(data?.github)
+    const [about, setAbout] = useState(data?.about)
+    const [linkedIn, setLinkedIn] = useState(data?.linkedIn)
+    const [city, setCity] = useState(data?.address?.city)
+    const [state, setState] = useState(data?.address?.state) 
+    const [country, setCountry] = useState(data?.address?.country)
 
     function converToBase64(file) { 
         return new Promise((resolve, reject) => {
@@ -55,6 +54,62 @@ export default function EditProfileModal() {
             toast.success("Profile Edited Successfully")
             window.location.reload(false)
         })
+    }
+
+    const handleUserName = (e) => {
+        setUserName(e.target.value)
+    }
+
+    const handleUpiId = (e) => {
+        setUpiId(e.target.value)
+    }
+
+    const handleSkill = (e) => {
+        setSkill(e.target.value)
+    }
+
+    const handlePhone = (e) => {
+        setPhone(e.target.value)
+    }
+
+    const handleDob = (e) => {
+        setDob(e.target.value)
+    }
+
+    const handleGender = (e) => {
+        setGender(e.target.value)
+    }
+
+    const handleAbout = (e) => {
+        setAbout(e.target.value)
+    }
+
+    const handleAddress = (e) => {
+        setAddress(e.target.value)
+    }
+
+    const handleCity = (e) => {
+        setCity(e.target.value)
+    }
+
+    const handleState = (e) => {
+        setState(e.target.value)
+    }
+
+    const handleCountry = (e) => {
+        setCountry(e.target.value)
+    }
+
+    const handleGoogle = (e) => {
+        setGoogleDrive(e.target.value)
+    }
+
+    const handleLinkedIn = (e) => {
+        setLinkedIn(e.target.value)
+    }
+
+    const handleGithub = (e) => {
+        setGithub(e.target.value)
     }
 
     return (
@@ -105,7 +160,8 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="first-name"
                                                     id="first-name"
-                                                    placeholder={data?.fullName}
+                                                    value={data?.fullName}
+                                                    readOnly
                                                     autoComplete="given-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -120,9 +176,7 @@ export default function EditProfileModal() {
                                                     name="last-name"
                                                     id="last-name"
                                                     value={userName}
-                                                    onChange={(e) => {
-                                                        setUserName(e.target.value)
-                                                    }}
+                                                    onChange={handleUserName}
                                                     autoComplete="family-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -137,9 +191,7 @@ export default function EditProfileModal() {
                                                     name="email-address"
                                                     id="email-address"
                                                     value={upiId}
-                                                    onChange={(e) => {
-                                                        setUpiId(e.target.value)
-                                                    }}
+                                                    onChange={handleUpiId}
                                                     autoComplete="email"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -154,9 +206,7 @@ export default function EditProfileModal() {
                                                     name="country"
                                                     id="country"
                                                     value={skill}
-                                                    onChange={(e) => {
-                                                        setSkill(e.target.value)
-                                                    }}
+                                                    onChange={handleSkill}
                                                     autoComplete="country"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -170,9 +220,7 @@ export default function EditProfileModal() {
                                                     type="text"
                                                     name="city"
                                                     value={phone}
-                                                    onChange={(e) => {
-                                                        setPhone(e.target.value)
-                                                    }}
+                                                    onChange={handlePhone}
                                                     id="city"
                                                     autoComplete="address-level2"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -188,9 +236,7 @@ export default function EditProfileModal() {
                                                     name="region"
                                                     id="region"
                                                     value={dob}
-                                                    onChange={(e) => {
-                                                        setDob(e.target.value)
-                                                    }}
+                                                    onChange={handleDob}
                                                     autoComplete="address-level1"
                                                     className="mt-5 block h-9 w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -205,9 +251,7 @@ export default function EditProfileModal() {
                                                     name="postal-code"
                                                     id="postal-code"
                                                     value={gender}
-                                                    onChange={(e) => {
-                                                        setGender(e.target.value)
-                                                    }}
+                                                    onChange={handleGender}
                                                     autoComplete="postal-code"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -222,9 +266,7 @@ export default function EditProfileModal() {
                                                         id="about"
                                                         name="about"
                                                         value={about}
-                                                        onChange={(e) => {
-                                                            setAbout(e.target.value)
-                                                        }}
+                                                        onChange={handleAbout}
                                                         rows={3}
                                                         className="mt-1 block w-full rounded-md border-0 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                     />
@@ -240,9 +282,7 @@ export default function EditProfileModal() {
                                                         id="about"
                                                         name="about"
                                                         value={address}
-                                                        onChange={(e) => {
-                                                            setAddress(e.target.value)
-                                                        }}
+                                                        onChange={handleAddress}
                                                         rows={1}
                                                         className="mt-1 block w-full rounded-md border-0 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                     />
@@ -258,9 +298,7 @@ export default function EditProfileModal() {
                                                     name="city"
                                                     id="city"
                                                     value={city}
-                                                    onChange={(e) => {
-                                                        setCity(e.target.value)
-                                                    }}
+                                                    onChange={handleCity}
                                                     autoComplete="address-level2"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -275,9 +313,7 @@ export default function EditProfileModal() {
                                                     name="region"
                                                     id="region"
                                                     value={state}
-                                                    onChange={(e) => {
-                                                        setState(e.target.value)
-                                                    }}
+                                                    onChange={handleState}
                                                     autoComplete="address-level1"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -292,9 +328,7 @@ export default function EditProfileModal() {
                                                     name="postal-code"
                                                     id="postal-code"
                                                     value={country}
-                                                    onChange={(e) => {
-                                                        setCountry(e.target.value)
-                                                    }}
+                                                    onChange={handleCountry}
                                                     autoComplete="postal-code"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -309,9 +343,7 @@ export default function EditProfileModal() {
                                                     name="first-name"
                                                     id="first-name"
                                                     value={googleDrive}
-                                                    onChange={(e) => {
-                                                        setGoogleDrive(e.target.value)
-                                                    }}
+                                                    onChange={handleGoogle}
                                                     autoComplete="given-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -326,9 +358,7 @@ export default function EditProfileModal() {
                                                     name="last-name"
                                                     id="last-name"
                                                     value={linkedIn}
-                                                    onChange={(e) => {
-                                                        setLinkedIn(e.target.value)
-                                                    }}
+                                                    onChange={handleLinkedIn}
                                                     autoComplete="family-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
@@ -343,9 +373,7 @@ export default function EditProfileModal() {
                                                     name="last-name"
                                                     id="last-name"
                                                     value={github}
-                                                    onChange={(e) => {
-                                                        setGithub(e.target.value)
-                                                    }}
+                                                    onChange={handleGithub}
                                                     autoComplete="family-name"
                                                     className="mt-5 block w-full rounded-lg border-gray-300 shadow-md border-0 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />

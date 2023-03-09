@@ -39,8 +39,6 @@ function VendorDashboard() {
     }
   }, [completedOrdersData])
 
-  console.log(completedOrdersData.map(dataPoint => `${dataPoint._id.year}/${dataPoint._id.month}/${dataPoint._id.day}`))
-
   const renderChart = () => {
 
     const dates = completedOrdersData.map(dataPoint => `${dataPoint._id.day}/${dataPoint._id.month}/${dataPoint._id.year}`)
@@ -90,7 +88,6 @@ function VendorDashboard() {
   const vndrDasboardCount = () => {
     vendorDasboardCount().then((result) => {
       setDataCount(result.data)
-      console.log(result, "ooooo");
     }).catch(err => console.log(err));
   }
 

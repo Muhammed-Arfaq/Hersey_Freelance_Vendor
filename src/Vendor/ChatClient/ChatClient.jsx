@@ -46,7 +46,7 @@ function ChatClient() {
 
     useEffect(() => {
         if (currentChat !== "") {
-            socket.current = io.connect("http://localhost:3500")
+            socket.current = io.connect("https://www.herseymensformals.ml/")
             console.log(vendorId);
             socket.current.emit("addUser", vendorId);
         }
@@ -56,7 +56,8 @@ function ChatClient() {
         setCurrentChat(user);
     };
 
-    const sendmsg = async () => {
+    const sendmsg = async (e) => {
+        e.preventDefault()
         const messages = {
             myself: true,
             message: inputMessage
@@ -73,7 +74,6 @@ function ChatClient() {
             from: vendorId,
             message: inputMessage
         }
-        console.log(data);
         await sndMsg(data)
         setMessage(message.concat(messages))
         setInputMessage("")
@@ -92,18 +92,20 @@ function ChatClient() {
         arrivalMessage && setMessage((pre) => [...pre, arrivalMessage])
     }, [arrivalMessage])
 
+    const checkUpdateChat = () => {
+       setUpdateChat(!updateChat) 
+    }
+    
     useEffect(() => {
         const fetchMessages = async (vendor) => {
             if (vendor) {
                 const userId = currentChat._id
-                console.log(userId);
                 const { data } = await fetchMsg(vendorId, userId)
                 setMessage(data);
-                console.log(data);
             }
         };
         fetchMessages(currentChat._id);
-    }, [currentChat._id]);
+    }, [message, currentChat._id]);
 
     const logout = () => {
         localStorage.clear();
@@ -539,7 +541,7 @@ function ChatClient() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div
+                                    <form onSubmit={sendmsg}
                                         class="flex flex-row items-center h-6 rounded-xl  w-full px-4"
                                     >
 
@@ -554,7 +556,7 @@ function ChatClient() {
                                             </div>
                                         </div>
                                         <div class="ml-4">
-                                            <button onClick={sendmsg} class="flex items-center justify-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 rounded-xl text-white px-4 py-1 flex-shrink-0">
+                                            <button type="submit" class="flex items-center justify-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 rounded-xl text-white px-4 py-1 flex-shrink-0">
                                                 <span>Send</span>
                                                 <span class="ml-2">
                                                     <svg
@@ -574,7 +576,7 @@ function ChatClient() {
                                                 </span>
                                             </button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

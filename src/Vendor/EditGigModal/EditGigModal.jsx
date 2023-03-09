@@ -23,7 +23,7 @@ export default function EditGigModal() {
             overview: data?.overview || "",
             description: data?.description || "",
             price: data?.price || "",
-            category: "",
+            category: data?.category?.name || "",
             type: data?.type || "",
         },
         onSubmit: async (values) => {
