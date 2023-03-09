@@ -5,6 +5,7 @@ import { modalOff } from "../../Redux/Reducer/viewGigModal";
 import CloseIcon from '@mui/icons-material/Close';
 import { deleteGig } from "../../api";
 import { toast } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 export default function ViewGigModal() {
     const cancelButtonRef = useRef(null);
@@ -13,12 +14,23 @@ export default function ViewGigModal() {
     const data = useSelector((state) => state.viewGigDetails.data)
 
     const dltGig = (gigId) => {
-        deleteGig(gigId).then((result) => {
-            toast.success("Gig Deleted Successfully", {
-                autoClose: 10000,
-            })
-            window.location.reload()
-        }).catch(err => console.log(err));
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delete Gig!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                deleteGig(gigId).then((result) => {
+                    toast.success("Gig Deleted Successfully", {
+                        autoClose: 10000,
+                    })
+                    window.location.reload()
+                }).catch(err => console.log(err));
+            }
+        })
     }
 
     return (
@@ -89,15 +101,15 @@ export default function ViewGigModal() {
                                             </div>
                                         </div>
                                     </div>
-                                        <div className="flex justify-end">
-                                            <button
-                                                onClick={() => dltGig(data?._id)}
-                                                type="button"
-                                                className="px-8 py-2 mb-0 font-bold uppercase transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-red-500 text-red-500 hover:border-red-500 hover:bg-transparent hover:text-red-500 hover:opacity-75 hover:shadow-none active:bg-red-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500"
-                                            >
-                                                Delete Gig
-                                            </button>
-                                        </div>
+                                    <div className="flex justify-end">
+                                        <button
+                                            onClick={() => dltGig(data?._id)}
+                                            type="button"
+                                            className="px-8 py-2 mb-0 font-bold uppercase transition-all bg-transparent border border-solid rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-red-500 text-red-500 hover:border-red-500 hover:bg-transparent hover:text-red-500 hover:opacity-75 hover:shadow-none active:bg-red-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500"
+                                        >
+                                            Delete Gig
+                                        </button>
+                                    </div>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>

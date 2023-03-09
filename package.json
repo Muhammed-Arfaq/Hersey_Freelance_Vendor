@@ -27,11 +27,13 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
+    "react-paginate": "^8.1.4",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.0",
     "redux": "^4.2.1",
     "socket.io-client": "^4.6.0",
     "styled-components": "^5.3.6",
+    "sweetalert2": "^11.7.3",
     "yup": "^1.0.2"
   },
   "devDependencies": {

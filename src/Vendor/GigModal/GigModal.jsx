@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { gigData, gigsCategory } from "../../api";
 import { useFormik } from "formik";
 import CloseIcon from '@mui/icons-material/Close';
+import { toast, Toaster } from "react-hot-toast";
 
 export default function GigModal() {
     const cancelButtonRef = useRef(null);
@@ -32,6 +33,7 @@ export default function GigModal() {
             }
             console.log(data);
             gigData(data).then(() => {
+                toast.success("Gig Added Successfully")
                 window.location.reload(false)
             })
         }
@@ -90,6 +92,7 @@ export default function GigModal() {
                 </Transition.Child>
 
                 <div className="fixed inset-0 z-10 overflow-y-auto">
+                    <Toaster/>
                     <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                         <Transition.Child
                             as={Fragment}

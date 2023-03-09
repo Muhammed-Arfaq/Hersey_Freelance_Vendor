@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ManageOrder.css";
+import './paginate.css'
 import logo from "../../assets/img/Logo1.png";
 import { Link } from "react-router-dom";
 import { cancelUserOrder, completeUserOrder, getReservedGigs } from "../../api";
@@ -7,6 +8,8 @@ import { useDispatch } from "react-redux";
 import OrderViewModal from "../OrderViewModal/OrderViewModal";
 import { orderModalOn } from "../../Redux/Reducer/viewOrderModal";
 import { toast } from "react-hot-toast";
+import ReactPaginate from "react-paginate";
+import Swal from "sweetalert2";
 
 function ManageOrder() {
 
@@ -17,6 +20,22 @@ function ManageOrder() {
     }
     const token = localStorage.getItem("jwt")
     const [orders, setOrders] = useState([])
+
+    const [search, setSearch] = useState("");
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+
+    const searchData = (tempProduct) => {
+        return search === ""
+            ? tempProduct
+            : tempProduct.title.toLowerCase().includes(search)
+    };
+
+    const dataToRender = orders.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
 
     const reservedGigs = async () => {
         await getReservedGigs().then((result) => {
@@ -31,10 +50,21 @@ function ManageOrder() {
     }
 
     const completeGig = (orderId) => {
-        completeUserOrder(orderId, token).then(() => {
-            toast.success("Gig Completed")
-            window.location.reload(false)
-        }).catch(err => console.log(err));
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Order Completed!'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                completeUserOrder(orderId, token).then(() => {
+                    toast.success("Gig Completed")
+                    window.location.reload(false)
+                }).catch(err => console.log(err));
+            }
+        })
     }
 
     useEffect(() => {
@@ -394,7 +424,7 @@ function ManageOrder() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {orders.map((orders) => (
+                                                    {dataToRender.map((orders) => (
                                                         <tr>
                                                             <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                                 <div className="flex px-2 py-1 justify-center">
@@ -424,6 +454,20 @@ function ManageOrder() {
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <ReactPaginate
+                                            pageCount={Math.ceil(orders.filter(searchData).length / itemsPerPage)}
+                                            marginPagesDisplayed={2}
+                                            pageRangeDisplayed={5}
+                                            onPageChange={handlePageChange}
+                                            containerClassName="pagination"
+                                            activeClassName="active"
+                                            previousLabel="Previous"
+                                            nextLabel="Next"
+                                            pageLinkClassName="page-link"
+                                            previousLinkClassName="page-link"
+                                            nextLinkClassName="page-link"
+                                            disabledClassName="disabled"
+                                        />
                                     </div>
                                 </div>
                             </div>
