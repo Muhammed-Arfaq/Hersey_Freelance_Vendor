@@ -72,7 +72,7 @@ function CompleteSignup() {
                 updatePersonalInfo(skill, googleDrive, linkedIn, github, about, profilePhoto, vendorId).then(() => {
                     toast.success("Personal Information Added Successfully")
                     toast.loading("You Will Be Able To Login As Vendor Once Approved By Admin!!!", {
-                        autoClose: 50000,
+                        autoClose: 10000,
                       })
                 })
             })
