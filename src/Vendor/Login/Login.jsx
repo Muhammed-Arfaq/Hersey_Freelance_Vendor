@@ -49,7 +49,7 @@ export default function VendorLogin() {
         }, {});
 
         setErrors(errors);
-        console.log(errors);
+        // console.log(errors);
 
         Object.values(errors).forEach((error) => {
           toast.error(error, {

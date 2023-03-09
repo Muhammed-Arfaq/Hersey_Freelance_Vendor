@@ -53,7 +53,7 @@ export default function EditProfileModal() {
         updateVendorProfile(userName, dob, gender, phone, address, profilePhoto, upiId, skill, googleDrive, github, about, linkedIn, city, state, country).then(() => {
             toast.success("Profile Edited Successfully")
             window.location.reload(false)
-        })
+        }).catch(() => toast.error("Internal Error"));
     }
 
     const handleUserName = (e) => {

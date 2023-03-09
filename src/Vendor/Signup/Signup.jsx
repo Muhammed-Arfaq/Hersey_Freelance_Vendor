@@ -63,7 +63,7 @@ export default function VendorSignup() {
         }, {});
 
         setErrors(errors);
-        console.log(errors);
+        // console.log(errors);
 
         Object.values(errors).forEach((error) => {
           toast.error(error, {

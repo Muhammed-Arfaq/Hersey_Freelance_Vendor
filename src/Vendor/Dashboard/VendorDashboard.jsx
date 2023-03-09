@@ -77,7 +77,7 @@ function VendorDashboard() {
   useEffect(() => {
     fetchAllOrders().then((result) => {
       setOrders(result.data.vendorOrders)
-    })
+    }).catch(() => toast.error("Internal Error"));
   }, [])
 
 
@@ -88,7 +88,7 @@ function VendorDashboard() {
   const vndrDasboardCount = () => {
     vendorDasboardCount().then((result) => {
       setDataCount(result.data)
-    }).catch(err => console.log(err));
+    }).catch(() => toast.error("Internal Error"));
   }
 
   useEffect(() => {

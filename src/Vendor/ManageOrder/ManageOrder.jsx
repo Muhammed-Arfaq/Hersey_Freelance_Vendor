@@ -40,13 +40,13 @@ function ManageOrder() {
     const reservedGigs = async () => {
         await getReservedGigs().then((result) => {
             setOrders(result.data.data.reserved);
-        }).catch(err => console.log(err));
+        }).catch(() => toast.error("Internal Error"));
     }
 
     const cancelGig = (orderId) => {
         cancelUserOrder(orderId, token).then(() => {
             window.location.reload(false)
-        }).catch(err => console.log(err));
+        }).catch(() => toast.error("Internal Error"));
     }
 
     const completeGig = (orderId) => {
@@ -62,7 +62,7 @@ function ManageOrder() {
                 completeUserOrder(orderId, token).then(() => {
                     toast.success("Gig Completed")
                     window.location.reload(false)
-                }).catch(err => console.log(err));
+                }).catch(() => toast.error("Internal Error"));
             }
         })
     }

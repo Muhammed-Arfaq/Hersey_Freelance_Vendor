@@ -31,11 +31,11 @@ export default function GigModal() {
             const data = {
                 ...values, gigImage, vendorId
             }
-            console.log(data);
+            // console.log(data);
             gigData(data).then(() => {
                 toast.success("Gig Added Successfully")
                 window.location.reload(false)
-            })
+            }).catch(() => toast.error("Internal Error"));
         }
     })
 
@@ -63,7 +63,7 @@ export default function GigModal() {
     const gigCat = async () => {
         await gigsCategory(token).then((result) => {
             setGigCategory(result.data.data.categories)
-        })
+        }).catch(() => toast.error("Internal Error"));
     }
 
     useEffect(() => {

@@ -30,11 +30,11 @@ export default function EditGigModal() {
             const data = {
                 ...values, gigImage, gigId
             }
-            console.log(data);
+            // console.log(data);
             editGigData(data).then(() => {
                 toast.success("Gig Edited Successfully")
                 window.location.reload(false)
-            })
+            }).catch(() => toast.error("Internal Error"));
         }
     })
 
@@ -62,7 +62,7 @@ export default function EditGigModal() {
     const gigCat = async () => {
         await gigsCategory().then((result) => {
             setGigCategory(result.data.data.categories)
-        })
+        }).catch(() => toast.error("Internal Error"));
     }
 
     useEffect(() => {

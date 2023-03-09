@@ -29,7 +29,7 @@ export default function VendorOtp() {
       setTimeout(() => {
         navigate("/vendor/completeSignup")
       }, 800)
-    })
+    }).catch(() => toast.error("Internal Error"));
   }
 
   return (
