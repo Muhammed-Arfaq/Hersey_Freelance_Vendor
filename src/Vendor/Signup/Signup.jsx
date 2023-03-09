@@ -166,7 +166,7 @@ export default function VendorSignup() {
             <div className="w-full lg:w-7/12 px-4 ">
               <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg border-0 bg-gray-50 bg-opacity-50 backdrop-blur">
                 <div className="rounded-t mb-0 px-6 py-6">
-                  <div className="text-center mb-3">
+                  {/* <div className="text-center mb-3">
                     <h6 className="text-blueGray-700 text-sm font-bold">
                       Sign up with
                     </h6>
@@ -182,7 +182,7 @@ export default function VendorSignup() {
                         src={github}
                       />
                       Github
-                    </button>
+                    </button> */}
                     {/* <button
                       className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                       type="button"
@@ -194,10 +194,10 @@ export default function VendorSignup() {
                       />
                       Google
                     </button> */}
-                  </div>
+                  {/* </div> */}
                   <hr className="border-b-1 border-blueGray-300" />
                 </div>
-                <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                <div className="flex-auto mt-5 px-4 lg:px-10 py-10 pt-0">
                   <div className="text-blueGray-700 text-center mb-3 font-bold">
                     <small>Or sign up with credentials</small>
                   </div>
@@ -206,14 +206,14 @@ export default function VendorSignup() {
                     <div className="grid md:grid-cols-2 mt-10 pl-8">
                       <div className="relative w-64 mb-3">
                         <label
-                          className="block uppercase  text-blueGray-600 text-xs font-bold mb-2"
+                          className="block uppercase mt-4  text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           Full Name
                         </label>
                         <input
                           type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          className="border-0 px-3 py-3 mt-4 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Full Name"
                           value={fullName}
                           onChange={(e) => {
@@ -223,14 +223,14 @@ export default function VendorSignup() {
                       </div>
                       <div className="relative w-64 mb-3">
                         <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          className="block uppercase mt-4 text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           Username
                         </label>
                         <input
                           type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          className="border-0 px-3 py-3 mt-4 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Username"
                           value={userName}
                           onChange={(e) => {
@@ -243,14 +243,14 @@ export default function VendorSignup() {
                     <div className="grid md:grid-cols-2 pl-8">
                       <div className="relative w-64 mb-3">
                         <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          className="block uppercase mt-4 text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           Email
                         </label>
                         <input
                           type="email"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          className="border-0 px-3 py-3 mt-4 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Email"
                           value={email}
                           onChange={(e) => {
@@ -261,14 +261,14 @@ export default function VendorSignup() {
 
                       <div className="relative w-64 mb-3">
                         <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          className="block uppercase mt-4 text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           Phone
                         </label>
                         <input
                           type="number"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          className="border-0 px-3 py-3 mt-4 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Phone"
                           value={phone}
                           onChange={(e) => {
@@ -281,14 +281,14 @@ export default function VendorSignup() {
                     <div className="grid md:grid-cols-2 pl-8">
                       <div className="relative w-64 mb-3">
                         <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          className="block uppercase mt-4 text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           Gender
                         </label>
                         <input
                           type="text"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          className="border-0 px-3 py-3 mt-4 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Gender"
                           value={gender}
                           onChange={(e) => {
@@ -299,14 +299,14 @@ export default function VendorSignup() {
 
                       <div className="relative w-64 mb-3">
                         <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          className="block uppercase mt-4 text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           D.O.B
                         </label>
                         <input
                           type="date"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          className="border-0 px-3 mt-4 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="D.O.B"
                           value={dob}
                           onChange={(e) => {
@@ -319,14 +319,14 @@ export default function VendorSignup() {
                     <div className="grid md:grid-cols-2 pl-8">
                       <div className="relative w-64 mb-3">
                         <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          className="block uppercase mt-4 text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           Password
                         </label>
                         <input
                           type="password"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          className="border-0 px-3 mt-4 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Password"
                           value={password}
                           onChange={(e) => {
@@ -337,14 +337,14 @@ export default function VendorSignup() {
 
                       <div className="relative w-64 mb-3">
                         <label
-                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          className="block uppercase mt-4 text-blueGray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
                           Confirm Password
                         </label>
                         <input
                           type="password"
-                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          className="border-0 px-3 py-3 mt-4 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Confirm Password"
                           value={passwordConfirm}
                           onChange={(e) => {

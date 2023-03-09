@@ -143,7 +143,7 @@ export default function VendorLogin() {
         <div className="absolute -top-20 w-full h-full bg-no-repeat ">
           <img
             className="w-full"
-            style={{ height: "116.4%" }}
+            style={{ height: "123%" }}
             src={bg2}
             alt=""
           />
@@ -153,7 +153,7 @@ export default function VendorLogin() {
             <div className="w-full lg:w-4/12 px-4">
               <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg border-0 bg-gray-50 bg-opacity-50 backdrop-blur">
                 <div className="rounded-t mb-0 px-6 py-6">
-                  <div className="text-center mb-3">
+                  {/* <div className="text-center mb-3">
                     <h6 className="text-blueGray-700 text-sm font-bold">
                       Sign in with
                     </h6>
@@ -174,14 +174,14 @@ export default function VendorLogin() {
                       Google
                     </button>
                   </div>
-                  <hr className="mt-6 border-b-1 border-blueGray-300" />
+                  <hr className="mt-6 border-b-1 border-blueGray-300" /> */}
                 </div>
                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                   <div className="text-blueGray-600 text-center mb-3 font-bold">
-                    <small>Or sign in with credentials</small>
+                    <small>Sign in with credentials</small>
                   </div>
                   <form onSubmit={eventHandler}>
-                    <div className="relative w-full mb-3">
+                    <div className="relative w-full mb-3 mt-10">
                       <label
                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                         htmlFor="grid-password"
@@ -190,7 +190,7 @@ export default function VendorLogin() {
                       </label>
                       <input
                         type="email"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        className="border-0 px-3 mt-4 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Email"
                         value={email}
                         onChange={(e)=>{
@@ -201,14 +201,14 @@ export default function VendorLogin() {
 
                     <div className="relative w-full mb-3">
                       <label
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        className="block mt-4 uppercase text-blueGray-600 text-xs font-bold mb-2"
                         htmlFor="grid-password"
                       >
                         Password
                       </label>
                       <input
                         type="password"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        className="border-0 mt-4 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Password"
                         value={password}
                         onChange={(e)=>{
@@ -218,14 +218,14 @@ export default function VendorLogin() {
                     </div>
                     <div>
                       <label className="inline-flex items-center cursor-pointer">
-                        <input
+                        {/* <input
                           id="customCheckLogin"
                           type="checkbox"
                           className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
                         />
                         <span className="ml-2 text-sm font-semibold text-blueGray-600">
                           Remember me
-                        </span>
+                        </span> */}
                       </label>
                     </div>
 
