@@ -25,7 +25,7 @@ function ChatClient() {
         await connections(vendorId).then((result) => {
             setClients(result.data.sortedUsers)
             setGetCount(result.data.connectionCount)
-            console.log(result.data);
+            // console.log(result.data);
         }).catch(() => toast.error("Internal Error"));
     }
 
