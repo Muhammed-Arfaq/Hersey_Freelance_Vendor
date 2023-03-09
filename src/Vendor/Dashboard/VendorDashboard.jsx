@@ -78,7 +78,7 @@ function VendorDashboard() {
     fetchAllOrders().then((result) => {
       setOrders(result.data.vendorOrders)
     })
-  }, [orders])
+  }, [])
 
 
   const logout = () => {
