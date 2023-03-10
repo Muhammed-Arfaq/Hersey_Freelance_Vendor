@@ -10,6 +10,7 @@ import { orderModalOn } from "../../Redux/Reducer/viewOrderModal";
 import { toast } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
 import Swal from "sweetalert2";
+import moment from "moment/moment";
 
 function ManageOrder() {
 
@@ -434,7 +435,7 @@ function ManageOrder() {
                                                                 </div>
                                                             </td>
                                                             <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                <p className="mb-0 font-semibold leading-tight text-center text-xs">{orders?.date}</p>
+                                                                <p className="mb-0 font-semibold leading-tight text-center text-xs">{moment(orders?.date).format("lll")}</p>
                                                             </td>
                                                             <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                                 <span className="font-semibold leading-tight text-xs text-slate-400">₹{orders?.gigId?.price}</span>

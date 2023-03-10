@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { fetchAllOrders, getOrdersCount, vendorDasboardCount } from "../../api";
 import { Chart, registerables } from "chart.js";
 import { LinearScale } from 'chart.js';
+import moment from "moment/moment";
 Chart.register(LinearScale);
 Chart.register(...registerables)
 
@@ -565,7 +566,7 @@ function VendorDashboard() {
                   <h6 className="font-mono font-bold text-lg">Recent Orders</h6>
                   <p className="leading-normal text-sm">
                     <i className="fa fa-arrow-up text-lime-500"></i>
-                    <span className="font-semibold"></span> 
+                    <span className="font-semibold"></span>
                   </p>
                 </div>
                 <div className="flex-auto p-4">
@@ -580,7 +581,7 @@ function VendorDashboard() {
                             {orders?.title}
                           </h6>
                           <p className="mt-1 mb-0 font-semibold leading-tight text-xs text-slate-400">
-                            {orders?.date}
+                            {moment(orders?.date).format("lll")}
                           </p>
                         </div>
                       </div>

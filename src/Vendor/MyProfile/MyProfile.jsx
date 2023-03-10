@@ -9,6 +9,7 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { switchOn } from "../../Redux/Reducer/editProfileModal";
 import { Link } from "react-router-dom";
 import { getVendorDetails, viewVendorRatings } from "../../api";
+import moment from "moment/moment";
 
 function MyProfile() {
     const [value, setValue] = React.useState(2);
@@ -430,7 +431,7 @@ function MyProfile() {
                                                 <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Email:</strong> &nbsp; {profile?.email}</li>
                                                 <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Gender:</strong> &nbsp; {profile?.gender}</li>
                                                 <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">UPI ID:</strong> &nbsp; {profile?.upiId}</li>
-                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">D.O.B:</strong> &nbsp; {profile?.dob}</li>
+                                                <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">D.O.B:</strong> &nbsp; {moment(profile?.dob).format("ll")}</li>
                                                 <li class="relative block px-4 py-2 pl-0 leading-normal bg-white border-0 border-t-0 text-sm text-inherit"><strong class="text-slate-600">Mobile:</strong> &nbsp; {profile?.phone}</li>
                                             </ul>
                                         </div>
@@ -518,7 +519,8 @@ function MyProfile() {
 
                                                 <footer class="mt-4">
                                                     <p class="text-xs text-gray-500">
-                                                        {review?.userId?.fullName} - {review?.date}
+                            
+                                                        {review?.userId?.fullName} - {moment(review?.date).format("lll")}
                                                     </p>
                                                 </footer>
                                             </blockquote>
