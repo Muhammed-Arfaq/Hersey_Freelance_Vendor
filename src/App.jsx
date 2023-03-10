@@ -8,6 +8,7 @@ import VendorDashboard from './Vendor/Dashboard/VendorDashboard';
 import VendorLogin from './Vendor/Login/Login';
 import ManageOrder from './Vendor/ManageOrder/ManageOrder';
 import MyProfile from './Vendor/MyProfile/MyProfile';
+import PageNotFound from './Vendor/PageNotFound/PageNotFound';
 import PostGig from './Vendor/PostGig/PostGig';
 import VendorSignup from './Vendor/Signup/Signup';
 import VendorOtp from './Vendor/Signup/VendorOtp';
@@ -27,6 +28,7 @@ function App() {
           <Route path='/vendor/chat' element={<ProtectedRoutes><ChatClient /></ProtectedRoutes>}/>
           <Route path='/vendor/manageOrder' element={<ProtectedRoutes><ManageOrder /></ProtectedRoutes>}/>
           <Route path='/vendor/profile' element={<ProtectedRoutes><MyProfile /></ProtectedRoutes>}/>
+          <Route path='*' element={<PageNotFound/>}/> 
         </Routes>
       </Router>
       <Toaster/>
