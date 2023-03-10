@@ -81,7 +81,7 @@ export default function VendorSignup() {
         <div>
           <nav className="flex h-9 items-center justify-between" aria-label="Global">
             <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
-              <a href="#" className="-m-1.5 p-1.5">
+              <a href="https://herseyfreelance-user.netlify.app/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
                 <img className="h-8" src={logo} alt="" />
               </a>
