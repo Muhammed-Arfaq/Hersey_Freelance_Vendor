@@ -414,6 +414,7 @@ function ManageOrder() {
                                     </div>
                                     <div className="flex-auto px-0 pt-0 pb-2">
                                         <div className="p-0 overflow-x-auto">
+                                            {dataToRender.length != 0 ? 
                                             <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                                                 <thead className="align-bottom">
                                                     <tr>
@@ -454,6 +455,9 @@ function ManageOrder() {
                                                     ))}
                                                 </tbody>
                                             </table>
+                                            :
+                                            <h1 className="font-mono font-bold text-2xl flex justify-center mt-1">No Orders Yet</h1>
+                                            }
                                         </div>
                                         <ReactPaginate
                                             pageCount={Math.ceil(orders.filter(searchData).length / itemsPerPage)}

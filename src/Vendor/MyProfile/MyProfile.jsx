@@ -488,7 +488,7 @@ function MyProfile() {
                                         Customer Reviews
                                     </h2>
                                     <div class="mt-8 h-96 overflow-y-scroll hide-scroll-bar grid grid-cols-1 gap-x-16 gap-y-12 lg:grid-cols-1">
-                                        {review.map((review) => (
+                                        {review?.length != 0 ? review.map((review) => (
                                             <blockquote>
                                                 <header class="sm:flex sm:items-center">
                                                     <div class="flex items-center space-x-2">
@@ -524,7 +524,10 @@ function MyProfile() {
                                                     </p>
                                                 </footer>
                                             </blockquote>
-                                        ))}
+                                            ))
+                                            :
+                                            <h1 className="font-mono font-bold text-2xl flex justify-center mt-1">No Customer Reviews Yet!!!!</h1>
+                                        }
                                     </div>
                                 </div>
                             </section>
