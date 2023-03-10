@@ -53,9 +53,9 @@ export default function VendorSignup() {
           password,
           passwordConfirm
         ).then(() => {
-          console.log("hereeeee");
+          
           navigate("/vendor/verifyOTP")
-        })
+        }).catch(() => toast.error("Email already exists!!!"))
       })
       .catch((validationErrors) => {
         const errors = validationErrors.inner.reduce((acc, error) => {

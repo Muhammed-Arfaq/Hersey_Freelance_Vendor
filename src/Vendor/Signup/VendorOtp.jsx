@@ -116,7 +116,7 @@ export default function VendorOtp() {
 
         ><img
             className="w-full"
-            style={{ height: "121%" }}
+            style={{ height: "136%" }}
             src={bg2}
             alt=""
           /></div>
@@ -157,7 +157,7 @@ export default function VendorOtp() {
                   <hr className="mt-6 border-b-1 border-blueGray-300" />
                 </div>
                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                  <div className="text-blueGray-600 text-center mb-3 font-bold"></div>
+                  <div className="text-blueGray-600 text-center mb-3 font-bold">OTP</div>
                   <form onSubmit={eventHandler}>
                     <div className="relative w-full mb-3">
                       <label
