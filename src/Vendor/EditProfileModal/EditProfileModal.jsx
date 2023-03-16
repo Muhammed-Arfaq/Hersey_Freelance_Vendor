@@ -10,8 +10,8 @@ export default function EditProfileModal() {
     const cancelButtonRef = useRef(null);
     const dispatch = useDispatch()
 
-    const show = useSelector((state) => state.editVendorProfile.show)
-    const data = useSelector((state) => state.editVendorProfile.data)
+    const show = useSelector((state) => state?.editVendorProfile?.show)
+    const data = useSelector((state) => state?.editVendorProfile?.data)
     
     const [userName, setUserName] = useState(data?.userName)
     const [dob, setDob] = useState(data?.dob)

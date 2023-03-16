@@ -19,12 +19,12 @@ export default function EditGigModal() {
 
     const formik = useFormik({
         initialValues: {
-            title: data?.title || "",
-            overview: data?.overview || "",
-            description: data?.description || "",
-            price: data?.price || "",
-            category: data?.category?.name || "",
-            type: data?.type || "",
+            title: data?.title ,
+            overview: data?.overview ,
+            description: data?.description ,
+            price: data?.price ,
+            category: data?.category?.name ,
+            type: data?.type ,
         },
         onSubmit: async (values) => {
             const data = {

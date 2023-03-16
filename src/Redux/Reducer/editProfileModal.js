@@ -2,22 +2,24 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const INITIAL_STATE = {
     show : false,
-    data: ''
+    data: {}
 }
 
 const editProfileModal = createSlice({
   name: 'editProfile',
   initialState: INITIAL_STATE,
   reducers: {
-    switchOn: (state, data) => {
+    switchOn: (state) => {
       state.show = true
-      state.data = data.payload
     },
     switchOff: (state) => {
         state.show = false
+    },
+    setData: (state, data) => {
+      state.data = data.payload
     }
   }
 })
 
-export const { switchOff, switchOn } = editProfileModal.actions;
+export const { switchOff, switchOn, setData } = editProfileModal.actions;
 export default editProfileModal.reducer;

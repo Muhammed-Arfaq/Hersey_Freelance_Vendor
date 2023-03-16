@@ -15,10 +15,11 @@ function ChatClient() {
     const [message, setMessage] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
     const [arrivalMessage, setArrivalMessage] = useState(null);
+    const [showMsg, setShowMsg] = useState(false)   
     const token = localStorage.getItem("jwt");
 
     const socket = useRef();
-    const scrolRef = useRef();
+    // const scrolRef = useRef();
 
 
     const getConnections = async () => {
@@ -38,11 +39,11 @@ function ChatClient() {
     useEffect(() => {
         getMessageCount()
         getConnections()
-    }, [])
+    }, [message])
 
-    useEffect(() => {
-        scrolRef.current.scrollIntoView({ behavior: "smooth" })
-    })
+    // useEffect(() => {
+    //     scrolRef.current.scrollIntoView({ behavior: "smooth" })
+    // })
 
     useEffect(() => {
         if (currentChat !== "") {
@@ -53,6 +54,7 @@ function ChatClient() {
     }, [vendorId])
 
     const handleSelect = (user) => {
+        setShowMsg(true)
         setCurrentChat(user);
     };
 
@@ -93,9 +95,9 @@ function ChatClient() {
     }, [arrivalMessage])
 
     const checkUpdateChat = () => {
-       setUpdateChat(!updateChat) 
+        setUpdateChat(!updateChat)
     }
-    
+
     useEffect(() => {
         const fetchMessages = async (vendor) => {
             if (vendor) {
@@ -488,96 +490,98 @@ function ChatClient() {
                                 </div>
                             </div>
                             <div class="flex flex-col flex-auto h-full p-6">
-                                <div
-                                    class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
-                                >
-                                    <div class="flex flex-col h-full overflow-x-auto mb-4 scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
-                                        <div class="flex flex-col h-full">
-                                            <div class="grid grid-cols-12 gap-y-2">
-                                                {message.map((msg) =>
-                                                    msg.myself ? (
+                                    <div
+                                        class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
+                                        >
+                                        <div class="flex flex-col h-full overflow-x-auto mb-4 scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                                            <div class="flex flex-col h-full">
+                                                <div class="grid grid-cols-12 gap-y-2">
+                                        {showMsg &&
+                                                    message.map((msg) =>
+                                                        msg.myself ? (
 
-                                                        <div key={msg._id} class="col-start-6 col-end-13 p-3 rounded-lg">
-                                                            <div class="flex items-center justify-start flex-row-reverse">
-                                                                <div
-                                                                    class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
-                                                                >
-                                                                    <img
-                                                                        src={team1}
-                                                                        alt="Avatar"
-                                                                        class="h-full w-full object-cover rounded-lg"
-                                                                    />
-                                                                </div>
-                                                                <div
-                                                                    class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                                                                >
-                                                                    <div>{msg.message}</div>
+                                                            <div key={msg._id} class="col-start-6 col-end-13 p-3 rounded-lg">
+                                                                <div class="flex items-center justify-start flex-row-reverse">
+                                                                    <div
+                                                                        class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                                    >
+                                                                        <img
+                                                                            src={team1}
+                                                                            alt="Avatar"
+                                                                            class="h-full w-full object-cover rounded-lg"
+                                                                        />
+                                                                    </div>
+                                                                    <div
+                                                                        class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
+                                                                    >
+                                                                        <div>{msg.message}</div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
-                                                    ) : (
-                                                        <div key={msg.message} class="col-start-1 col-end-8 p-3 rounded-lg">
-                                                            <div class="flex flex-row items-center">
-                                                                <div
-                                                                    class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
-                                                                >
-                                                                    <img
-                                                                        src={currentChat?.profilePhoto || team1}
-                                                                        alt="Avatar"
-                                                                        class="h-full w-full object-cover rounded-lg"
-                                                                    />
-                                                                </div>
-                                                                <div
-                                                                    class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                                                                >
-                                                                    <div>{msg.message}</div>
+                                                        ) : (
+                                                            <div key={msg.message} class="col-start-1 col-end-8 p-3 rounded-lg">
+                                                                <div class="flex flex-row items-center">
+                                                                    <div
+                                                                        class="flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-fuchsia-800 to-indigo-900 text-white flex-shrink-0"
+                                                                    >
+                                                                        <img
+                                                                            src={currentChat?.profilePhoto || team1}
+                                                                            alt="Avatar"
+                                                                            class="h-full w-full object-cover rounded-lg"
+                                                                        />
+                                                                    </div>
+                                                                    <div
+                                                                        class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                                                                    >
+                                                                        <div>{msg.message}</div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    )
-                                                )}
-                                                <div ref={scrolRef} />
+                                                        )
+                                                    )}
+                                                    {/* <div ref={scrolRef} /> */}
+                                                </div>
+                              
                                             </div>
                                         </div>
+                                        <form onSubmit={sendmsg}
+                                            class="flex flex-row items-center h-6 rounded-xl  w-full px-4"
+                                        >
+
+                                            <div class="flex-grow ml-4">
+                                                <div class="relative w-full">
+                                                    <input
+                                                        value={inputMessage}
+                                                        onChange={(e) => setInputMessage(e.target.value)}
+                                                        type="text"
+                                                        className="block w-full border-0 flex-1 rounded-lg sm:text-sm"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="ml-4">
+                                                <button type="submit" class="flex items-center justify-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 rounded-xl text-white px-4 py-1 flex-shrink-0">
+                                                    <span>Send</span>
+                                                    <span class="ml-2">
+                                                        <svg
+                                                            class="w-4 h-4 transform rotate-45 -mt-px"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                        >
+                                                            <path
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                                                            ></path>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <form onSubmit={sendmsg}
-                                        class="flex flex-row items-center h-6 rounded-xl  w-full px-4"
-                                    >
-
-                                        <div class="flex-grow ml-4">
-                                            <div class="relative w-full">
-                                                <input
-                                                    value={inputMessage}
-                                                    onChange={(e) => setInputMessage(e.target.value)}
-                                                    type="text"
-                                                    className="block w-full border-0 flex-1 rounded-lg sm:text-sm"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="ml-4">
-                                            <button type="submit" class="flex items-center justify-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 rounded-xl text-white px-4 py-1 flex-shrink-0">
-                                                <span>Send</span>
-                                                <span class="ml-2">
-                                                    <svg
-                                                        class="w-4 h-4 transform rotate-45 -mt-px"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <path
-                                                            stroke-linecap="round"
-                                                            stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                                                        ></path>
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div>

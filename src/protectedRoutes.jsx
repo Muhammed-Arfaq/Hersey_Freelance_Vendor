@@ -1,7 +1,10 @@
+import { useDispatch } from "react-redux"
 import { Navigate } from "react-router-dom"
 import { vendorAuth } from "./api"
+import { setData } from "./Redux/Reducer/editProfileModal"
 
 const ProtectedRoutes = ({ children }) => {
+    const dispatch = useDispatch()
     const token = localStorage.getItem("jwt")
 
     if (token) {
@@ -12,6 +15,7 @@ const ProtectedRoutes = ({ children }) => {
                 localStorage.clear();
                 window.location.reload()
             }
+            dispatch(setData(result.data.userData))
         })
     }
 

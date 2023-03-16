@@ -2,16 +2,16 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const INITIAL_STATE = {
     show : false,
-    data: ''
-}
-
-const EditGigDetails = createSlice({
+    data: {}
+  }
+  
+  const EditGigDetails = createSlice({
   name: 'editGig',
   initialState: INITIAL_STATE,
   reducers: {
     setCreateModalOn: (state, data) => {
-      state.show = true
       state.data = data.payload
+      state.show = true
     },
     setCreateModalOff: (state) => {
         state.show = false

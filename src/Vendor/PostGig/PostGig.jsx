@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./PostGig.css";
 import logo from "../../assets/img/Logo1.png";
 import AddIcon from '@mui/icons-material/Add';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCreateSwitchOn } from "../../Redux/Reducer/gigModal";
 import GigModal from "../GigModal/GigModal";
 import { modalOn } from "../../Redux/Reducer/viewGigModal";
@@ -20,6 +20,7 @@ function PostGig() {
   }
 
   const [gigs, setGigs] = useState([])
+  const show = useSelector((state) => state.editGigDetails.show)
 
   const allGigs = async () => {
     await viewGig().then((result) => {
@@ -34,7 +35,6 @@ function PostGig() {
 
   return (
     <div>
-      <EditGigModal />
       <ViewGigModal />
       <GigModal />
       <div className="grid grid-cols-12">
@@ -404,6 +404,7 @@ function PostGig() {
                                 >
                                   View Gig
                                 </button>
+                                {show && <EditGigModal />}
                                 <button className="text-gray-500" onClick={() => dispatch(setCreateModalOn(gig))}>
                                   <EditIcon fontSize="small" />
                                 </button>
