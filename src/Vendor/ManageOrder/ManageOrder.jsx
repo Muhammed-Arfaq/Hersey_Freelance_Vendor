@@ -9,10 +9,14 @@ import OrderViewModal from "../OrderViewModal/OrderViewModal";
 import { orderModalOn } from "../../Redux/Reducer/viewOrderModal";
 import { toast } from "react-hot-toast";
 import ReactPaginate from "react-paginate";
+import MenuIcon from '@mui/icons-material/Menu';
+import { Dialog } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import Swal from "sweetalert2";
 import moment from "moment/moment";
 
 function ManageOrder() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -76,8 +80,8 @@ function ManageOrder() {
     return (
         <div>
             <OrderViewModal />
-            <div className="grid grid-cols-12">
-                <div className="z-10 my-4 mx-3 col-span-3">
+            <div className="grid xl:grid-cols-12 xs:align-middle md:p-5 sm:p-10 xs:p-10 p-10">
+                <div className="xl:block hidden z-10 my-4 mx-3 col-span-3">
                     <div className="w-full max-w-full px-3 lg:w-80 lg:flex-none fixed">
                         <div className="border-black/12.5 shadow-soft-2xl relative flex h-full min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
                             <div className="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid bg-white p-6 pb-0">
@@ -402,6 +406,75 @@ function ManageOrder() {
                                 </ol>
                                 <h6 className="mb-0 font-bold capitalize">Manage Order</h6>
                             </nav>
+                            <div className="flex items-center grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
+                                <div className="flex items-center md:ml-auto md:pr-4">
+
+                                </div>
+                                <ul className="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+                                    <li className="">
+                                        <div className="absolute z-10">
+                                            <button type="button" className="block xl:hidden mx-3 text-black" onClick={() => setMobileMenuOpen(true)} ><MenuIcon /></button>
+
+                                            <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+                                                <Dialog.Panel focus="true" className="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 xl:hidden">
+                                                    <div className="flex h-9 items-center justify-between">
+                                                        <div className="flex">
+                                                            <a href="#" className="-m-1.5 p-1.5">
+                                                                <span className="sr-only">Your Company</span>
+                                                                <img
+                                                                    className="h-8"
+                                                                    src={logo}
+                                                                    alt=""
+                                                                />
+                                                            </a>
+                                                        </div>
+                                                        <div className="flex">
+                                                            <button
+                                                                type="button"
+                                                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                                                onClick={() => setMobileMenuOpen(false)}
+                                                            >
+                                                                <span className="sr-only">Close menu</span>
+                                                                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="mt-6 flow-root">
+                                                        <div className="-my-6 divide-y divide-gray-500/10">
+                                                            <div className="space-y-2 py-6">
+                                                                <Link to="/vendor/dashboard" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Vendor Dashboard
+                                                                </Link>
+                                                                <Link to="/vendor/postGig" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Post Gigs
+                                                                </Link>
+                                                                <Link to="/vendor/chat" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Message Clients
+                                                                </Link>
+                                                                <Link to="/vendor/manageOrder" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Manage Orders
+                                                                </Link>
+                                                                <Link to="/vendor/profile" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    My Profile
+                                                                </Link>
+                                                            </div>
+                                                            <div className="py-6">
+                                                                <Link
+                                                                    to='/login'
+                                                                    onClick={logout}
+                                                                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                                                                >
+                                                                    Logout
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Dialog.Panel>
+                                            </Dialog>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </nav>
                     <div className="w-full px-6 py-6 mx-auto mt-7">
@@ -414,49 +487,49 @@ function ManageOrder() {
                                     </div>
                                     <div className="flex-auto px-0 pt-0 pb-2">
                                         <div className="p-0 overflow-x-auto">
-                                            {dataToRender.length != 0 ? 
-                                            <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
-                                                <thead className="align-bottom">
-                                                    <tr>
-                                                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Order_ID</th>
-                                                        <th className="px-6 py-3 pl-2 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Order Date</th>
-                                                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Amount</th>
-                                                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
-                                                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {dataToRender.map((orders) => (
+                                            {dataToRender.length != 0 ?
+                                                <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                                                    <thead className="align-bottom">
                                                         <tr>
-                                                            <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                <div className="flex px-2 py-1 justify-center">
-                                                                    <div className="flex flex-col justify-center">
-                                                                        <h6 className="mb-0 leading-normal text-sm cursor-pointer" onClick={() => dispatch(orderModalOn(orders))}>#{orders?._id}</h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                <p className="mb-0 font-semibold leading-tight text-center text-xs">{moment(orders?.date).format("lll")}</p>
-                                                            </td>
-                                                            <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                <span className="font-semibold leading-tight text-xs text-slate-400">₹{orders?.gigId?.price}</span>
-                                                            </td>
-                                                            <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                <span className="font-semibold leading-tight text-base">{orders?.status}</span>
-                                                            </td>
-                                                            <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                                {orders?.status == 'Cancelled' ?
-                                                                    <button><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white ">Cancelled</span></button>
-                                                                    :
-                                                                    <button ><span className="bg-gradient-to-r from-emerald-500 to-emerald-900 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white" onClick={() => completeGig(orders?._id)}>Complete</span></button>
-                                                                }
-                                                            </td>
+                                                            <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Order_ID</th>
+                                                            <th className="px-6 py-3 pl-2 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Order Date</th>
+                                                            <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Amount</th>
+                                                            <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
+                                                            <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Action</th>
                                                         </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                            :
-                                            <h1 className="font-mono font-bold text-2xl flex justify-center mt-1">No Orders Yet</h1>
+                                                    </thead>
+                                                    <tbody>
+                                                        {dataToRender.map((orders) => (
+                                                            <tr>
+                                                                <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                    <div className="flex px-2 py-1 justify-center">
+                                                                        <div className="flex flex-col justify-center">
+                                                                            <h6 className="mb-0 leading-normal text-sm cursor-pointer" onClick={() => dispatch(orderModalOn(orders))}>#{orders?._id}</h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                    <p className="mb-0 font-semibold leading-tight text-center text-xs">{moment(orders?.date).format("lll")}</p>
+                                                                </td>
+                                                                <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                    <span className="font-semibold leading-tight text-xs text-slate-400">₹{orders?.gigId?.price}</span>
+                                                                </td>
+                                                                <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                    <span className="font-semibold leading-tight text-base">{orders?.status}</span>
+                                                                </td>
+                                                                <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                                    {orders?.status == 'Cancelled' ?
+                                                                        <button><span className="bg-gradient-to-tl from-red-600 to-red-400 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white ">Cancelled</span></button>
+                                                                        :
+                                                                        <button ><span className="bg-gradient-to-r from-emerald-500 to-emerald-900 px-3 text-xs rounded-lg py-2 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white" onClick={() => completeGig(orders?._id)}>Complete</span></button>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                                :
+                                                <h1 className="font-mono font-bold text-2xl flex justify-center mt-1">No Orders Yet</h1>
                                             }
                                         </div>
                                         <ReactPaginate

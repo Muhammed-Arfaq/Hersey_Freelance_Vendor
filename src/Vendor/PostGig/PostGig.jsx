@@ -11,9 +11,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import EditGigModal from "../EditGigModal/EditGigModal";
 import { setCreateModalOn } from "../../Redux/Reducer/editGigModal";
 import { Link } from "react-router-dom";
+import MenuIcon from '@mui/icons-material/Menu';
+import { Dialog } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { viewGig } from "../../api";
 
 function PostGig() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   const dispatch = useDispatch()
   const logout = () => {
     localStorage.clear();
@@ -37,8 +42,8 @@ function PostGig() {
     <div>
       <ViewGigModal />
       <GigModal />
-      <div className="grid grid-cols-12">
-        <div className="z-10 my-4 mx-3 col-span-3">
+      <div className="grid xl:grid-cols-12">
+        <div className="xl:block hidden z-10 my-4 mx-3 col-span-3">
           <div className="w-full max-w-full px-3 lg:w-80 lg:flex-none fixed">
             <div className="border-black/12.5 shadow-soft-2xl relative flex h-full min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
               <div className="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid bg-white p-6 pb-0">
@@ -337,7 +342,7 @@ function PostGig() {
             </div>
           </div>
         </div>
-        <div className="col-span-9 ">
+        <div className="col-span-9 w-screen md:w-5/12 lg:w-6/12 xl:w-full">
           <nav
             className="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start"
             navbar-main
@@ -363,22 +368,91 @@ function PostGig() {
                 </ol>
                 <h6 className="mb-0 font-bold capitalize">Post Gig</h6>
               </nav>
+              <div className="flex items-center grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
+                <div className="flex items-center md:ml-auto md:pr-4">
+
+                </div>
+                <ul className="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+                  <li className="">
+                    <div className="absolute z-10">
+                      <button type="button" className="block xl:hidden text-black" onClick={() => setMobileMenuOpen(true)} ><MenuIcon /></button>
+
+                      <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+                        <Dialog.Panel focus="true" className="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 xl:hidden">
+                          <div className="flex h-9 items-center justify-between">
+                            <div className="flex">
+                              <a href="#" className="-m-1.5 p-1.5">
+                                <span className="sr-only">Your Company</span>
+                                <img
+                                  className="h-8"
+                                  src={logo}
+                                  alt=""
+                                />
+                              </a>
+                            </div>
+                            <div className="flex">
+                              <button
+                                type="button"
+                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                <span className="sr-only">Close menu</span>
+                                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                              </button>
+                            </div>
+                          </div>
+                          <div className="mt-6 flow-root">
+                            <div className="-my-6 divide-y divide-gray-500/10">
+                              <div className="space-y-2 py-6">
+                                <Link to="/vendor/dashboard" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                  Vendor Dashboard
+                                </Link>
+                                <Link to="/vendor/postGig" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                  Post Gigs
+                                </Link>
+                                <Link to="/vendor/chat" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                  Message Clients
+                                </Link>
+                                <Link to="/vendor/manageOrder" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                  Manage Orders
+                                </Link>
+                                <Link to="/vendor/profile" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                  My Profile
+                                </Link>
+                              </div>
+                              <div className="py-6">
+                                <Link
+                                  to='/login'
+                                  onClick={logout}
+                                  className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                                >
+                                  Logout
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </Dialog.Panel>
+                      </Dialog>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </nav>
           <div className="w-full px-6 py-6 mx-auto mt-7">
             <div className="flex flex-wrap -mx-3 ">
-              <div className="flex-none w-full max-w-full px-3 mt-6">
+              <div className="flex-none w-full px-3 mt-6">
                 <div className="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 shadow-soft-2xl rounded-2xl bg-clip-border">
                   <div className="p-4 pb-0 mb-0 bg-white rounded-t-2xl">
                     <h6 className="mb-1 font-semibold text-lg">Your Gigs</h6>
                   </div>
                   <div className="flex-auto p-4">
-                    <div className="flex flex-wrap -mx-3">
+                    <div className="flex flex-wrap ">
                       {gigs.map((gig) => (
-                        <div className="w-full mt-5 max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
+                        <div className="w-full mt-5 max-w-full px-3 mb-6 lg:w-4/12 sm:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
                           <div className="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl bg-clip-border">
                             <div className="relative">
-                              <a className="block shadow-xl rounded-2xl">
+                              <a className="block">
                                 <img
                                   src={gig?.image}
                                   alt="img-blur-shadow"

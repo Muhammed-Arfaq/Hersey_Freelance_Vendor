@@ -8,10 +8,15 @@ import { useDispatch } from "react-redux";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { switchOn } from "../../Redux/Reducer/editProfileModal";
 import { Link } from "react-router-dom";
+import MenuIcon from '@mui/icons-material/Menu';
+import { Dialog } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { getVendorDetails, viewVendorRatings } from "../../api";
 import moment from "moment/moment";
 
 function MyProfile() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
     const [value, setValue] = React.useState(2);
     const [review, setReview] = useState([])
     const dispatch = useDispatch()
@@ -41,8 +46,8 @@ function MyProfile() {
     return (
         <div>
             <EditProfileModal />
-            <div className="grid grid-cols-12">
-                <div className="z-10 my-4 mx-3 col-span-3">
+            <div className="grid xl:grid-cols-12 xs:align-middle md:p-5 sm:p-10 xs:p-10 p-10">
+                <div className="xl:block hidden z-10 my-4 mx-3 col-span-3">
                     <div className="w-full max-w-full px-3 lg:w-80 lg:flex-none fixed">
                         <div className="border-black/12.5 shadow-soft-2xl relative flex h-full min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
                             <div className="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid bg-white p-6 pb-0">
@@ -367,6 +372,75 @@ function MyProfile() {
                                 </ol>
                                 <h6 className="mb-0 font-bold capitalize">My Profile</h6>
                             </nav>
+                            <div className="flex items-center grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
+                                <div className="flex items-center md:ml-auto md:pr-4">
+
+                                </div>
+                                <ul className="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+                                    <li className="">
+                                        <div className="absolute z-10">
+                                            <button type="button" className="block xl:hidden mx-3 text-black" onClick={() => setMobileMenuOpen(true)} ><MenuIcon /></button>
+
+                                            <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+                                                <Dialog.Panel focus="true" className="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 xl:hidden">
+                                                    <div className="flex h-9 items-center justify-between">
+                                                        <div className="flex">
+                                                            <a href="#" className="-m-1.5 p-1.5">
+                                                                <span className="sr-only">Your Company</span>
+                                                                <img
+                                                                    className="h-8"
+                                                                    src={logo}
+                                                                    alt=""
+                                                                />
+                                                            </a>
+                                                        </div>
+                                                        <div className="flex">
+                                                            <button
+                                                                type="button"
+                                                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                                                onClick={() => setMobileMenuOpen(false)}
+                                                            >
+                                                                <span className="sr-only">Close menu</span>
+                                                                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="mt-6 flow-root">
+                                                        <div className="-my-6 divide-y divide-gray-500/10">
+                                                            <div className="space-y-2 py-6">
+                                                                <Link to="/vendor/dashboard" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Vendor Dashboard
+                                                                </Link>
+                                                                <Link to="/vendor/postGig" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Post Gigs
+                                                                </Link>
+                                                                <Link to="/vendor/chat" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Message Clients
+                                                                </Link>
+                                                                <Link to="/vendor/manageOrder" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Manage Orders
+                                                                </Link>
+                                                                <Link to="/vendor/profile" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    My Profile
+                                                                </Link>
+                                                            </div>
+                                                            <div className="py-6">
+                                                                <Link
+                                                                    to='/login'
+                                                                    onClick={logout}
+                                                                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                                                                >
+                                                                    Logout
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Dialog.Panel>
+                                            </Dialog>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </nav>
                     <div className="w-full px-6 mx-auto">
@@ -514,17 +588,17 @@ function MyProfile() {
                                                 </p>
 
                                                 <p class="mt-2 text-gray-700">
-                                                   {review?.description}
+                                                    {review?.description}
                                                 </p>
 
                                                 <footer class="mt-4">
                                                     <p class="text-xs text-gray-500">
-                            
+
                                                         {review?.userId?.fullName} - {moment(review?.date).format("lll")}
                                                     </p>
                                                 </footer>
                                             </blockquote>
-                                            ))
+                                        ))
                                             :
                                             <h1 className="font-mono font-bold text-2xl flex justify-center mt-1">No Customer Reviews Yet!!!!</h1>
                                         }

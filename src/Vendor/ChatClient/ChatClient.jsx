@@ -4,9 +4,14 @@ import io from "socket.io-client";
 import logo from "../../assets/img/Logo1.png";
 import team1 from "../../assets/img/team-2.jpg";
 import { connections, fetchMsg, getMsgCount, sndMsg } from "../../api";
+import MenuIcon from '@mui/icons-material/Menu';
+import { Dialog } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from "react-router-dom";
 
 function ChatClient() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
     const vendorId = localStorage.getItem("vendorId")
     const [clients, setClients] = useState([])
     const [getCount, setGetCount] = useState([])
@@ -15,7 +20,7 @@ function ChatClient() {
     const [message, setMessage] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
     const [arrivalMessage, setArrivalMessage] = useState(null);
-    const [showMsg, setShowMsg] = useState(false)   
+    const [showMsg, setShowMsg] = useState(false)
     const token = localStorage.getItem("jwt");
 
     const socket = useRef();
@@ -115,8 +120,8 @@ function ChatClient() {
 
     return (
         <div>
-            <div className="grid grid-cols-12">
-                <div className="z-10 my-4 mx-3 col-span-3">
+            <div className="grid xl:grid-cols-12 xs:align-middle md:p-5 sm:p-10 xs:p-10 p-10">
+                <div className="xl:block hidden z-10 my-4 mx-3 col-span-3">
                     <div className="w-full max-w-full px-3 lg:w-80 lg:flex-none fixed">
                         <div className="border-black/12.5 shadow-soft-2xl relative flex h-full min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
                             <div className="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid bg-white p-6 pb-0">
@@ -441,6 +446,75 @@ function ChatClient() {
                                 </ol>
                                 <h6 className="mb-0 font-bold capitalize">Chat</h6>
                             </nav>
+                            <div className="flex items-center grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
+                                <div className="flex items-center md:ml-auto md:pr-4">
+
+                                </div>
+                                <ul className="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+                                    <li className="">
+                                        <div className="absolute z-10">
+                                            <button type="button" className="block xl:hidden mx-3 text-black" onClick={() => setMobileMenuOpen(true)} ><MenuIcon /></button>
+
+                                            <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+                                                <Dialog.Panel focus="true" className="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 xl:hidden">
+                                                    <div className="flex h-9 items-center justify-between">
+                                                        <div className="flex">
+                                                            <a href="#" className="-m-1.5 p-1.5">
+                                                                <span className="sr-only">Your Company</span>
+                                                                <img
+                                                                    className="h-8"
+                                                                    src={logo}
+                                                                    alt=""
+                                                                />
+                                                            </a>
+                                                        </div>
+                                                        <div className="flex">
+                                                            <button
+                                                                type="button"
+                                                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                                                                onClick={() => setMobileMenuOpen(false)}
+                                                            >
+                                                                <span className="sr-only">Close menu</span>
+                                                                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="mt-6 flow-root">
+                                                        <div className="-my-6 divide-y divide-gray-500/10">
+                                                            <div className="space-y-2 py-6">
+                                                                <Link to="/vendor/dashboard" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Vendor Dashboard
+                                                                </Link>
+                                                                <Link to="/vendor/postGig" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Post Gigs
+                                                                </Link>
+                                                                <Link to="/vendor/chat" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Message Clients
+                                                                </Link>
+                                                                <Link to="/vendor/manageOrder" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    Manage Orders
+                                                                </Link>
+                                                                <Link to="/vendor/profile" className="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">
+                                                                    My Profile
+                                                                </Link>
+                                                            </div>
+                                                            <div className="py-6">
+                                                                <Link
+                                                                    to='/login'
+                                                                    onClick={logout}
+                                                                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                                                                >
+                                                                    Logout
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Dialog.Panel>
+                                            </Dialog>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </nav>
                     <div class="flex h-screen antialiased text-gray-800 ">
@@ -490,13 +564,13 @@ function ChatClient() {
                                 </div>
                             </div>
                             <div class="flex flex-col flex-auto h-full p-6">
-                                    <div
-                                        class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
-                                        >
-                                        <div class="flex flex-col h-full overflow-x-auto mb-4 scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
-                                            <div class="flex flex-col h-full">
-                                                <div class="grid grid-cols-12 gap-y-2">
-                                        {showMsg &&
+                                <div
+                                    class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
+                                >
+                                    <div class="flex flex-col h-full overflow-x-auto mb-4 scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                                        <div class="flex flex-col h-full">
+                                            <div class="grid grid-cols-12 gap-y-2">
+                                                {showMsg &&
                                                     message.map((msg) =>
                                                         msg.myself ? (
 
@@ -540,48 +614,48 @@ function ChatClient() {
                                                             </div>
                                                         )
                                                     )}
-                                                    {/* <div ref={scrolRef} /> */}
-                                                </div>
-                              
+                                                {/* <div ref={scrolRef} /> */}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <form onSubmit={sendmsg}
+                                        class="flex flex-row items-center h-6 rounded-xl  w-full px-4"
+                                    >
+
+                                        <div class="flex-grow ml-4">
+                                            <div class="relative w-full">
+                                                <input
+                                                    value={inputMessage}
+                                                    onChange={(e) => setInputMessage(e.target.value)}
+                                                    type="text"
+                                                    className="block w-full border-0 flex-1 rounded-lg sm:text-sm"
+                                                />
                                             </div>
                                         </div>
-                                        <form onSubmit={sendmsg}
-                                            class="flex flex-row items-center h-6 rounded-xl  w-full px-4"
-                                        >
-
-                                            <div class="flex-grow ml-4">
-                                                <div class="relative w-full">
-                                                    <input
-                                                        value={inputMessage}
-                                                        onChange={(e) => setInputMessage(e.target.value)}
-                                                        type="text"
-                                                        className="block w-full border-0 flex-1 rounded-lg sm:text-sm"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div class="ml-4">
-                                                <button type="submit" class="flex items-center justify-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 rounded-xl text-white px-4 py-1 flex-shrink-0">
-                                                    <span>Send</span>
-                                                    <span class="ml-2">
-                                                        <svg
-                                                            class="w-4 h-4 transform rotate-45 -mt-px"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                        >
-                                                            <path
-                                                                stroke-linecap="round"
-                                                                stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                                                            ></path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                        <div class="ml-4">
+                                            <button type="submit" class="flex items-center justify-center bg-gradient-to-r from-fuchsia-800 to-indigo-900 rounded-xl text-white px-4 py-1 flex-shrink-0">
+                                                <span>Send</span>
+                                                <span class="ml-2">
+                                                    <svg
+                                                        class="w-4 h-4 transform rotate-45 -mt-px"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <path
+                                                            stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                                                        ></path>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
