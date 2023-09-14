@@ -58,4 +58,4 @@ export const vendorDasboardCount = () => axios.get("/vendor/vendorDasboardCount"
 
 export const getOrdersCount = () => axios.get("/vendor/completed-orders-by-date", config)
 
-export const fetchAllOrders = () => axios.get("/vendor/fetchAllOrders", config)
+export const fetchAllOrders = () => axios.get("/vendor/fetchAllOrders", config) 
