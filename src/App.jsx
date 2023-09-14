@@ -2,7 +2,7 @@ import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './protectedRoutes';
 import ReRoute from './reRoute';
-import ChatClient from './Vendor/ChatClient/ChatClient';
+// import ChatClient from './Vendor/ChatClient/ChatClient';
 import CompleteSignup from './Vendor/CompleteSignup/CompleteSignup';
 import VendorDashboard from './Vendor/Dashboard/VendorDashboard';
 import VendorLogin from './Vendor/Login/Login';
@@ -25,7 +25,7 @@ function App() {
           <Route path='/vendor/completeSignup' element={<CompleteSignup />}/>
           <Route path='/vendor/dashboard' element={<ProtectedRoutes><VendorDashboard /></ProtectedRoutes>}/>
           <Route path='/vendor/postGig' element={<ProtectedRoutes><PostGig /></ProtectedRoutes>}/>
-          <Route path='/vendor/chat' element={<ProtectedRoutes><ChatClient /></ProtectedRoutes>}/>
+          {/* <Route path='/vendor/chat' element={<ProtectedRoutes><ChatClient /></ProtectedRoutes>}/> */}
           <Route path='/vendor/manageOrder' element={<ProtectedRoutes><ManageOrder /></ProtectedRoutes>}/>
           <Route path='/vendor/profile' element={<ProtectedRoutes><MyProfile /></ProtectedRoutes>}/>
           <Route path='*' element={<PageNotFound/>}/> 
