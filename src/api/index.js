@@ -16,7 +16,7 @@ export const verifyVendorOTP = (fullName, userName, email, phone, gender, dob, p
     passwordConfirm
 })
 
-export const vendorOTP = (otp) => axios.post("/vendor/verifyVendorOTP",{ otp })
+export const vendorOTP = (otp) => axios.post("/vendor/vendorOTP",{ otp })
 
 export const gigData = (data) => axios.post("/vendor/newGig", data, config)
 

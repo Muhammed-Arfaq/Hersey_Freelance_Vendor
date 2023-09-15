@@ -7,7 +7,7 @@ import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/img/Logo1.png";
 import { Link, useNavigate } from "react-router-dom";
-import { vendorOtp } from "../../api";
+import { verifyVendorOTP } from "../../api";
 import toast, { Toaster } from "react-hot-toast";
 import { vendorSignup } from "../../YupSchema/VendorSignup";
 
