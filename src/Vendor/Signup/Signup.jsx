@@ -43,7 +43,7 @@ export default function VendorSignup() {
     await vendorSignup
       .validate(formData, { abortEarly: false })
       .then(() => {
-        vendorOtp(
+        verifyVendorOTP(
           fullName,
           userName,
           email,
@@ -53,8 +53,14 @@ export default function VendorSignup() {
           password,
           passwordConfirm
         ).then(() => {
-          
-          navigate("/vendor/verifyOTP")
+
+          localStorage.setItem("vendorId", result.data?.data?.user._id)
+          localStorage.setItem("jwt", result.data?.token)
+          toast.success('Signup successful')
+          setTimeout(() => {
+            navigate("/vendor/completeSignup")
+          }, 800)
+
         }).catch(() => toast.error("Email already exists!!!"))
       })
       .catch((validationErrors) => {
@@ -183,7 +189,7 @@ export default function VendorSignup() {
                       />
                       Github
                     </button> */}
-                    {/* <button
+                  {/* <button
                       className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                       type="button"
                     >

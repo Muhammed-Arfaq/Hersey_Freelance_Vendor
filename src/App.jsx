@@ -12,6 +12,7 @@ import PageNotFound from './Vendor/PageNotFound/PageNotFound';
 import PostGig from './Vendor/PostGig/PostGig';
 import VendorSignup from './Vendor/Signup/Signup';
 import VendorOtp from './Vendor/Signup/VendorOtp';
+import ChatClient from './Vendor/ChatClient/ChatClient';
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
           <Route path='/vendor/completeSignup' element={<CompleteSignup />}/>
           <Route path='/vendor/dashboard' element={<ProtectedRoutes><VendorDashboard /></ProtectedRoutes>}/>
           <Route path='/vendor/postGig' element={<ProtectedRoutes><PostGig /></ProtectedRoutes>}/>
-          {/* <Route path='/vendor/chat' element={<ProtectedRoutes><ChatClient /></ProtectedRoutes>}/> */}
+          <Route path='/vendor/chat' element={<ProtectedRoutes><ChatClient /></ProtectedRoutes>}/>
           <Route path='/vendor/manageOrder' element={<ProtectedRoutes><ManageOrder /></ProtectedRoutes>}/>
           <Route path='/vendor/profile' element={<ProtectedRoutes><MyProfile /></ProtectedRoutes>}/>
           <Route path='*' element={<PageNotFound/>}/> 

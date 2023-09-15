@@ -5,7 +5,7 @@ const config = { headers: { Authorization: `Bearer ${token}` } }
 
 export const login = (data) => axios.post("/vendor/login", data)
 
-export const vendorOtp = (fullName, userName, email, phone, gender, dob, password, passwordConfirm) => axios.post("/vendor/vendorOTP", {
+export const verifyVendorOTP = (fullName, userName, email, phone, gender, dob, password, passwordConfirm) => axios.post("/vendor/verifyVendorOTP", {
     fullName,
     userName,
     email,
@@ -16,7 +16,7 @@ export const vendorOtp = (fullName, userName, email, phone, gender, dob, passwor
     passwordConfirm
 })
 
-export const verifyVendorOTP = (otp) => axios.post("/vendor/verifyVendorOTP",{ otp })
+export const vendorOTP = (otp) => axios.post("/vendor/verifyVendorOTP",{ otp })
 
 export const gigData = (data) => axios.post("/vendor/newGig", data, config)
 

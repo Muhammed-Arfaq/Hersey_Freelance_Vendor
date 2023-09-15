@@ -32,10 +32,10 @@ export default function VendorLogin() {
       .then(() => {
         login(data).then((result) => {
           if(result.data.status == "Success") {
-            localStorage.setItem("jwt", result.data.token)
-            localStorage.setItem( "vendorId", result.data.data.user._id )
-            localStorage.setItem( "userName", result.data.data.user.userName )
-            localStorage.setItem( "email", result.data.data.user.email )
+            localStorage.setItem("jwt", result.data?.token)
+            localStorage.setItem( "vendorId", result.data?.data?.user?._id )
+            localStorage.setItem( "userName", result.data?.data?.user?.userName )
+            localStorage.setItem( "email", result.data?.data?.user?.email )
             toast.success("Login Successful")
             navigate('/vendor/Dashboard')
           } else {
