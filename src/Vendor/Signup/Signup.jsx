@@ -52,14 +52,12 @@ export default function VendorSignup() {
           dob,
           password,
           passwordConfirm
-        ).then(() => {
-
+        ).then((result) => {
+          console.log(result)
           localStorage.setItem("vendorId", result.data?.data?.user._id)
           localStorage.setItem("jwt", result.data?.token)
           toast.success('Signup successful')
-          setTimeout(() => {
-            navigate("/vendor/completeSignup")
-          }, 800)
+          navigate("/vendor/completeSignup")
 
         }).catch(() => toast.error("Email already exists!!!"))
       })
